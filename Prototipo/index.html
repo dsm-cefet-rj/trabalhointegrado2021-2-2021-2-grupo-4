@@ -10,74 +10,42 @@
         <div class="menu_navegacao">
             <nav class="nav-bar">
                 <a onclick="mostraTela('painel-aluno')">Painel Aluno</a>
-                <a onclick="mostraTela('painel-prof')">Painel Professor</a>
-                <a onclick="mostraTela('exportacao')">Exportação</a>
             </nav>
         </div>
         <br>
         <h3 style="text-align: center;">Bem Vindo! Seu curso cadastrado é <b>BCC</b> </h3> 
         <section id="paimel">
-            <h2 >Horas Cadastradas:</h2> 
-                <table>
-                    <tr>
-                        <th>Tipo Atividade</th>
-                        <th>Limite (HS)</th>
-                        <th>Você</th>
-                    </tr>
-                    <tr>
-                        <td>Conscientização HC ou Ambiental</td>
-                        <td>20</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>Ensino</td>
-                        <td>150</td>
-                        <td>50</td>
-                    </tr>
-                    <tr>
-                        <td>Extenção</td>
-                        <td>150</td>
-                        <td>150</td>
-                    </tr>
-                    <tr>
-                        <td>Pesquisa</td>
-                        <td>150</td>
-                        <td>80</td>
-                    </tr>
-                </table>
-            <h2 >Horas Faltantes:</h2>
+            <h2>Registro de Atividade de <b style="color: crimson;">Pesquisa</b>:</h2> 
             <table>
                 <tr>
                     <th>Tipo Atividade</th>
-                    <th>Limite (HS)</th>
-                    <th>Você</th>
+                    <th>Descrição</th>
+                    <th>Horas</th>
+                    <th>Anexo</th>
                 </tr>
+
                 <tr>
-                    <td>Conscientização HC ou Ambiental</td>
-                    <td>20</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>Ensino</td>
-                    <td>150</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>Extenção</td>
-                    <td>150</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>Pesquisa</td>
-                    <td>150</td>
-                    <td>70</td>
+                    <td>
+                        <select name="" id="">
+                            <option value=""></option>
+                            <option value="">Iniciação Científica</option>
+                            <option value="">Publicações</option>
+                            <option value="">Participação em Pesquisa</option>
+                            <option value="">Ass. a monografia, teses...</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <input type="number" name="horas" id="horas">
+                    </td>
+                    <td>
+                        <input type="file">
+                    </td>
                 </tr>
             </table>
-            <button id="comeco" onclick="salvar()">Salvar</button>            
-        </section>
-        <section id="exportar" hidden style="background-color: gray;">
-            
-            <button id="comeco" onclick="exportar()">Exportar</button>            
+            <button id="comeco" onclick="salvar()">Submit</button>            
         </section>
         <footer>
             <p>By: Grupo 4 (PSW)</p>
