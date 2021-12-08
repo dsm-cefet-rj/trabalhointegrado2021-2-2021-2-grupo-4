@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
+.accordions{
+  width:95%;
+  margin:0 auto;
+  border:1px solid #ccc;
+}
+.accordion-item input{
+display:none;
+}
+.accordion-item label{
+  display:block;
+  border:1px solid #ccc;
+  background:#e5e5e5;
+  cursor:pointer;
+ padding:5px 3px;
+}
+.accordion-content{
+  height: 0px;
+  overflow: hidden;
+  -webkit-transition: height 0.3s ease-in-out;
+  -moz-transition: height 0.3s ease-in-out;
+  -o-transition: height 0.3s ease-in-out;
+  -ms-transition: height 0.3s ease-in-out;
+  transition: height 0.3s ease-in-out;
+}
+[id^=accordion]:checked ~ .accordion-content {
+  height: 60px;
+}
+
+html *{
+  font-family: 'Raleway', sans-serif;
+  max-height: auto;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.file {
+  border: none !important;
+  padding-left: 0px !important;
+}
+
+.form-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-row .name {
+  width: 100%;
+  color: #555;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form-row .value {
+  width: -webkit-calc(100% - 0px);
+  width: -moz-calc(100% - 0px);
+  width: calc(100% - 0px);
+}
+
+@media (max-width: 767px) {
+  .form-row {
+    display: block;
+  }
+
+  .form-row .name,
+  .form-row .value {
+    display: block;
+    width: 100%;
+  }
+
+  .form-row .name {
+    margin-bottom: 8px;
+  }
+}
+
+input {
+  outline: none;
+  margin: 0;
+  border: none;
+  border-radius: 4px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+  font-size: 14px;
+  font-family: inherit;
+  background-color: rgb(206, 206, 206);
+  margin-left: 20px;
+  max-width: 200px;
+}
+
+.title {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+}
+
+.card-5 {
+  max-height: auto;
+  background: #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.card-5 .card-heading {
+  border-radius: 20px;
+  padding: 20px 0;
+  background: #333333;
+}
+
+.card-5 .card-body {
+  padding-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+  .card-5 .card-body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.form-row.required .name:after {
+  color: red;
+  content: "*";
+  top: 7px;
+}
+
+.modal-body {
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+div .form-row {
+  margin-left: 100px;
+}
