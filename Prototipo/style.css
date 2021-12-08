@@ -60,7 +60,7 @@ table {
 td, th {
     border: 1px solid rgba(0, 0, 136, 0.85);
     text-align: left;
-    padding: 5px;
+    padding: 10px;
 }
 
 button{
