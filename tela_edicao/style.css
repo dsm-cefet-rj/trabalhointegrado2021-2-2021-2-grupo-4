@@ -59,7 +59,6 @@ table {
 
 td,
 th {
-
     text-align: center;
     padding: 8px;
 }
@@ -71,4 +70,39 @@ tr:nth-child(even) {
 button {
     padding-right: 8px;
     padding-left: 8px;
+}
+
+@media (max-width: 767px) {
+    .form-row {
+        display: block;
+    }
+
+    .form-row .name,
+    .form-row .value {
+        display: block;
+        width: 100%;
+    }
+
+    .form-row .name {
+        margin-bottom: 7px;
+    }
+
+    section {
+        background-color: #69afe5c7;
+        border-radius: 10px;
+        padding: 14px;
+        width: 50%;
+        margin: auto;
+        margin-top: 20px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+        text-align: center;
+    }
+
+    table {
+        margin-bottom: 10px;
+        font-family: arial, sans-serif;
+        font-size: 14px;
+        border-collapse: collapse;
+        width: 50%;
+    }
 }
