@@ -1,0 +1,30 @@
+.footer {
+  height: 70px;
+  background-color: darkgray;
+
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+
+  &__social {
+    width: 100%;
+    padding-top: 8px;
+
+    display: flex;
+    justify-content: center;
+
+    a+a {
+      margin-left: 8px;
+    }
+  }
+
+  &__copyright {
+    position: absolute;
+    bottom: 8px;
+
+    width: 100%;
+    text-align: center;
+    color: white;
+  }
+}
