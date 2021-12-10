@@ -1,35 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
 
-.accordions {
-  width: 80%;
-  margin: 0 auto;
-  border: 1px solid #ccc;
+$transition-collapse: height .35s ease;
+
+.collapse {
+  &:not(.show) {
+    display: none;
+  }
 }
 
-.accordion-item input {
-  display: none;
-}
-
-.accordion-item label {
-  display: block;
-  border: 1px solid #ccc;
-  background: #e5e5e5;
-  cursor: pointer;
-  padding: 5px 3px;
-}
-
-.accordion-content {
-  height: 0px;
+.collapsing {
+  height: 0;
   overflow: hidden;
-  -webkit-transition: height 0.3s ease-in-out;
-  -moz-transition: height 0.3s ease-in-out;
-  -o-transition: height 0.3s ease-in-out;
-  -ms-transition: height 0.3s ease-in-out;
-  transition: height 0.3s ease-in-out;
-}
-
-[id^=accordion]:checked~.accordion-content {
-  height: 60px;
 }
 
 html * {
