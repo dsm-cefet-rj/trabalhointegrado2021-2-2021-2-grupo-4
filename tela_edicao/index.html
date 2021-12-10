@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="style.css">
+        <title>Prototipo</title>
+    </head>
+    <body>
+        <div class="menu_navegacao">
+            <nav class="nav-bar">
+                <a onclick="mostraTela('painel-aluno')">Painel Aluno</a>
+            </nav>
+        </div>
+        <br>
+        <h3 style="text-align: center;">Bem Vindo! Seu curso cadastrado é <b>BCC</b> </h3> 
+        <section id="paimel">
+            <h2>Registro de Atividade de <b style="color: crimson;">Pesquisa</b>:</h2> 
+           
+            <table>
+                <tr>
+                    <th>Tipo Atividade</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="" id="">
+                            <option value=""></option>
+                            <option value="">Iniciação Científica</option>
+                            <option value="">Publicações</option>
+                            <option value="">Participação em Pesquisa</option>
+                            <option value="">Ass. a monografia, teses...</option>
+                        </select>
+                    </td>                  
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Descrição</th>
+                </tr>
+                <tr>                   
+                    <td>
+                        <input type="text">
+                    </td>                   
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Horas</th>
+                </tr>
+                <tr>                   
+                    <td>
+                        <input type="number" name="horas" id="horas">
+                    </td>                   
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Anexo</th>
+                </tr>
+                <tr>                   
+                    <td>
+                        <input type="file">
+                    </td>
+                </tr>
+            </table>
+            <button id="comeco" onclick="salvar()">Submit</button>            
+        </section>
+        <footer>
+            <p>By: Grupo 4 (PSW)</p>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

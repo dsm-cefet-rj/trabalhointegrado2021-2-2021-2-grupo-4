@@ -1,0 +1,131 @@
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: #4CAF50;
+}
+
+/* Green */
+
+.menu_navegacao {
+  width: 100%;
+  height: 60px;
+  background-color: #004478f0;
+  display: flex;
+}
+
+.nav-bar {
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-content: center;
+}
+
+a {
+  margin-left: 25px;
+  margin-right: 25px;
+  display: grid;
+  justify-content: center;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: white !important;
+}
+
+section {
+  background-color: #69afe5c7;
+  border-radius: 10px;
+  padding: 14px;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+footer {
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12px;
+  font-style: italic;
+}
+
+table {
+  margin-bottom: 10px;
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+button {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+@media (max-width: 767px) {
+  .form-row {
+    display: block;
+  }
+
+  .form-row .name,
+  .form-row .value {
+    display: block;
+    width: 100%;
+  }
+
+  .form-row .name {
+    margin-bottom: 7px;
+  }
+
+  section {
+    background-color: #69afe5c7;
+    border-radius: 10px;
+    padding: 14px;
+    width: 50%;
+    margin: auto;
+    margin-top: 20px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+
+  table {
+    margin-bottom: 10px;
+    font-family: arial, sans-serif;
+    font-size: 14px;
+    border-collapse: collapse;
+    max-width: 100px;
+    overflow-x: scroll;
+  }
+
+  thead {
+    max-width: 100px;
+  }
+
+  tbody {
+    max-width: 100px;
+  }
+}
