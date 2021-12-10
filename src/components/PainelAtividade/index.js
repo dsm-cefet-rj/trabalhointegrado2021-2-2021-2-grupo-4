@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import "./styled.scss";
 
@@ -34,8 +34,8 @@ class PainelAtividade extends Component {
               <Collapse isOpen={collapse === index[0]}>
               <CardBody>
                 Adicionar Atividade 
-                <button style={{ marginLeft: '10px' }} className="btn btn-success btn-block">
-                    +
+                <button style={{ marginLeft: '10px' }} className="btn btn-success btn-block" type="submit">
+                  +
                 </button>
               </CardBody>
               </Collapse>
