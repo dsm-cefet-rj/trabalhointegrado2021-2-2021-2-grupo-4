@@ -4,6 +4,7 @@ import "./styled.scss";
 class PainelAtividade extends Component {
   render () {
       return(
+        
         <>
         <div className="menu_navegacao">
           <nav className="nav-bar">
