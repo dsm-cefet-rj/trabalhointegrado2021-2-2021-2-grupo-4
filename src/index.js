@@ -4,12 +4,13 @@ import './index.css';
 import Footer from './components/Footer/index'
 import App from './App';
 import PainelAtividade from './components/PainelAtividade/index'
+import TelaValidacao from './components/TelaValidacao/index';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <PainelAtividade />
+    <TelaValidacao />
     <Footer />
   </React.StrictMode>,
   document.getElementById('root')
