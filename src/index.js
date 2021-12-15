@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Footer from './components/Footer/index'
+import Header from './components/Header';
 import App from './App';
 import EdicaoAtividade from './components/EdicaoAtividade';
 import PainelAtividade from './components/PainelAtividade/index'
@@ -11,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
+    <Header/>
     <EdicaoAtividade />
     <Footer />
   </React.StrictMode>,
