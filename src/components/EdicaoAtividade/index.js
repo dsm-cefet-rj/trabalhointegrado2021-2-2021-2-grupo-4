@@ -5,11 +5,6 @@ export default function EdicaoAtividade(props) {
 
     return (
       <>
-            <div class="menu_navegacao">
-                <nav class="nav-bar">
-                    <a onclick="mostraTela('painel-aluno')">Painel Aluno</a>
-                </nav>
-            </div>
             <h3 style={{textAlign: 'center'}}>Bem Vindo! Seu curso cadastrado é <b>BCC</b> </h3> 
             <div className='container' id="painel">
                 <h2>Registro de Atividade de <b style={{color: 'crimson'}}>Pesquisa</b>:</h2> 
