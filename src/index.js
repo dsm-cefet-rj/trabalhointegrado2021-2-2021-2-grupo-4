@@ -10,12 +10,13 @@ import ListaAlunos from './components/ListaAlunos/index'
 import TelaValidacao from './components/TelaValidacao/index';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PainelOfertas from './components/PainelOfertas';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <Header/>
-    <EdicaoAtividade />
+    <PainelOfertas />
     <Footer />
   </React.StrictMode>,
   document.getElementById('root')
