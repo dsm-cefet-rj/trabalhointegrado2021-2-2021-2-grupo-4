@@ -12,6 +12,9 @@ export default function EdicaoAtividade(props) {
             <table>
                 <tr>
                     <th>Tipo Atividade</th>
+                    <th>Descrição</th>
+                    <th>Horas</th>
+                    <th>Anexo</th>
                 </tr>
                 <tr>
                     <td>
@@ -22,39 +25,19 @@ export default function EdicaoAtividade(props) {
                             <option value="">Participação em Pesquisa</option>
                             <option value="">Ass. a monografia, teses...</option>
                         </select>
-                    </td>                  
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <th>Descrição</th>
-                </tr>
-                <tr>                   
+                    </td>    
                     <td>
                         <input type="text"/>
-                    </td>                   
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <th>Horas</th>
-                </tr>
-                <tr>                   
+                    </td>    
                     <td>
                         <input type="number" name="horas" id="horas"/>
-                    </td>                   
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <th>Anexo</th>
-                </tr>
-                <tr>                   
+                    </td> 
                     <td>
                         <input type="file"/>
-                    </td>
+                    </td>         
                 </tr>
             </table>
+            <br />
             <button id="comeco" onclick="salvar()">Submit</button>            
         </div>
       </>

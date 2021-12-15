@@ -22,25 +22,25 @@
 }
 
 table {
-    margin-bottom: 10px;
-    font-family: arial, sans-serif;
-    font-size: 14px;
     border-collapse: collapse;
-    width: 100vh;
-    display: flex;
-    align-items: center;
-    align-content: center;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: .8rem;
 }
+
 
 td,
 th {
-    display: flex;
     border: 1px solid rgba(0, 0, 136, 0.85);
-    text-align: center;
     padding: 10px;
 }
 
+td {
+    text-align: center;
+}
+
 button {
+    margin-top: 30px;
     padding-right: 8px;
     padding-left: 8px;
 }
