@@ -5,11 +5,6 @@ function TelaValidacao(props){
 
     return(
       <>
-      <div className="menu_navegacao">
-        <nav className="nav-bar">
-          <a>Painel Aluno</a>
-        </nav>
-      </div>
       <div style={{ marginTop: '1rem' }} className="container">
       <h2>Tabela de Validação</h2>
 
