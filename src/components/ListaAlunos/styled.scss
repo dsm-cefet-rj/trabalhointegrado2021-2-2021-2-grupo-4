@@ -1,20 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
 
-.accordions{
-  width:100%;
-  margin:0 auto;
-  border:1px solid #ccc;
+.accordions {
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid #ccc;
 }
-.accordion-item input{
-display:none;
+
+.accordion-item input {
+  display: none;
 }
-.accordion-item label{
-  display:block;
-  border:1px solid #ccc;
-  background:#e5e5e5;
-  cursor:pointer;
-padding:5px 3px;
+
+.accordion-item label {
+  display: block;
+  border: 1px solid #ccc;
+  background: #e5e5e5;
+  cursor: pointer;
+  padding: 5px 3px;
 }
+
 /* .accordion-content{
   height: 0px;
   overflow: hidden;
@@ -24,7 +27,7 @@ padding:5px 3px;
   height: 40px;
 } */
 
-html *{
+html * {
   font-family: 'Raleway', sans-serif;
   max-height: auto;
 
@@ -34,10 +37,8 @@ body {
   flex: 100%;
 
 }
-footer{
-}  
 
-.search{
+.search {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,17 +46,18 @@ footer{
 
 }
 
-.search-form{
+.search-form {
   display: flex;
   width: 100%;
   justify-content: center;
   align-content: center;
 }
-.search-bar{
+
+.search-bar {
   display: block;
   border-radius: 50px;
   border: 3px solid #ececec;
-  background-color: #ffffff;
+  background-color: lightgray;
   height: 50px;
   width: 50vh;
   max-width: 80vh;
@@ -68,7 +70,7 @@ footer{
 
 .file {
   border: none !important;
-  padding-left: 0px !important;  
+  padding-left: 0px !important;
 }
 
 .form-row {
@@ -131,8 +133,9 @@ input {
   flex: 100%;
   background: #fff;
   border-radius: 10px;
-/*   box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
- */}
+  /*   box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+ */
+}
 
 .card-5 .card-heading {
   border-radius: 20px;

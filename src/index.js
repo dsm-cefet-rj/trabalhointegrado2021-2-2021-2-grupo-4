@@ -16,7 +16,7 @@ import PainelOfertas from './components/PainelOfertas';
 ReactDOM.render(
   <React.StrictMode>
     <Header/>
-    <EdicaoAtividade />
+    <PainelAtividade />
     <Footer />
   </React.StrictMode>,
   document.getElementById('root')
