@@ -26,11 +26,15 @@ table {
     font-family: arial, sans-serif;
     font-size: 14px;
     border-collapse: collapse;
-    width: 100%;
+    width: 100vh;
+    display: flex;
+    align-items: center;
+    align-content: center;
 }
 
 td,
 th {
+    display: flex;
     border: 1px solid rgba(0, 0, 136, 0.85);
     text-align: center;
     padding: 10px;
