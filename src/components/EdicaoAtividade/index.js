@@ -36,7 +36,7 @@ export default function EdicaoAtividade(props) {
                     </tr>
                 </table>
                 <table>
-                    <tr>
+                    <tr> 
                         <th>Horas</th>
                     </tr>
                     <tr>                   
