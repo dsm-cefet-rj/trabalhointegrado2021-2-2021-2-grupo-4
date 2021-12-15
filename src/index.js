@@ -6,13 +6,14 @@ import Header from './components/Header';
 import App from './App';
 import PainelAtividade from './components/PainelAtividade/index'
 import ListaAlunos from './components/ListaAlunos/index'
+import TelaValidacao from './components/TelaValidacao/index';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Header/>
-    <ListaAlunos/>
+    <PainelAtividade />
     <Footer />
   </React.StrictMode>,
   document.getElementById('root')
