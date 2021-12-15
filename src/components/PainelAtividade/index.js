@@ -1,45 +1,38 @@
 import React, { useState } from 'react'
+import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import "./styled.scss";
 
 
-
 function PainelAtividade() {
-
   const [selected, setSelected] = useState(null)
 
   const toggle = (i) => {
     if (selected === i) {
       return setSelected(null)
     }
-
     setSelected(i)
   }
   return(
     <>
-    <div className="menu_navegacao">
-      <nav className="nav-bar">
-        <a>Painel Aluno</a>
-      </nav>
-    </div>
-    
     <div className='wrapper'>
       <div className='accordion'>
         {cards.map((item, i) => (
-          <div className='item'> 
-            <div className='title' onClick={() => toggle(i)}>
-              <h3>{item.name}</h3>
-              <span>{selected === i ? '-' : '+'}</span>
-            </div>
-            <div className={selected === i ? 'content show' : 'content'}>
-              <hr/>
-              {item.content}
-            </div>
-          </div>
+          <>
+          <Card style={{ marginBottom: '1rem' }}>
+            <CardHeader className={selected === i ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(i)}>{item.name}</CardHeader>
+            <Collapse className={selected === i ? 'content show' : 'content'}>
+              <CardBody>
+                Adicionar Atividade
+                <button style={{ marginLeft: '10px' }} className="btn btn-success btn-block" type="submit">
+                  +
+                </button>
+              </CardBody>
+            </Collapse>
+          </Card>
+          </> 
         ))}
       </div>
-    </div>   
-
-   
+    </div>
     </>
   );
 }
