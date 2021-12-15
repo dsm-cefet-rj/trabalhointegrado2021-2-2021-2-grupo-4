@@ -1,52 +1,70 @@
-import React, { Component } from 'react'
-import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
+import React, { useState } from 'react'
 import "./styled.scss";
 
-class PainelAtividade extends Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
-    this.state = {  collapse: 0, 
-                    cards: [[1, 'Pesquisa'], [2, 'Extensão'], [3, 'Ensino'], [4, 'AC HC ou Ambiental']]
-                  };
-  }
 
-  toggle(e) {
-    let event = e.target.dataset.event;
-    this.setState({ collapse: this.state.collapse === Number(event) ? 0 : Number(event) });
-  }
 
-  render () {
-    const {cards, collapse} = this.state;
-    return(
-      <>
-      <div className="menu_navegacao">
-        <nav className="nav-bar">
-          <a>Painel Aluno</a>
-        </nav>
+function PainelAtividade() {
+
+  const [selected, setSelected] = useState(null)
+
+  const toggle = (i) => {
+    if (selected === i) {
+      return setSelected(null)
+    }
+
+    setSelected(i)
+  }
+  return(
+    <>
+    <div className="menu_navegacao">
+      <nav className="nav-bar">
+        <a>Painel Aluno</a>
+      </nav>
+    </div>
+    
+    <div className='wrapper'>
+      <div className='accordion'>
+        {cards.map((item, i) => (
+          <div className='item'> 
+            <div className='title' onClick={() => toggle(i)}>
+              <h3>{item.name}</h3>
+              <span>{selected === i ? '-' : '+'}</span>
+            </div>
+            <div className={selected === i ? 'content show' : 'content'}>
+              <hr/>
+              {item.content}
+            </div>
+          </div>
+        ))}
       </div>
-      <div style={{ marginTop: '1rem' }} className="container">
-        
-        {cards.map(index => {
-          return (
-            <Card style={{ marginBottom: '1rem' }} key={index[0]}>
-              <CardHeader className= {this.state.collapse ? 'accordion-button': 'accordion-button collapsed'} onClick={this.toggle} data-event={index[0]}>{index[1]}</CardHeader>
-              <Collapse isOpen={collapse === index[0]}>
-              <CardBody>
-                Adicionar Atividade 
-                <button style={{ marginLeft: '10px' }} className="btn btn-success btn-block" type="submit">
-                  +
-                </button>
-              </CardBody>
-              </Collapse>
-            </Card>
-          )
-        })}     
+    </div>   
 
-      </div>
-      </>
-    );
-  }
+   
+    </>
+  );
 }
+
+const cards = [
+  {
+    id: 1, 
+    name: 'Pesquisa',
+    content: 'Adicionar Atividade',
+  }, 
+  {
+    id: 2, 
+    name: 'Extensão',
+    content: 'Adicionar Atividade',
+  }, 
+  {
+    id: 3, 
+    name: 'Ensino',
+    content: 'Adicionar Atividade',
+  }, 
+  {
+    id: 4, 
+    name: 'AC HC ou Ambiental',
+    content: 'Adicionar Atividade',
+  }
+]
 
 export default PainelAtividade;

@@ -1,31 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
-
-$transition-collapse: height .35s ease;
-
-.collapse {
-  &:not(.show) {
-    display: none;
-  }
-}
-
-.collapsing {
-  height: 0;
-  overflow: hidden;
-}
-
-html * {
-  font-family: 'Raleway', sans-serif;
-  max-height: auto;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  height: 100%;
-  width: 100%;
-}
-
-
 .menu_navegacao {
   width: 100%;
   height: 60px;
@@ -53,81 +25,50 @@ a {
   color: white !important;
 }
 
-@media (max-width: 767px) {
-  .form-row {
-    display: block;
-  }
 
-  .form-row .name,
-  .form-row .value {
-    display: block;
-    width: 100%;
-  }
-
-  .form-row .name {
-    margin-bottom: 8px;
-  }
+.wrapper {
+  margin-top: 30px;
+  display: flex;
+  height: auto;
+  width: auto;
+  justify-content: center;
+  align-items: center;
 }
 
-input {
-  outline: none;
-  margin: 0;
-  border: none;
-  border-radius: 4px;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  width: 100%;
-  font-size: 14px;
-  font-family: inherit;
-  background-color: rgb(206, 206, 206);
-  margin-left: 20px;
-  max-width: 200px;
+.accordion {
+  width: 500px;
+
+}
+
+.item {
+  background: rgb(199, 199, 199);
+  margin-bottom: 5px;
+  padding: 10px 20px;
+
 }
 
 .title {
-  font-size: 20px;
-  text-transform: uppercase;
-  font-weight: 500;
-  text-align: center;
-  color: #ffffff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 }
 
-.card-5 {
-  max-height: auto;
-  background: #fff;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+.content {
+  color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0, 1, 0, 1);
 }
 
-.card-5 .card-heading {
-  border-radius: 20px;
-  padding: 20px 0;
-  background: #333333;
+.content.show {
+  height: auto;
+  max-height: 9999px;
+  transition: all 0.2s cubic-bezier(0, 1, 0, 1);
 }
 
-.card-5 .card-body {
-  padding-bottom: 30px;
-}
-
-@media (max-width: 767px) {
-  .card-5 .card-body {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-}
-
-.form-row.required .name:after {
-  color: red;
-  content: "*";
-  top: 7px;
-}
-
-.modal-body {
-  max-height: calc(100vh - 140px);
-  overflow-y: auto;
+#item-name {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
 }
