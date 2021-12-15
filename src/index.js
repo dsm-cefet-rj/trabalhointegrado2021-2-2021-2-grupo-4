@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Footer from './components/Footer/index'
+import Header from './components/Header';
 import App from './App';
 import PainelAtividade from './components/PainelAtividade/index'
 import reportWebVitals from './reportWebVitals';
@@ -9,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
+    <Header/>
     <PainelAtividade />
     <Footer />
   </React.StrictMode>,
