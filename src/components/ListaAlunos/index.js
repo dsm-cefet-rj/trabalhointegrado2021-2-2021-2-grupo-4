@@ -5,7 +5,7 @@ const ListaAlunos = () => {
   return(
     <body>
     <div class="card-5">
-      <div class="card-heading">
+      <div class="card-heading"> 
         <h2 class="title">Contabilização de horas</h2>
       </div>
 
