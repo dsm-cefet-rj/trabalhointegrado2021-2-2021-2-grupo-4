@@ -12,7 +12,6 @@ function TelaValidacao(props){
       </div>
       <div style={{ marginTop: '1rem' }} className="container">
       <h2>Tabela de Validação</h2>
-
         <table>
         <tr>
             <th>Nome</th>
@@ -52,7 +51,6 @@ function TelaValidacao(props){
         </tr>
         </table>
         <button className="button button1">Enviar</button>
-
       </div>
       </>
     );
