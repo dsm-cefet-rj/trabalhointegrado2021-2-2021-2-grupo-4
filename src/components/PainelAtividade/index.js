@@ -24,9 +24,9 @@ function PainelAtividade() {
             <Collapse className={selected === i ? 'content show' : 'content'}>
               <CardBody>
                 Adicionar Atividade
-                <button style={{ marginLeft: '10px' }} className="btn btn-success btn-block" type="submit">
-                  <Link to="/adicionaratividade"> + </Link>
-                </button>
+                <Link type="button" to="/adicionaratividade" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" type="submit">
+                  + 
+                </Link>
               </CardBody>
             </Collapse>
           </Card>
