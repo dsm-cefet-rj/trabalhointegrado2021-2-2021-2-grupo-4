@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
 
+
+label>a {
+  text-decoration: none !important;
+  color: #808080 !important;
+}
+
 .accordions {
   width: 100%;
   margin: 0 auto;

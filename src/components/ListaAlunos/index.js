@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import './styled.scss'
 
 const ListaAlunos = () => {
@@ -16,16 +17,17 @@ const ListaAlunos = () => {
       <div id="forms" class="card-body modal-body">
         <div class="accordions"> 
           <div class="accordion-item">
-            <label for= "accordion-1">Luiz Felipi</label>
+            <label for= "accordion-1"> <Link to='/painelatividades'> Luiz Felipi </Link> </label>
           </div> 
           <div class="accordion-item">
-            <label for= "accordion-2">Jorge Gabriel</label>
+            <label for= "accordion-2"> <Link to='/painelatividades'> Jorge Gabriel</Link></label>
           </div> 
           <div class="accordion-item">
-            <label for= "accordion-3">Julia Gratz</label>
+            
+            <label for= "accordion-3"><Link to='/painelatividades'>  Julia Gratz </Link></label>
           </div>
           <div class="accordion-item">
-            <label for= "accordion-4">Baltazhar da Silva</label>
+            <label for= "accordion-4"> <Link to='/painelatividades'> Baltazhar da Silva</Link></label>
           </div>
         </div>
       </div>

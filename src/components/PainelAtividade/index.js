@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import "./styled.scss";
 
 
@@ -24,7 +25,7 @@ function PainelAtividade() {
               <CardBody>
                 Adicionar Atividade
                 <button style={{ marginLeft: '10px' }} className="btn btn-success btn-block" type="submit">
-                  +
+                  <Link to="/adicionaratividade"> + </Link>
                 </button>
               </CardBody>
             </Collapse>

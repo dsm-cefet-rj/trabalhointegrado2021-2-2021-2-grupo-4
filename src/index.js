@@ -4,7 +4,7 @@ import './index.css';
 import Footer from './components/Footer/index'
 import Header from './components/Header';
 import App from './App';
-import EdicaoAtividade from './components/EdicaoAtividade';
+import AdicionarAtividade from './components/AdicionarAtividade';
 import PainelAtividade from './components/PainelAtividade/index'
 import ListaAlunos from './components/ListaAlunos/index'
 import TelaValidacao from './components/TelaValidacao/index';
@@ -15,9 +15,7 @@ import PainelOfertas from './components/PainelOfertas';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Header/>
-    <PainelAtividade />
-    <Footer />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

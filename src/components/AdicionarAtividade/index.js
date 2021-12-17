@@ -1,7 +1,7 @@
 import React from 'react'
 import './styled.scss'
 
-export default function EdicaoAtividade(props) {
+export default function AdicionarAtividade(props) {
 
     return (
       <>
