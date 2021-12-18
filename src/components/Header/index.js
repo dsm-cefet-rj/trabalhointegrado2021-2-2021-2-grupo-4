@@ -7,6 +7,7 @@ const Header = () => {
     <div className="menu_navegacao">
       <nav className="nav-bar">
         <Link to='/'> Painel Aluno </Link>
+        <Link to='/painelofertas'> Painel de Ofertas </Link>
       </nav>
     </div>
   ); 

@@ -3,32 +3,42 @@ import { Link } from 'react-router-dom';
 import './styled.scss'
 
 const ListaAlunos = () => {
+
+  const students = [
+    {
+      id: 1, 
+      name: 'Luiz Felipi',
+    }, 
+    {
+      id: 2, 
+      name: 'Jorge Gabriel',
+    }, 
+    {
+      id: 3, 
+      name: 'Julia Gratz',
+    },
+    {
+      id: 4,
+      name: 'Baltazhar da Silva',
+    }
+  ]
   return(
     <body>
-    <div class="card-5">
+    <div className="card-5">
 
-      <div class="search">
-        <form class="search-form">
-          <input type="text" class="search-bar" placeholder="Procure por Nome ou CPF"/>
+      <div className="search">
+        <form className="search-form">
+          <input type="text" className="search-bar" placeholder="Procure por Nome ou CPF"/>
         </form>
-
       </div>
 
-      <div id="forms" class="card-body modal-body">
-        <div class="accordions"> 
-          <div class="accordion-item">
-            <label for= "accordion-1"> <Link to='/painelatividades'> Luiz Felipi </Link> </label>
-          </div> 
-          <div class="accordion-item">
-            <label for= "accordion-2"> <Link to='/painelatividades'> Jorge Gabriel</Link></label>
-          </div> 
-          <div class="accordion-item">
-            
-            <label for= "accordion-3"><Link to='/painelatividades'>  Julia Gratz </Link></label>
-          </div>
-          <div class="accordion-item">
-            <label for= "accordion-4"> <Link to='/painelatividades'> Baltazhar da Silva</Link></label>
-          </div>
+      <div id="forms" className="card-body modal-body">
+        <div className="accordions"> 
+          {students.map((item, i) => (
+            <div className="accordion-item">
+              <label for= "accordion-1"> <Link to='/painelatividades'> {item.name} </Link> </label>
+            </div> 
+          ))}
         </div>
       </div>
     </div>

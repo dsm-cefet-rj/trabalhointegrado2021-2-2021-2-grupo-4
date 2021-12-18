@@ -28,6 +28,9 @@ function PainelAtividade() {
                   + 
                 </Link>
               </CardBody>
+              <CardBody className={items != null ? '' : 'pad'}>
+                { }
+              </CardBody>
             </Collapse>
           </Card>
           </> 
@@ -42,23 +45,21 @@ const cards = [
   {
     id: 1, 
     name: 'Pesquisa',
-    content: 'Adicionar Atividade',
   }, 
   {
     id: 2, 
     name: 'Extensão',
-    content: 'Adicionar Atividade',
   }, 
   {
     id: 3, 
     name: 'Ensino',
-    content: 'Adicionar Atividade',
   }, 
   {
     id: 4, 
     name: 'AC HC ou Ambiental',
-    content: 'Adicionar Atividade',
   }
 ]
+
+const items = null
 
 export default PainelAtividade;
