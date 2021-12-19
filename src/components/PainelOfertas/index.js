@@ -16,19 +16,25 @@ function PainelOfertas() {
     <>
     <div className='wrapper'>
       <div className='accordion'>
-        <>
-        <Card style={{ marginBottom: '1rem' }}>
-        <CardHeader className={selected === 0 ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(0)}>Ofertas</CardHeader>
-        <Collapse className={selected === 0 ? 'content show' : 'content'}>
-            <CardBody>
-            Ofertar Atividade
-            <button style={{ marginLeft: '10px' }} className="btn btn-success btn-block" type="submit">
-                +
-            </button>
-            </CardBody>
-        </Collapse>
-        </Card>
-        </> 
+        {/* {console.log(typeof cards)} */}
+        {cards.map((item, i) => (
+          <>
+          <Card style={{ marginBottom: '1rem' }}>
+            <CardHeader className={selected === i ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(i)}>{item.name}</CardHeader>
+            <Collapse className={selected === i ? 'content show' : 'content'}>
+
+            {item.content.map((cont) => (
+                <>
+                <CardBody>
+                  {cont.oferta}
+                </CardBody>
+                </>
+              ))}
+
+            </Collapse>
+          </Card>
+          </> 
+        ))}
       </div>
     </div>
     </>
@@ -39,22 +45,26 @@ const cards = [
   {
     id: 1, 
     name: 'Pesquisa',
-    content: 'Adicionar Atividade',
+    content:  [{oferta:'Iniciação Cientifica [120 horas]'},
+               {oferta:'Assistencia de TCC [8 horas]'}],
   }, 
   {
     id: 2, 
     name: 'Extensão',
-    content: 'Adicionar Atividade',
+    content: [{oferta:'Fazer apresentação em evento [10 horas]'},
+              {oferta:'Projeto de Extensão [100 horas]'},
+              {oferta: 'Assistir apresentação de TCC [1 hora]'}],
   }, 
   {
     id: 3, 
     name: 'Ensino',
-    content: 'Adicionar Atividade',
+    content: [{oferta:'Vaga de Monitor [100 horas]'},
+              {oferta:'Disciplina não prevista Y [72 horas]'}],
   }, 
   {
     id: 4, 
     name: 'AC HC ou Ambiental',
-    content: 'Adicionar Atividade',
+    content: [{oferta:'Cineminha [1 hora]'}],
   }
 ]
 
