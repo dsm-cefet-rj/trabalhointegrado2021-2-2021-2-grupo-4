@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import "./styled.scss";
-import $ from 'jquery';
 import AdicionarAtividade from '../AdicionarAtividade';
 
 
