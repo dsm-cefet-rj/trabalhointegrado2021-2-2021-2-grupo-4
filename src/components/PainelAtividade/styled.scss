@@ -58,3 +58,18 @@ a {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
 }
+
+.activity_list {
+  border-spacing: 10px;
+  border: 1px solid gray;
+  border-collapse: collapse;
+  letter-spacing: 1px;
+  font-family: sans-serif;
+  font-size: .8rem;
+
+  display: flex;
+  height: auto;
+  align-items: center;
+  align-content: space-between;
+
+}

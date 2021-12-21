@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import "./styled.scss";
+import AdicionarAtividade from '../AdicionarAtividade';
 
 
-function PainelAtividade() {
+function PainelAtividade(props) {
   const [selected, setSelected] = useState(null)
+  const [isNewActivity, setIsNewActivity] = useState(null)
 
   const toggle = (i) => {
     if (selected === i) {
@@ -13,6 +14,14 @@ function PainelAtividade() {
     }
     setSelected(i)
   }
+
+  const handleNewActivity = (i) => {
+    if (isNewActivity === i) {
+      return setIsNewActivity(null)
+    }
+    setIsNewActivity(i)
+  }
+
   return(
     <>
     <div className='wrapper'>
@@ -24,13 +33,20 @@ function PainelAtividade() {
             <Collapse className={selected === i ? 'content show' : 'content'}>
               <CardBody>
                 Adicionar Atividade
-                <Link type="button" to="/adicionaratividade" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" type="submit">
+                <button type="button" 
+                        style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} 
+                        className="btn btn-success btn-block" 
+                        onClick={() => handleNewActivity(i)} >
                   + 
-                </Link>
+                </button>
               </CardBody>
-              <CardBody className={items != null ? '' : 'pad'}>
-                { }
+              <CardBody className={items != null ? 'pad' : ''}>
+                {isNewActivity === i ? 
+                  <AdicionarAtividade onClose={() => setIsNewActivity(false)} activities={props.activities} setActivities={props.setActivities} /> 
+                : null}
               </CardBody>
+              <hr />
+              <ActivityList activities={props.activities} />
             </Collapse>
           </Card>
           </> 
@@ -38,6 +54,26 @@ function PainelAtividade() {
       </div>
     </div>
     </>
+  );
+}
+
+const ActivityLine = (props) => {
+  return (
+    <>
+    <div class="activity_list container row">
+      <div class="col-4">{props.activity.type}</div>
+      <div class="col-4">{props.activity.description}</div>
+      <div class="col-2">{props.activity.hours}</div>
+      <div class="col-2">{props.activity.attachment}</div>
+    </div>
+      
+    </>
+  );
+}
+
+function ActivityList(props){
+  return(
+    props.activities.map((activity, i) => <ActivityLine key={i} activity={activity} />)
   );
 }
 
