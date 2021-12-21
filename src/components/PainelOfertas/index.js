@@ -31,6 +31,7 @@ function PainelOfertas() {
                 </CardBody>
                 </>
               ))}
+              
             <CardBody>  
               <Link type="button" to="/adicionaratividade" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" type="submit">
                     + 
