@@ -26,7 +26,7 @@ const ListaAlunos = () => {
     <body>
     <div className="card-5">
 
-      <div className="search">
+      <div className="search-div">
         <form className="search-form">
           <input type="text" className="search-bar" placeholder="Procure por Nome ou CPF"/>
         </form>

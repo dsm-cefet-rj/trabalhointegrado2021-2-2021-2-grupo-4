@@ -1,27 +1,31 @@
 import React from 'react'
 import './styled.scss'
 
-export default function AdicionarOferta(){
+const AdicionarOferta= ({onClose, children}) => {
     return(
         <>
-            <tr>
-                <th>Nome da Oferta</th>
-                <th>Descrição da Oferta</th>
-            </tr>
+            <div className='form-div'>
+                <form className='form'>
+                    <table>
+                        <tr>
+                            <th>Nome da Oferta</th>
+                            <th>Descrição da Oferta</th>
+                        </tr>
 
-            <tr>
-                <td>
-                    <input type= "text"/>    
-                </td>
-                <td>
-                    <input type = "text"/>
-                </td>          
-            </tr>
-            <tr>
-                <button id= "submitOffer" onClick={}/>
-            </tr>
-            
-        
+                        <tr>
+                            <td>
+                                <input  type= "text"/>    
+                            </td>
+                            <td>
+                                <input  type = "text"/>
+                            </td>          
+                        </tr>
+                        <tr>
+                        <button id="comeco" onClick={onClose}> Adicionar </button>
+                        </tr>
+                    </table>
+                </form>
+            </div>
         
         </>
     )
@@ -29,3 +33,5 @@ export default function AdicionarOferta(){
 
 
 }
+
+export default AdicionarOferta

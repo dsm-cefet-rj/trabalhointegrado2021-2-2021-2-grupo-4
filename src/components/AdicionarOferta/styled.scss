@@ -1,0 +1,28 @@
+.form-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+  
+  }
+  
+  .form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+  }
+  
+  .form-textbox {
+    display: block;
+    border-radius: 50px;
+    border: 3px solid #ececec;
+    background-color: lightgray;
+    height: 50px;
+    width: 50vh;
+    max-width: 80vh;
+    justify-content: center;
+    padding: 0 25px;
+    text-align: center;
+  
+  }

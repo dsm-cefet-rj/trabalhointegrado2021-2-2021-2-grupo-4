@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import "./styled.scss";
+import AdicionarOferta from '../AdicionarOferta';
 
+const check = null
 
 function PainelOfertas() {
   const [selected, setSelected] = useState(null)
+  const [isNewOffer, setIsNewOffer] = useState(null)
 
   const toggle = (i) => {
     if (selected === i) {
@@ -13,6 +15,14 @@ function PainelOfertas() {
     }
     setSelected(i)
   }
+
+  const handleNewOffer = (i) => {
+    if (isNewOffer === i) {
+      return setIsNewOffer(null)
+    }
+    setIsNewOffer(i)
+  }
+
   return(
     <>
     <div className='wrapper'>
@@ -24,6 +34,21 @@ function PainelOfertas() {
             <CardHeader className={selected === i ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(i)}>{item.name}</CardHeader>
             <Collapse className={selected === i ? 'content show' : 'content'}>
 
+            <CardBody>  
+              <button type="button" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" onClick={() => handleNewOffer(i)}>
+                    + 
+              </button> 
+            </CardBody>
+
+            <CardBody className={check != null ? '' : 'pad'}>
+                {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)}/> : null}
+                   
+                
+            </CardBody>
+            <CardBody className={check != null ? '' : 'pad'}>
+                {}
+            </CardBody>
+
             {item.content.map((cont) => (
                 <>
                 <CardBody>
@@ -31,12 +56,8 @@ function PainelOfertas() {
                 </CardBody>
                 </>
               ))}
-              
-            <CardBody>  
-              <Link type="button" to="/adicionaratividade" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" type="submit">
-                    + 
-              </Link> 
-            </CardBody>
+
+            
             </Collapse>
           </Card>
           </> 
