@@ -14,14 +14,16 @@ const AdicionarOferta= ({onClose, children}) => {
 
                         <tr>
                             <td>
-                                <input  type= "text"/>    
+                                <input className='form-textbox' type= "text"/>    
                             </td>
+
                             <td>
-                                <input  type = "text"/>
+                                <input className='form-textbox' type = "text"/>
                             </td>          
                         </tr>
+
                         <tr>
-                        <button id="comeco" onClick={onClose}> Adicionar </button>
+                        <button id="addOffer" onClick={onClose}> Adicionar </button>
                         </tr>
                     </table>
                 </form>
