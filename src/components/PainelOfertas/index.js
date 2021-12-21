@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import "./styled.scss";
 
 
@@ -30,7 +31,11 @@ function PainelOfertas() {
                 </CardBody>
                 </>
               ))}
-
+            <CardBody>  
+              <Link type="button" to="/adicionaratividade" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" type="submit">
+                    + 
+              </Link> 
+            </CardBody>
             </Collapse>
           </Card>
           </> 
