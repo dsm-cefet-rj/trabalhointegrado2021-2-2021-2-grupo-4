@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
   Routes as Switch,
@@ -12,13 +12,15 @@ import Footer from './components/Footer/index';
 import './App.css';
 
 const App = (props) => {
+  const [activities, setActivities] = useState([]);
+  
   return (
     <Router>
       <div>
         <Header />
         <Switch>
           <Route exact path="/" element={<ListaAlunos />}/>
-          <Route exact path="/painelatividades" element={<PainelAtividade />} />
+          <Route exact path="/painelatividades" element={<PainelAtividade activities={activities}  setActivities={setActivities} />} />
           <Route exact path="/painelofertas" element={<PainelOfertas />} />
         </Switch>
         <Footer />

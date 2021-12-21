@@ -4,7 +4,7 @@ import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
 
 
-function PainelAtividade() {
+function PainelAtividade(props) {
   const [selected, setSelected] = useState(null)
   const [isNewActivity, setIsNewActivity] = useState(null)
 
@@ -40,14 +40,13 @@ function PainelAtividade() {
                   + 
                 </button>
               </CardBody>
-              <CardBody className={items != null ? '' : 'pad'}>
+              <CardBody className={items != null ? 'pad' : ''}>
                 {isNewActivity === i ? 
-                  <AdicionarAtividade onClose={() => setIsNewActivity(false)} /> 
+                  <AdicionarAtividade onClose={() => setIsNewActivity(false)} activities={props.activities} setActivities={props.setActivities} /> 
                 : null}
               </CardBody>
-              <CardBody className={items != null ? '' : 'pad'}>
-                {}
-              </CardBody>
+              <hr />
+              <ActivityList activities={props.activities} />
             </Collapse>
           </Card>
           </> 
@@ -55,6 +54,26 @@ function PainelAtividade() {
       </div>
     </div>
     </>
+  );
+}
+
+const ActivityLine = (props) => {
+  return (
+    <>
+    <div class="activity_list container row">
+      <div class="col-4">{props.activity.type}</div>
+      <div class="col-4">{props.activity.description}</div>
+      <div class="col-2">{props.activity.hours}</div>
+      <div class="col-2">{props.activity.attachment}</div>
+    </div>
+      
+    </>
+  );
+}
+
+function ActivityList(props){
+  return(
+    props.activities.map((activity, i) => <ActivityLine key={i} activity={activity} />)
   );
 }
 
