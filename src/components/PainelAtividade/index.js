@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import "./styled.scss";
+import $ from 'jquery';
+import AdicionarAtividade from '../AdicionarAtividade';
 
 
 function PainelAtividade() {
   const [selected, setSelected] = useState(null)
+  const [isNewActivity, setIsNewActivity] = useState(null)
 
   const toggle = (i) => {
     if (selected === i) {
@@ -13,6 +16,14 @@ function PainelAtividade() {
     }
     setSelected(i)
   }
+
+  const handleNewActivity = (i) => {
+    if (isNewActivity === i) {
+      return setIsNewActivity(null)
+    }
+    setIsNewActivity(i)
+  }
+
   return(
     <>
     <div className='wrapper'>
@@ -24,12 +35,20 @@ function PainelAtividade() {
             <Collapse className={selected === i ? 'content show' : 'content'}>
               <CardBody>
                 Adicionar Atividade
-                <Link type="button" to="/adicionaratividade" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" type="submit">
+                <button type="button" 
+                        style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} 
+                        className="btn btn-success btn-block" 
+                        onClick={() => handleNewActivity(i)} >
                   + 
-                </Link>
+                </button>
               </CardBody>
               <CardBody className={items != null ? '' : 'pad'}>
-                { }
+                {isNewActivity === i ? 
+                  <AdicionarAtividade onClose={() => setIsNewActivity(false)} /> 
+                : null}
+              </CardBody>
+              <CardBody className={items != null ? '' : 'pad'}>
+                {}
               </CardBody>
             </Collapse>
           </Card>

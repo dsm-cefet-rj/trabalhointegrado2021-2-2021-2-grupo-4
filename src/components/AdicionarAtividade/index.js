@@ -1,7 +1,7 @@
 import React from 'react'
 import './styled.scss'
 
-export default function AdicionarAtividade(props) {
+const AdicionarAtividade = ({ onClose, children }) => {
 
     return (
       <>
@@ -38,8 +38,10 @@ export default function AdicionarAtividade(props) {
                 </tr>
             </table>
             <br />
-            <button id="comeco" onclick="salvar()">Submit</button>            
+            <button id="comeco" onClick={onClose} >Submit</button>            
         </div>
       </>
     );
 }
+
+export default AdicionarAtividade;
