@@ -1,45 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './styled.scss'
 
-export default function AdicionarAtividade(props) {
+export default function AdicionarAtividade(props) { 
+  const [activity, setActivity] = useState({});
 
-    return (
-      <>
-        <h3 style={{textAlign: 'center'}}>Bem Vindo! Seu curso cadastrado é <b>BCC</b> </h3> 
-        <div className='container' id="painel">
-            <h2>Registro de Atividade de <b style={{color: 'crimson'}}>Pesquisa</b>:</h2> 
-        
-            <table>
-                <tr>
-                    <th>Tipo Atividade</th>
-                    <th>Descrição</th>
-                    <th>Horas</th>
-                    <th>Anexo</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select name="" id="">
-                            <option value=""></option>
-                            <option value="">Iniciação Científica</option>
-                            <option value="">Publicações</option>
-                            <option value="">Participação em Pesquisa</option>
-                            <option value="">Ass. a monografia, teses...</option>
-                        </select>
-                    </td>    
-                    <td>
-                        <input type="text"/>
-                    </td>    
-                    <td>
-                        <input type="number" name="horas" id="horas"/>
-                    </td> 
-                    <td>
-                        <input type="file"/>
-                    </td>         
-                </tr>
-            </table>
-            <br />
-            <button id="comeco" onclick="salvar()">Submit</button>            
-        </div>
-      </>
-    );
+  function handleInputChange(e) {
+    setActivity({...activity, [e.target.name]: e.target.value })
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(props.activities);
+    props.setActivities(props.activities.concat(activity));
+  }
+
+  return ( 
+      <div className='container' id="painel">        
+        <form onSubmit={handleSubmit} >
+          <div className='linha-form'>
+            <label>Tipo Atividade</label>
+            <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange}>
+                <option key=""></option>
+                {props.card.subcategories.map(sub => (
+                  <option key={sub.id} style={{ width: '250px', textOverflow:'ellipsis'}} value={activity.type}>
+                      {sub.name}</option>               
+                ))}
+            </select>            
+          </div>
+          <div className='linha-form'>
+            <label>Descrição</label>
+            <input  type="text" 
+                    name='description' 
+                    value={activity.description} 
+                    onChange={handleInputChange}/>
+          </div>
+          <div className='linha-form'>
+            <label>Horas</label>
+            <input  type="number" 
+                    name="hours" 
+                    value={activity.hours} 
+                    onChange={handleInputChange}/>
+          </div>
+          <div className='linha-form'>
+            <label>Anexo</label>
+            <input type="file" 
+                   name='attachment' 
+                   value={activity.attachment} 
+                   onChange={handleInputChange}/>
+          </div>
+          <button id="comeco" type='submit' value="Salvar" >Submit</button>   
+        </form>
+      </div>
+  );
 }

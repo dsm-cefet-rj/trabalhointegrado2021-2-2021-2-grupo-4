@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import "./styled.scss";
 
 function TelaValidacao(props){
@@ -17,31 +17,31 @@ function TelaValidacao(props){
         <tr>
             <td>Introdução a Ciencia de dados</td>
             <td>4</td>
-            <td><img src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979212.png?token=exp=1638839376~hmac=6f1fe9d3406b1ceffb883a25ab330430" alt=""/></td>
+            <td><img src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979212.png?token=exp=1640120585~hmac=07ff15c0e41136ea891a9d7e0886f263" alt=""/></td>
             <td><input type="checkbox" /></td>
         </tr>
         <tr>
             <td>Curso de web design</td>
             <td>12</td>
-            <td><img src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979212.png?token=exp=1638839376~hmac=6f1fe9d3406b1ceffb883a25ab330430" alt=""/></td>
+            <td><img src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979212.png?token=exp=1640120585~hmac=07ff15c0e41136ea891a9d7e0886f263" alt=""/></td>
             <td><input type="checkbox" /></td>
         </tr>
         <tr>
             <td>Curso de java</td>
             <td>32</td>
-            <td><img src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979212.png?token=exp=1638839376~hmac=6f1fe9d3406b1ceffb883a25ab330430" alt=""/></td>
+            <td><img src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979212.png?token=exp=1640120585~hmac=07ff15c0e41136ea891a9d7e0886f263" alt=""/></td>
             <td><input type="checkbox" /></td>
         </tr>
         <tr>
             <td>Curso de influencer</td>
             <td>2</td>
-            <td><img src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979212.png?token=exp=1638839376~hmac=6f1fe9d3406b1ceffb883a25ab330430" alt=""/></td>
+            <td><img src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979212.png?token=exp=1640120585~hmac=07ff15c0e41136ea891a9d7e0886f263" alt=""/></td>
             <td><input type="checkbox" /></td>
         </tr>
         <tr>
             <td>Curso de youtuber</td>
             <td>8</td>
-            <td><img src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979212.png?token=exp=1638839376~hmac=6f1fe9d3406b1ceffb883a25ab330430" alt=""/></td>
+            <td><img src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979212.png?token=exp=1640120585~hmac=07ff15c0e41136ea891a9d7e0886f263" alt=""/></td>
             <td><input type="checkbox" /></td>
         </tr>
         </table>
@@ -50,6 +50,5 @@ function TelaValidacao(props){
       </>
     );
   }
-
-
+  
 export default TelaValidacao;
