@@ -23,9 +23,7 @@ const ListaAlunos = () => {
     }
   ]
   return(
-    <body>
     <div className="card-5">
-
       <div className="search">
         <form className="search-form">
           <input type="text" className="search-bar" placeholder="Procure por Nome ou CPF"/>
@@ -35,15 +33,13 @@ const ListaAlunos = () => {
       <div id="forms" className="card-body modal-body">
         <div className="accordions"> 
           {students.map((item, i) => (
-            <div className="accordion-item">
-              <label for= "accordion-1"> <Link to='/painelatividades'> {item.name} </Link> </label>
+            <div className="accordion-item" key={i}>
+              <label htmlFor='accordion-1'> <Link to='/painelatividades'> {item.name} </Link> </label>
             </div> 
           ))}
         </div>
       </div>
     </div>
-  </body>
-
   ); 
 }
 

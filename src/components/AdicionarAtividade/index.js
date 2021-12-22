@@ -1,8 +1,7 @@
-import React, {useState } from 'react'
+import React, { useState } from 'react'
 import './styled.scss'
 
-export default function AdicionarAtividade(props) {
-
+export default function AdicionarAtividade(props) { 
   const [activity, setActivity] = useState({});
 
   function handleInputChange(e) {
@@ -11,44 +10,46 @@ export default function AdicionarAtividade(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.setActivities(props.activities.concat(activity))
-    props.onClose()
+    console.log(props.activities);
+    props.setActivities(props.activities.concat(activity));
   }
 
-  return (
-    <>
-    <hr />
+  return ( 
       <div className='container' id="painel">        
-        <form onSubmit={handleSubmit}>
-          <tr>
-            <th>Tipo Atividade</th>
-            <th>Descrição</th>
-            <th>Horas</th>
-            <th>Anexo</th>
-          </tr>
-          <tr>
-            <td>
-              <select name="type" onChange={handleInputChange} >
-                <option value={activity.type}></option>
-                <option value={activity.type}>Iniciação Científica</option>
-                <option value={activity.type}>Publicações</option>
-                <option value={activity.type}>Participação em Pesquisa</option>
-                <option value={activity.type}>Ass. a monografia, teses...</option>
-              </select>
-            </td>    
-            <td>
-              <input type="text" name='description' value={activity.description} onChange={handleInputChange}/>
-            </td>    
-            <td>
-              <input type="number" name="hours" value={activity.hours} onChange={handleInputChange}/>
-            </td> 
-            <td>
-              <input type="file" name='attachment' value={activity.attachment} onChange={handleInputChange}/>
-            </td>         
-          </tr>
+        <form onSubmit={handleSubmit} >
+          <div className='linha-form'>
+            <label>Tipo Atividade</label>
+            <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange}>
+              <option key=""></option>
+                {props.card.subcategories.map(item => (
+                  <option key={item.id} style={{ width: '250px', textOverflow:'ellipsis'}} value={activity.type}>
+                      {item.name}</option>               
+                ))}
+            </select>            
+          </div>
+          <div className='linha-form'>
+            <label>Descrição</label>
+            <input  type="text" 
+                    name='description' 
+                    value={activity.description} 
+                    onChange={handleInputChange}/>
+          </div>
+          <div className='linha-form'>
+            <label>Horas</label>
+            <input  type="number" 
+                    name="hours" 
+                    value={activity.hours} 
+                    onChange={handleInputChange}/>
+          </div>
+          <div className='linha-form'>
+            <label>Anexo</label>
+            <input type="file" 
+                   name='attachment' 
+                   value={activity.attachment} 
+                   onChange={handleInputChange}/>
+          </div>
           <button id="comeco" type='submit' value="Salvar" >Submit</button>   
         </form>
       </div>
-    </>
   );
 }
