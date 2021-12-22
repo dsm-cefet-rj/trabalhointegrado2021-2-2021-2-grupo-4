@@ -20,10 +20,10 @@ export default function AdicionarAtividade(props) {
           <div className='linha-form'>
             <label>Tipo Atividade</label>
             <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange}>
-              <option key=""></option>
-                {props.card.subcategories.map(item => (
-                  <option key={item.id} style={{ width: '250px', textOverflow:'ellipsis'}} value={activity.type}>
-                      {item.name}</option>               
+                <option key=""></option>
+                {props.card.subcategories.map(sub => (
+                  <option key={sub.id} style={{ width: '250px', textOverflow:'ellipsis'}} value={activity.type}>
+                      {sub.name}</option>               
                 ))}
             </select>            
           </div>
