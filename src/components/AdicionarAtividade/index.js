@@ -12,6 +12,7 @@ export default function AdicionarAtividade(props) {
     e.preventDefault();
     console.log(props.activities);
     props.setActivities(props.activities.concat(activity));
+    props.onClose();
   }
 
   return ( 
@@ -48,7 +49,7 @@ export default function AdicionarAtividade(props) {
                    value={activity.attachment} 
                    onChange={handleInputChange}/>
           </div>
-          <button id="comeco" type='submit' value="Salvar" >Submit</button>   
+          <button id="comeco" type='submit' value="Salvar" >Salvar</button>   
         </form>
       </div>
   );

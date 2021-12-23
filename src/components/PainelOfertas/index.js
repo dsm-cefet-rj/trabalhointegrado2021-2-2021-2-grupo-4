@@ -5,7 +5,7 @@ import AdicionarOferta from '../AdicionarOferta';
 
 const check = null
 
-function PainelOfertas() {
+function PainelOfertas(props) {
   const [selected, setSelected] = useState(null)
   const [isNewOffer, setIsNewOffer] = useState(null)
 
@@ -24,47 +24,31 @@ function PainelOfertas() {
   }
 
   return(
-    <>
     <div className='wrapper'>
       <div className='accordion'>
-        {/* {console.log(typeof cards)} */}
         {cards.map((item, i) => (
-          <>
-          <Card style={{ marginBottom: '1rem' }}>
+          <Card key={item.id} style={{ marginBottom: '1rem' }}>
             <CardHeader className={selected === i ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(i)}>{item.name}</CardHeader>
             <Collapse className={selected === i ? 'content show' : 'content'}>
-
-            <CardBody>  
-              <button type="button" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" onClick={() => handleNewOffer(i)}>
-                    + 
-              </button> 
-            </CardBody>
-
-            <CardBody className={check != null ? '' : 'pad'}>
-                {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)}/> : null}
-                   
-                
-            </CardBody>
-            <CardBody className={check != null ? '' : 'pad'}>
-                {}
-            </CardBody>
-
-            {item.content.map((cont) => (
-                <>
-                <CardBody>
-                  {cont.oferta}
-                </CardBody>
-                </>
-              ))}
-
-            
+              <CardBody>  
+                <button type="button" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" onClick={() => handleNewOffer(i)}>
+                      + 
+                </button> 
+              </CardBody>
+              <CardBody className={check != null ? '' : 'pad'}>
+                  {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)} offers={props.offers} setOffers={props.setOffers} /> : null}
+              </CardBody>
+              <CardBody className={check != null ? '' : 'pad'}>
+                  {}
+              </CardBody>
+                {props.offers.map(o =>
+                    <CardBody key={i}>{o.type} {o.description}</CardBody>
+                )}
             </Collapse>
           </Card>
-          </> 
         ))}
       </div>
     </div>
-    </>
   );
 }
 
@@ -72,21 +56,21 @@ const cards = [
   {
     id: 1, 
     name: 'Pesquisa',
-    content:  [{oferta:'Iniciação Cientifica [120 horas]'},
-               {oferta:'Assistencia de TCC [8 horas]'}],
+    content:  [{id: 1, oferta:'Iniciação Cientifica [120 horas]'},
+               {id: 2 ,oferta:'Assistencia de TCC [8 horas]'}],
   }, 
   {
     id: 2, 
     name: 'Extensão',
-    content: [{oferta:'Fazer apresentação em evento [10 horas]'},
-              {oferta:'Projeto de Extensão [100 horas]'},
-              {oferta: 'Assistir apresentação de TCC [1 hora]'}],
+    content: [{id: 1, oferta:'Fazer apresentação em evento [10 horas]'},
+              {id: 2,oferta:'Projeto de Extensão [100 horas]'},
+              {id: 3,oferta: 'Assistir apresentação de TCC [1 hora]'}],
   }, 
   {
     id: 3, 
     name: 'Ensino',
-    content: [{oferta:'Vaga de Monitor [100 horas]'},
-              {oferta:'Disciplina não prevista Y [72 horas]'}],
+    content: [{id: 1,oferta:'Vaga de Monitor [100 horas]'},
+              {id: 2,oferta:'Disciplina não prevista Y [72 horas]'}],
   }, 
   {
     id: 4, 
