@@ -22,6 +22,10 @@ function PainelAtividade(props) {
     setIsNewActivity(i)
   }
 
+  const handleClickDeleteActivity = (id) => {
+    props.setActivities(props.activities.filter((value) => value.id !== id  ))
+  }
+
   return(
     <div className='wrapper'>
       <div className='accordion'>
@@ -44,7 +48,7 @@ function PainelAtividade(props) {
                 : null}
               </CardBody>
               <hr />
-              <ActivityList activities={props.activities} />
+              <ActivityList activities={props.activities} onClickDeleteActivity={handleClickDeleteActivity} card={item} />
             </Collapse>
           </Card>
         ))}
@@ -56,17 +60,19 @@ function PainelAtividade(props) {
 const ActivityLine = (props) => {
   return (    
     <div className='activity_list container row'>
-      <div className='col-4'>{props.activity.type}</div>
+      <div className='col-1'>{props.activity.id}</div>
+      <div className='col-3'>{props.activity.type}</div>
       <div className='col-4'>{props.activity.description}</div>
-      <div className='col-2'>{props.activity.hours}</div>
+      <div className='col-1'>{props.activity.hours}</div>
       <div className='col-2'>{props.activity.attachment}</div>
+      <div className='col-1'><button className="btn btn-danger btn-block" name='delete_activity' onClick={() => props.onClickDeleteActivity(props.activity.id)}>X</button></div>
     </div>    
   );
 }
 
 function ActivityList(props){
   return(
-    props.activities.map((activity, i) => <ActivityLine key={i} activity={activity} />)
+    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine key={i} activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} />)            
   );
 }
 
