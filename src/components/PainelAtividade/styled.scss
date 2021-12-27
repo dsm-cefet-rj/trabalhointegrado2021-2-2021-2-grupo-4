@@ -3,12 +3,15 @@ a {
   margin-right: 25px;
   display: grid;
   justify-content: center;
-  text-decoration: none;
+  text-decoration: none !important;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   color: white !important;
 }
 
+.pad {
+  padding: 0 !important;
+}
 
 .wrapper {
   margin-top: 30px;
@@ -42,16 +45,31 @@ a {
 .content {
   max-height: 0;
   overflow: hidden;
-  transition: all 0.2s cubic-bezier(0, 1, 0, 1);
+  transition: all 0.5s cubic-bezier(0, 1, 0, 1);
 }
 
 .content.show {
   height: auto;
   max-height: 9999px;
-  transition: all 0.2s cubic-bezier(0, 1, 0, 1);
+  transition: all 0.5s cubic-bezier(0, 1, 0, 1);
 }
 
 #item-name {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
+}
+
+.activity_list {
+  border-spacing: 10px;
+  border: 1px solid gray;
+  border-collapse: collapse;
+  letter-spacing: 1px;
+  font-family: sans-serif;
+  font-size: .8rem;
+
+  display: flex;
+  height: auto;
+  align-items: center;
+  align-content: space-between;
+
 }
