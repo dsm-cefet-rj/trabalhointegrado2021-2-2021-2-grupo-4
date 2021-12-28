@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import "./styled.scss";
 import AdicionarOferta from '../AdicionarOferta';
+import Button from 'react-bootstrap/Button'
 
 const check = null
+
+rxsli
 
 function PainelOfertas(props) {
   const [selected, setSelected] = useState(null)
@@ -42,7 +45,18 @@ function PainelOfertas(props) {
                   {}
               </CardBody>
                 {props.offers.map(o =>
-                    <CardBody key={i}>{o.type} {o.description}</CardBody>
+                    <CardBody key={i}>
+                      <tr> Tipo: {o.type} </tr> 
+                      <tr> Descrição: {o.description} 
+                      <td> 
+                        <Button type="button" style={{ marginLeft: '10px', paddingRight: '15px', paddingLeft: '15px', borderRadius:'20px'  }} variant="danger"  >
+                        X
+                        </Button>
+                      </td>
+                      
+                      </tr>
+                      
+                    </CardBody>
                 )}
             </Collapse>
           </Card>
