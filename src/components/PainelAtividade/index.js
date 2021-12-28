@@ -23,7 +23,7 @@ function PainelAtividade(props) {
   }
 
   const handleClickDeleteActivity = (id) => {
-    props.setActivities(props.activities.filter((value) => value.id !== id  ))
+    props.setActivities(props.activities.filter((value) => value.id !== id ))
   }
 
   return(
@@ -58,21 +58,30 @@ function PainelAtividade(props) {
 }
 
 const ActivityLine = (props) => {
+  const [selected, setSelected] = useState(null)
+
+  const handleClickValidateActivity = (i) => {
+    if (selected === i) {
+      return setSelected(null)
+    }
+    setSelected(i)
+  }
   return (    
     <div className='activity_list container row'>
       <div className='col-1'>{props.activity.id}</div>
       <div className='col-3'>{props.activity.type}</div>
-      <div className='col-4'>{props.activity.description}</div>
+      <div className='col-3'>{props.activity.description}</div>
       <div className='col-1'>{props.activity.hours}</div>
       <div className='col-2'>{props.activity.attachment}</div>
       <div className='col-1'><button className="btn btn-danger btn-block" name='delete_activity' onClick={() => props.onClickDeleteActivity(props.activity.id)}>X</button></div>
+      <div className='col-1'><button className={selected === props.keyActivity ? "btn btn-success disabled":"btn btn-success"} name='validate_activity' onClick={() => handleClickValidateActivity(props.keyActivity)}>V</button></div>
     </div>    
   );
 }
 
 function ActivityList(props){
   return(
-    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine key={i} activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} />)            
+    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine keyActivity={i} activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} cardId={props.card.id}/>)            
   );
 }
 

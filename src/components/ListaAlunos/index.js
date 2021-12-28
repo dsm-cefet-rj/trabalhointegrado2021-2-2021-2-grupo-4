@@ -19,7 +19,7 @@ const ListaAlunos = () => {
     },
     {
       id: 4,
-      name: 'Baltazhar da Silva',
+      name: 'Balthazar Paixao',
     }
   ]
   return(
