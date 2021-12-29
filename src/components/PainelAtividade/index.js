@@ -1,4 +1,4 @@
-import React, { useParams, useState } from 'react'
+import React, { useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
@@ -13,8 +13,6 @@ function PainelAtividade(props) {
 
   const activities = useSelector(state => state.activities)
   const dispatch = useDispatch()
-  // let { id } = useParams()
-  // id = parseInt(id)
 
   const toggle = (i) => {
     if (selected === i) {
@@ -76,7 +74,7 @@ const ActivityLine = (props) => {
   }
   return (    
     <div className='activity_list container row'>
-      <div className='col-1'> <Link to={'/adicionaratividade/${props.activity.id}'}> <button>{props.activity.id}</button> </Link></div>
+      <div className='col-1'> <Link to={{ path: `/adicionaratividade/${props.activity.id}`}}> <button>{props.activity.id}</button> </Link></div>
       <div className='col-3'>{props.activity.type}</div>
       <div className='col-3'>{props.activity.description}</div>
       <div className='col-1'>{props.activity.hours}</div>
@@ -89,7 +87,7 @@ const ActivityLine = (props) => {
 
 function ActivityList(props){
   return(
-    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine keyActivity={i} activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} cardId={props.card.id}/>)            
+    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine keyActivity={i} activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} card={props.card}/>)            
   );
 }
 

@@ -1,11 +1,26 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { addActivity } from '../slices/ActivitiesSlice';
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { addActivity, updateActivity } from '../slices/ActivitiesSlice';
 import './styled.scss'
 
 export default function AdicionarAtividade(props) { 
   
-  const [activity, setActivity] = useState({});
+  //const [activity, setActivity] = useState({});
+  const activities = useSelector(state => state.activities)
+  let { id } = useParams()
+  id = parseInt(id)
+
+  const [activity, setActivity] = useState(
+    id ? activities.filter((a) => a.id === id)[0] ?? {} : {}
+  )
+
+  const [actionType, ] = useState(
+    id ? activities.filter((a) => a.id === id)[0] 
+       ? '../slices/ActivitiesSlice/updateActivity'
+       : '../slices/ActivitiesSlice/addActivity'
+      : '../slices/ActivitiesSlice/addActivity'
+  )
 
   const dispatch = useDispatch()
 
@@ -15,8 +30,13 @@ export default function AdicionarAtividade(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setActivity(activity.id = props.activities.length+1, activity.category = props.card.id)
-    dispatch(addActivity(activity))
+    if(actionType === '../slices/ActivitiesSlice/addActivity') {
+      setActivity(activity.id = props.activities.length+1, activity.category = props.card.id)
+      dispatch(addActivity(activity))
+    }else{
+      dispatch(updateActivity(activity))
+    }
+    
     props.onClose();
   }
 
