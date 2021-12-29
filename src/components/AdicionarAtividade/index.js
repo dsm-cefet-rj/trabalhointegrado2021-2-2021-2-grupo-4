@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { addActivity } from '../slices/ActivitiesSlice';
 import './styled.scss'
 
 export default function AdicionarAtividade(props) { 
+  
   const [activity, setActivity] = useState({});
+
+  const dispatch = useDispatch()
 
   function handleInputChange(e) {
     setActivity({...activity, [e.target.name]: e.target.value })
@@ -11,7 +16,7 @@ export default function AdicionarAtividade(props) {
   function handleSubmit(e) {
     e.preventDefault();
     setActivity(activity.id = props.activities.length+1, activity.category = props.card.id)
-    props.setActivities(props.activities.concat(activity));
+    dispatch(addActivity(activity))
     props.onClose();
   }
 

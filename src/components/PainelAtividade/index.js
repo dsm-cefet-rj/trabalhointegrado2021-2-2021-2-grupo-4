@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useParams, useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteActivity } from '../slices/ActivitiesSlice';
+import { Link } from 'react-router-dom'
 
 
 function PainelAtividade(props) {
   const [selected, setSelected] = useState(null)
   const [isNewActivity, setIsNewActivity] = useState(null)
+
+  const activities = useSelector(state => state.activities)
+  const dispatch = useDispatch()
+  // let { id } = useParams()
+  // id = parseInt(id)
 
   const toggle = (i) => {
     if (selected === i) {
@@ -23,7 +31,7 @@ function PainelAtividade(props) {
   }
 
   const handleClickDeleteActivity = (id) => {
-    props.setActivities(props.activities.filter((value) => value.id !== id ))
+    dispatch(deleteActivity(id))
   }
 
   return(
@@ -44,11 +52,11 @@ function PainelAtividade(props) {
               </CardBody>
               <CardBody className={items != null ? 'pad' : ''}>
                 {isNewActivity === i ? 
-                  <AdicionarAtividade onClose={() => setIsNewActivity(false)} activities={props.activities} setActivities={props.setActivities} card={item} /> 
+                  <AdicionarAtividade onClose={() => setIsNewActivity(false)} activities={activities} dispatch={dispatch} card={item} /> 
                 : null}
               </CardBody>
               <hr />
-              <ActivityList activities={props.activities} onClickDeleteActivity={handleClickDeleteActivity} card={item} />
+              <ActivityList activities={activities} onClickDeleteActivity={handleClickDeleteActivity} card={item} />
             </Collapse>
           </Card>
         ))}
@@ -68,8 +76,9 @@ const ActivityLine = (props) => {
   }
   return (    
     <div className='activity_list container row'>
+      <div className='col-1'> <Link to={'/adicionaratividade/${props.activity.id}'}> <button>{props.activity.id}</button> </Link></div>
       <div className='col-3'>{props.activity.type}</div>
-      <div className='col-4'>{props.activity.description}</div>
+      <div className='col-3'>{props.activity.description}</div>
       <div className='col-1'>{props.activity.hours}</div>
       <div className='col-2'>{props.activity.attachment}</div>
       <div className='col-1'><button className="btn btn-danger btn-block" name='delete_activity' onClick={() => props.onClickDeleteActivity(props.activity.id)}>X</button></div>
