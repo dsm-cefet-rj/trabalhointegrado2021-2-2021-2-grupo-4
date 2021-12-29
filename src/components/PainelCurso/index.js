@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Collapse, Card, CardHeader } from 'reactstrap';
 import Template from './templateCurso';
+import FormCurso from './formularioCurso';
 
 function PainelCurso(props) {
   const [selected, setSelected] = useState(null);
@@ -21,7 +22,18 @@ function PainelCurso(props) {
           <Card key={item.id} style={{ marginBottom: '1rem' }}>
             <CardHeader className={selected === item.id ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(item.id)}>{item.name}</CardHeader>
             <Collapse className={selected === item.id ? 'content show':'content'}>  
-              {(selected===item.id)=== true ? <Template curso={cursos.filter(c => c.id === selected)} /> : null}
+              {(selected===item.id)=== true ? 
+                <>
+                  <Template curso={cursos.filter(c => c.id === selected)} />
+                  <FormCurso curso={cursos.filter(c => c.id === selected)} set={setCursos}></FormCurso>
+                  {/* <button type="button" 
+                        style={{ marginLeft: '10px', paddingRight: '30px', paddingLeft: '30px'  }} 
+                        className="btn btn-success btn-block" 
+                        onClick={() => editarCurso} >
+                    Editar
+                  </button>  */}
+                </>
+              : null}              
             </Collapse>
           </Card>
         ))}
