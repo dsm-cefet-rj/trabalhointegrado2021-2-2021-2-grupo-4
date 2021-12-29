@@ -1,25 +1,20 @@
 import React, { useState } from 'react'
 import './styled.scss'
 
-function ofertasReducer(listaDeOfertas, action){
-    switch(action.type){
-        case 'submit':
-            return
-    }
 
-}
 
 const AdicionarOferta= (props) => {
-    const [listaDeOfertas, setOffer] = useState({});
+    const [novaOferta, setOffer] = useState({});
     
     function handleInputChange(e) {
-        setOffer({...listaDeOfertas, [e.target.name]: e.target.value })
+        setOffer({...novaOferta, [e.target.name]: e.target.value })
     }
     
     function handleSubmit(e) {
         e.preventDefault();
-        props.setOffers(props.offers.concat(listaDeOfertas));   
-        console.log(props.offers)  
+        /* props.setOffers(props.offers.concat(novaOferta)); */
+        setOffer(novaOferta.category = props.card.id)
+        props.dispatch({type:'add_offer', payload:novaOferta});     
         props.onClose();
     }
 
@@ -31,7 +26,7 @@ const AdicionarOferta= (props) => {
                         <input className='form-textbox' 
                                 type= "text"
                                 name='type'
-                                value={listaDeOfertas.type}
+                                value={novaOferta.type}
                                 onChange={handleInputChange} />    
                     </div>
                     <div>
@@ -39,7 +34,7 @@ const AdicionarOferta= (props) => {
                         <input  className='form-textbox' 
                                 type = "text"
                                 name='description'
-                                value={listaDeOfertas.description} 
+                                value={novaOferta.description} 
                                 onChange={handleInputChange} />
                     </div>
                    

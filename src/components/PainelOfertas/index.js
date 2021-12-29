@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 const check = null
 
-rxsli
+
 
 function PainelOfertas(props) {
   const [selected, setSelected] = useState(null)
@@ -28,6 +28,7 @@ function PainelOfertas(props) {
 
   return(
     <div className='wrapper'>
+      {console.log(props.ofertas.type)}
       <div className='accordion'>
         {cards.map((item, i) => (
           <Card key={item.id} style={{ marginBottom: '1rem' }}>
@@ -39,12 +40,12 @@ function PainelOfertas(props) {
                 </button> 
               </CardBody>
               <CardBody className={check != null ? '' : 'pad'}>
-                  {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)} offers={props.offers} setOffers={props.setOffers} /> : null}
+                  {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)} ofertas={props.ofertas} dispatch={props.dispatch} card={item} /> : null}
               </CardBody>
               <CardBody className={check != null ? '' : 'pad'}>
                   {}
               </CardBody>
-                {props.offers.map(o =>
+                {props.ofertas.filter((oferta) => oferta.category === item.id).map(o =>
                     <CardBody key={i}>
                       <tr> Tipo: {o.type} </tr> 
                       <tr> Descrição: {o.description} 
