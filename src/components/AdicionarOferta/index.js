@@ -11,7 +11,6 @@ const AdicionarOferta= (props) => {
     function handleSubmit(e) {
         e.preventDefault();
         props.setOffers(props.offers.concat(offer));   
-        console.log(props.offers)  
         props.onClose();
     }
 

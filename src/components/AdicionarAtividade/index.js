@@ -10,7 +10,7 @@ export default function AdicionarAtividade(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(props.activities);
+    setActivity(activity.id = props.activities.length+1, activity.category = props.card.id)
     props.setActivities(props.activities.concat(activity));
     props.onClose();
   }
