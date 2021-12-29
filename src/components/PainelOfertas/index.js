@@ -3,6 +3,8 @@ import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import "./styled.scss";
 import AdicionarOferta from '../AdicionarOferta';
 import Button from 'react-bootstrap/Button'
+import { useSelector } from 'react-redux'
+
 
 const check = null
 
@@ -11,6 +13,9 @@ const check = null
 function PainelOfertas(props) {
   const [selected, setSelected] = useState(null)
   const [isNewOffer, setIsNewOffer] = useState(null)
+
+  const ofertas = useSelector(state => state.ofertas)
+
 
   const toggle = (i) => {
     if (selected === i) {
@@ -28,7 +33,7 @@ function PainelOfertas(props) {
 
   return(
     <div className='wrapper'>
-      {console.log(props.ofertas.type)}
+      {/* {console.log(props.ofertas.type)} */}
       <div className='accordion'>
         {cards.map((item, i) => (
           <Card key={item.id} style={{ marginBottom: '1rem' }}>
@@ -40,12 +45,12 @@ function PainelOfertas(props) {
                 </button> 
               </CardBody>
               <CardBody className={check != null ? '' : 'pad'}>
-                  {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)} ofertas={props.ofertas} dispatch={props.dispatch} card={item} /> : null}
+                  {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)} card={item} /> : null}
               </CardBody>
               <CardBody className={check != null ? '' : 'pad'}>
                   {}
               </CardBody>
-                {props.ofertas.filter((oferta) => oferta.category === item.id).map(o =>
+                {ofertas.filter((oferta) => oferta.category === item.id).map(o =>
                     <CardBody key={i}>
                       <tr> Tipo: {o.type} </tr> 
                       <tr> Descrição: {o.description} 

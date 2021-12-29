@@ -11,18 +11,18 @@ import PainelOfertas from './components/PainelOfertas'
 import Footer from './components/Footer/index';
 //import Validacao from './components/TelaValidacao/index';
 import './App.css';
+import { store } from './store';
+import { Provider } from 'react-redux'
+
 
 const App = (props) => {
   const [activities, setActivities] = useState([]);
   /* const [offers, setOffers] = useState([]); */
   
   const ofertasIniciais = []
-
   const [ofertas, dispatch] = useReducer(ofertasReducer, ofertasIniciais)
-  
-  
 
-  function ofertasReducer(ofertas, action){
+  function ofertasReducer(ofertas = ofertasIniciais, action){
     switch(action.type){
       case 'add_offer':
         let proxId = 0
@@ -42,18 +42,20 @@ const App = (props) => {
   }
 
   return (
-    <Router>
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path="/" element={<ListaAlunos />}/>
-          <Route exact path="/painelatividades" element={<PainelAtividade activities={activities}  setActivities={setActivities} />} />
-          <Route exact path="/painelofertas" element={<PainelOfertas ofertas={ofertas} dispatch={dispatch} />} />
-         {/* <Route exact path="/validacao" element={<Validacao />}/> */}
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div>
+          <Header />
+          <Switch>
+            <Route exact path="/" element={<ListaAlunos />}/>
+            <Route exact path="/painelatividades" element={<PainelAtividade activities={activities}  setActivities={setActivities} />} />
+            <Route exact path="/painelofertas" element={<PainelOfertas ofertas={ofertas} dispatch={dispatch} />} />
+           {/* <Route exact path="/validacao" element={<Validacao />}/> */}
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
+    </Provider>
   );
 }
 

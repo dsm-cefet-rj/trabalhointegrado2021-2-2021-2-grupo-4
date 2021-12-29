@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import './styled.scss'
+import { useDispatch } from 'react-redux'
 
 
 
 const AdicionarOferta= (props) => {
     const [novaOferta, setOffer] = useState({});
+
+    const dispatch = useDispatch();
     
     function handleInputChange(e) {
         setOffer({...novaOferta, [e.target.name]: e.target.value })
@@ -13,8 +16,9 @@ const AdicionarOferta= (props) => {
     function handleSubmit(e) {
         e.preventDefault();
         /* props.setOffers(props.offers.concat(novaOferta)); */
+        debugger
         setOffer(novaOferta.category = props.card.id)
-        props.dispatch({type:'add_offer', payload:novaOferta});     
+        dispatch({type:'add_offer', payload:novaOferta});     
         props.onClose();
     }
 
