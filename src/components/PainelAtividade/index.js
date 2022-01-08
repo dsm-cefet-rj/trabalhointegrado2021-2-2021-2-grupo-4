@@ -7,7 +7,7 @@ import { deleteActivity } from '../slices/ActivitiesSlice';
 import { Link } from 'react-router-dom'
 
 
-function PainelAtividade(props) {
+const PainelAtividade = (props) => {
   const [selected, setSelected] = useState(null)
   const [isNewActivity, setIsNewActivity] = useState(null)
 
@@ -74,7 +74,7 @@ const ActivityLine = (props) => {
   }
   return (    
     <div className='activity_list container row'>
-      <div className='col-1'> <Link to={{ path: `/adicionaratividade/${props.activity.id}`}}> <button>{props.activity.id}</button> </Link></div>
+      <div className='col-1'> <Link to={{pathname: `/adicionaratividade/${props.activity.id}`, query: {props}}} > <button>{props.activity.id}</button> </Link></div>
       <div className='col-3'>{props.activity.type}</div>
       <div className='col-3'>{props.activity.description}</div>
       <div className='col-1'>{props.activity.hours}</div>
