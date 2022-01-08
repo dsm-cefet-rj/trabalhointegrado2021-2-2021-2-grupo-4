@@ -42,8 +42,6 @@ const AdicionarAtividade = (props) => {
   }
 
   const card = props.card ? props.card : cards.filter((c) => c.id === activity.category)[0]
-
-  debugger;
   
   return ( 
       <div className='container' id="painel">        
