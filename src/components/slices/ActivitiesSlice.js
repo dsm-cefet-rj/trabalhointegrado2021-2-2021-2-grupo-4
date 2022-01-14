@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
 let initialActivities = []
 
@@ -21,6 +21,16 @@ function deleteActivityReducer(activities, id){
   return activities.filter((activity) => activity.id !== id)
 }
 
+export const fetchActivities = createAsyncThunk(
+  'components/slices/fetchActivities',
+  async () => {
+    return await (await fetch('https://localhost:3004/activities')).json();
+  })
+
+function fulfillActivitiesReducer(activitiesState, activitiesFetched) {
+  return activitiesFetched;
+}
+
 export const activitiesSlice = createSlice({
   name: 'activities',
   initialState: initialActivities,
@@ -28,7 +38,10 @@ export const activitiesSlice = createSlice({
     addActivity: (state, action) => addActivityReducer(state, action.payload),
     updateActivity: (state, action) => updateActivityReducer(state, action.payload),
     deleteActivity: (state, action) => deleteActivityReducer(state, action.payload)
-  }
+  },
+  extraReducers: {
+    [fetchActivities.fulfilled]: (state, action) => fulfillActivitiesReducer(state, action.payload),
+  },
 })
 
 export const { addActivity, updateActivity, deleteActivity } = activitiesSlice.actions
