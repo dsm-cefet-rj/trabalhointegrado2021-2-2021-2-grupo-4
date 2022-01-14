@@ -48,11 +48,13 @@ const PainelAtividade = (props) => {
                   + 
                 </button>
               </CardBody>
-              <CardBody className={items != null ? 'pad' : ''}>
+              
                 {isNewActivity === i ? 
-                  <AdicionarAtividade onClose={() => setIsNewActivity(false)} activities={activities} dispatch={dispatch} card={item} /> 
-                : null}
-              </CardBody>
+                  <CardBody className={items != null ? 'pad' : ''}>
+                    <AdicionarAtividade onClose={() => setIsNewActivity(false)} activities={activities} dispatch={dispatch} card={item} /> 
+                  </CardBody>
+                  : null
+                }
               <hr />
               <ActivityList activities={activities} onClickDeleteActivity={handleClickDeleteActivity} card={item} />
             </Collapse>
