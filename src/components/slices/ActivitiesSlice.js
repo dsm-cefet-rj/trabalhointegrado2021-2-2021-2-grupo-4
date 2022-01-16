@@ -21,10 +21,9 @@ function deleteActivityReducer(activities, id){
   return activities.filter((activity) => activity.id !== id)
 }
 
-export const fetchActivities = createAsyncThunk(
-  'components/slices/fetchActivities',
+export const fetchActivities = createAsyncThunk('components/slices/fetchActivities',
   async () => {
-    return await (await fetch('https://localhost:3004/activities')).json();
+    return await (await fetch('http://localhost:3004/activities')).json();
   })
 
 function fulfillActivitiesReducer(activitiesState, activitiesFetched) {
