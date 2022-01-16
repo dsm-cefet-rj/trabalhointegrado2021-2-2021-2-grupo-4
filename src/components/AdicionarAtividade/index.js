@@ -6,9 +6,9 @@ import './styled.scss'
 
 const AdicionarAtividade = (props) => { 
   
-  //const [activity, setActivity] = useState({});
+  const activities = useSelector(state => state.activities.activities)
   const history = useNavigate()
-  const activities = useSelector(state => state.activities)
+  const dispatch = useDispatch()
   let { id } = useParams()
   id = id ? Number.parseInt(id) : null
 
@@ -22,8 +22,6 @@ const AdicionarAtividade = (props) => {
        : '../slices/ActivitiesSlice/addActivity'
       : '../slices/ActivitiesSlice/addActivity'
   )
-
-  const dispatch = useDispatch()
 
   function handleInputChange(e) {
     setActivity({...activity, [e.target.name]: e.target.value })

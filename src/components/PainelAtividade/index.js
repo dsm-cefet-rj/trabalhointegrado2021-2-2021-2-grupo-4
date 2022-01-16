@@ -11,7 +11,11 @@ const PainelAtividade = (props) => {
   const [selected, setSelected] = useState(null)
   const [isNewActivity, setIsNewActivity] = useState(null)
 
-  const activities = useSelector(state => state.activities)
+  const activitesState = useSelector(state => state.activities)
+  const activities = activitesState.activities
+  const status = activitesState.status
+  const error = activitesState.error
+
   const dispatch = useDispatch()
 
   const toggle = (i) => {
@@ -30,6 +34,13 @@ const PainelAtividade = (props) => {
 
   const handleClickDeleteActivity = (id) => {
     dispatch(deleteActivity(id))
+  }
+
+  let tableActivities = null
+  if(status === 'loading'){
+    tableActivities = <div>Carregando Atividades... </div>
+  } else if(status === 'failed') {
+    tableActivities = <div>Error: {error} </div>
   }
 
   return(
@@ -56,7 +67,10 @@ const PainelAtividade = (props) => {
                   : null
                 }
               <hr />
-              <ActivityList activities={activities} onClickDeleteActivity={handleClickDeleteActivity} card={item} />
+              {status === 'loaded' ?
+                <ActivityList activities={activities} onClickDeleteActivity={handleClickDeleteActivity} card={item} />
+                : tableActivities
+              }
             </Collapse>
           </Card>
         ))}

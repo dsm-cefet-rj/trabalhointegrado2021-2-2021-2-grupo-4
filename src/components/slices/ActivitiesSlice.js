@@ -1,24 +1,27 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-let initialActivities = []
+const initialState = {
+  status: 'not_loaded',
+  activities: [],
+  error: null
+};
 
-function addActivityReducer(activities, activity) {
+function addActivityReducer(state, activity) {
   let proxId = 0
-  if (activities.length > 0)
-    proxId = 1 + activities.map(a => a.id).reduce((x, y) => Math.max(x,y))
+  if (state.activities.length > 0)
+    proxId = 1 + state.activities.map(a => a.id).reduce((x, y) => Math.max(x,y))
   else
     proxId = 1
-  return activities.concat([{ ...activity, id: proxId }])
+    state.activities = state.activities.concat([{ ...activity, id: proxId }])
 }
 
-function updateActivityReducer(activities, activity){
-  let index = activities.map(a => a.id).indexOf(activity.id)
-  activities.splice(index, 1, activity)
-  return activities
+function updateActivityReducer(state, activity){
+  let index = state.activities.map(a => a.id).indexOf(activity.id)
+  state.activities.splice(index, 1, activity)
 }
 
-function deleteActivityReducer(activities, id){
-  return activities.filter((activity) => activity.id !== id)
+function deleteActivityReducer(state, id){
+  state.activities = state.activities.filter((activity) => activity.id !== id)
 }
 
 export const fetchActivities = createAsyncThunk('components/slices/fetchActivities',
@@ -27,19 +30,22 @@ export const fetchActivities = createAsyncThunk('components/slices/fetchActiviti
   })
 
 function fulfillActivitiesReducer(activitiesState, activitiesFetched) {
-  return activitiesFetched;
+  activitiesState.status = 'loaded';
+  activitiesState.activities = activitiesFetched;
 }
 
 export const activitiesSlice = createSlice({
   name: 'activities',
-  initialState: initialActivities,
+  initialState: initialState,
   reducers: {
     addActivity: (state, action) => addActivityReducer(state, action.payload),
     updateActivity: (state, action) => updateActivityReducer(state, action.payload),
     deleteActivity: (state, action) => deleteActivityReducer(state, action.payload)
   },
   extraReducers: {
+    [fetchActivities.pending]: (state, action) => {state.status = 'loading'},
     [fetchActivities.fulfilled]: (state, action) => fulfillActivitiesReducer(state, action.payload),
+    [fetchActivities.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
   },
 })
 
