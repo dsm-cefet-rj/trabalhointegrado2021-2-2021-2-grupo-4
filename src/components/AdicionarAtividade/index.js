@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { addActivity, updateActivity } from '../slices/ActivitiesSlice';
+import { addActivity, updateActivityServer } from '../slices/ActivitiesSlice';
 import './styled.scss'
 
 const AdicionarAtividade = (props) => { 
@@ -34,7 +34,7 @@ const AdicionarAtividade = (props) => {
       dispatch(addActivity(activity))
       props.onClose();
     }else{
-      dispatch(updateActivity(activity))
+      dispatch(updateActivityServer(activity))
       history('/painelatividades')
     }
   }

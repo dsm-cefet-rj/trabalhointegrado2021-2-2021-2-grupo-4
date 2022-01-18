@@ -1,10 +1,7 @@
 {
-    "activities": [{
-        "id": 1, 
-        "type": "Iniciação científica", 
-        "description": "blabla", 
-        "hours": 20, 
-        "attachment": null, 
-        "category": 1
-    }]
+  "activities": [
+    {
+      "id": 1
+    }
+  ]
 }

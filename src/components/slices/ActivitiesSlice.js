@@ -15,6 +15,25 @@ function addActivityReducer(state, activity) {
     state.activities = state.activities.concat([{ ...activity, id: proxId }])
 }
 
+export const updateActivityServer = createAsyncThunk('components/slices/updateActivityServer',
+  async (activity) => {
+    let response = await fetch('http://localhost:3004/activities/' + activity.id,
+    {
+      method: 'PUT', 
+      headers: {
+        'Content-Type': 'application/json;charset-utf-8'
+      },
+      body: JSON.stringify(activity)
+    });
+
+    if(response.ok){
+      return activity;
+    }else{
+      throw new Error("Erro ao atualizar a atividade");
+    }
+  }
+);
+
 function updateActivityReducer(state, activity){
   let index = state.activities.map(a => a.id).indexOf(activity.id)
   state.activities.splice(index, 1, activity)
@@ -46,6 +65,7 @@ export const activitiesSlice = createSlice({
     [fetchActivities.pending]: (state, action) => {state.status = 'loading'},
     [fetchActivities.fulfilled]: (state, action) => fulfillActivitiesReducer(state, action.payload),
     [fetchActivities.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
+    [updateActivityServer.fulfilled]: (state, action) => {updateActivityReducer(state, action.payload)}
   },
 })
 

@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteActivity } from '../slices/ActivitiesSlice';
+import { deleteActivity, fetchActivities } from '../slices/ActivitiesSlice';
 import { Link } from 'react-router-dom'
 
 
@@ -35,6 +35,12 @@ const PainelAtividade = (props) => {
   const handleClickDeleteActivity = (id) => {
     dispatch(deleteActivity(id))
   }
+
+  useEffect(() => {
+    if(status ==='not_loaded') {
+      dispatch(fetchActivities())
+    }
+  }, [status, dispatch])
 
   let tableActivities = null
   if(status === 'loading'){

@@ -5,7 +5,6 @@ import {
   Route
 } from "react-router-dom";
 import { Provider } from 'react-redux';
-import { fetchActivities } from './components/slices/ActivitiesSlice';
 import {store} from './store';
 import Header from './components/Header/index';
 import ListaAlunos from './components/ListaAlunos/index';
@@ -15,8 +14,6 @@ import Footer from './components/Footer/index';
 //import Validacao from './components/TelaValidacao/index';
 import './App.css';
 import AdicionarAtividade from './components/AdicionarAtividade';
-
-store.dispatch(fetchActivities());
 
 const App = (props) => {
 
