@@ -1,73 +1,59 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit"
+import { httpGet, httpDelete, httpPost, httpPut } from "../../utils";
+import { baseUrl } from '../../baseUrl';
 
-const initialState = {
+const activitiesAdapter = createEntityAdapter()
+
+const initialState = activitiesAdapter.getInitialState({
   status: 'not_loaded',
-  activities: [],
   error: null
-};
+});
 
-function addActivityReducer(state, activity) {
-  let proxId = 0
-  if (state.activities.length > 0)
-    proxId = 1 + state.activities.map(a => a.id).reduce((x, y) => Math.max(x,y))
-  else
-    proxId = 1
-    state.activities = state.activities.concat([{ ...activity, id: proxId }])
-}
+export const fetchActivities = createAsyncThunk('components/slices/fetchActivities', async () => {
+  return await httpGet(`${baseUrl}/activities`)
+})
 
-export const updateActivityServer = createAsyncThunk('components/slices/updateActivityServer',
-  async (activity) => {
-    let response = await fetch('http://localhost:3004/activities/' + activity.id,
-    {
-      method: 'PUT', 
-      headers: {
-        'Content-Type': 'application/json;charset-utf-8'
-      },
-      body: JSON.stringify(activity)
-    });
+export const addActivityServer = createAsyncThunk('components/slices/addActivityServer', async (activity) => {
+  return await httpPost(`${baseUrl}/activities`, activity);
+});
 
-    if(response.ok){
-      return activity;
-    }else{
-      throw new Error("Erro ao atualizar a atividade");
-    }
-  }
-);
+export const deleteActivityServer = createAsyncThunk('components/slices/deleteActivityServer', async (idActivity) => {
+  await httpDelete(`${baseUrl}/activities/${idActivity}`);
+  return idActivity;
+});
 
-function updateActivityReducer(state, activity){
-  let index = state.activities.map(a => a.id).indexOf(activity.id)
-  state.activities.splice(index, 1, activity)
-}
-
-function deleteActivityReducer(state, id){
-  state.activities = state.activities.filter((activity) => activity.id !== id)
-}
-
-export const fetchActivities = createAsyncThunk('components/slices/fetchActivities',
-  async () => {
-    return await (await fetch('http://localhost:3004/activities')).json();
-  })
-
-function fulfillActivitiesReducer(activitiesState, activitiesFetched) {
-  activitiesState.status = 'loaded';
-  activitiesState.activities = activitiesFetched;
-}
+export const updateActivityServer = createAsyncThunk('components/slices/updateActivityServer', async (activity) => {
+  return await httpPut(`${baseUrl}/activities/${activity.id}`, activity);
+});
 
 export const activitiesSlice = createSlice({
   name: 'activities',
   initialState: initialState,
   reducers: {
-    addActivity: (state, action) => addActivityReducer(state, action.payload),
-    updateActivity: (state, action) => updateActivityReducer(state, action.payload),
-    deleteActivity: (state, action) => deleteActivityReducer(state, action.payload)
+    setStatus: (state, action) => {state.status = action.payload}
   },
   extraReducers: {
     [fetchActivities.pending]: (state, action) => {state.status = 'loading'},
-    [fetchActivities.fulfilled]: (state, action) => fulfillActivitiesReducer(state, action.payload),
-    [fetchActivities.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
-    [updateActivityServer.fulfilled]: (state, action) => {updateActivityReducer(state, action.payload)}
+    [deleteActivityServer.pending]: (state, action) => {state.status = 'deleting'},
+    [addActivityServer.pending]: (state, action) => {state.status = 'saving'},
+    [updateActivityServer.pending]: (state, action) => {state.status = 'saving'},
+    [fetchActivities.fulfilled]: (state, action) => {state.status = 'loaded'; activitiesAdapter.setAll(state, action.payload);},
+    [fetchActivities.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao buscar atividades: ' + action.error.message},        
+    [deleteActivityServer.fulfilled]: (state, action) => {state.status = 'deleted'; activitiesAdapter.removeOne(state, action.payload);},
+    [deleteActivityServer.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao excluir atividade: ' + action.error.message},
+    [addActivityServer.fulfilled]: (state, action) => {state.status = 'saved'; activitiesAdapter.addOne(state, action.payload);},
+    [addActivityServer.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao adicionar atividade: ' + action.error.message},        
+    [updateActivityServer.fulfilled]: (state, action) => {state.status = 'saved'; activitiesAdapter.upsertOne(state, action.payload);},
+    [updateActivityServer.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao atualizar atividade: ' + action.error.message},
   },
 })
 
-export const { addActivity, updateActivity, deleteActivity } = activitiesSlice.actions
+export const { setStatus } = activitiesSlice.actions
+
 export default activitiesSlice.reducer
+
+export const {
+  selectAll: selectAllActivities,
+  selectById: selectActivitiesById,
+  selectIds: selectActivitiesIds
+} = activitiesAdapter.getSelectors(state => state.activities)

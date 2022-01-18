@@ -1,26 +1,26 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { addActivity, updateActivityServer } from '../slices/ActivitiesSlice';
+import { addActivityServer, selectActivitiesById, updateActivityServer } from '../slices/ActivitiesSlice';
 import './styled.scss'
 
 const AdicionarAtividade = (props) => { 
   
-  const activities = useSelector(state => state.activities.activities)
   const history = useNavigate()
   const dispatch = useDispatch()
   let { id } = useParams()
   id = id ? Number.parseInt(id) : null
+  const activityFound = useSelector(state => selectActivitiesById(state, id))
 
   const [activity, setActivity] = useState(
-    id ? activities.filter((a) => a.id === id)[0] ?? {} : {}
+    id ? activityFound ?? {} : {}
   )
 
   const [actionType, ] = useState(
-    id ? activities.filter((a) => a.id === id)[0] 
-       ? '../slices/ActivitiesSlice/updateActivity'
-       : '../slices/ActivitiesSlice/addActivity'
-      : '../slices/ActivitiesSlice/addActivity'
+    id ? activityFound 
+       ? '../slices/ActivitiesSlice/updateActivityServer'
+       : '../slices/ActivitiesSlice/addActivityServer'
+      : '../slices/ActivitiesSlice/addActivityServer'
   )
 
   function handleInputChange(e) {
@@ -29,9 +29,9 @@ const AdicionarAtividade = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if(actionType === '../slices/ActivitiesSlice/addActivity') {
+    if(actionType === '../slices/ActivitiesSlice/addActivityServer') {
       setActivity(activity.id = props.activities.length+1, activity.category = props.card.id)
-      dispatch(addActivity(activity))
+      dispatch(addActivityServer(activity))
       props.onClose();
     }else{
       dispatch(updateActivityServer(activity))
@@ -42,14 +42,14 @@ const AdicionarAtividade = (props) => {
   const card = props.card ? props.card : cards.filter((c) => c.id === activity.category)[0]
   
   return ( 
-      <div className='container' id="painel">        
+      <div className='container' id="painel">    
         <form onSubmit={handleSubmit} >
           <div className='linha-form'>
             <label>Tipo Atividade</label>
             <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange}>
                 <option key=""></option>
                 {card.subcategories.map(sub => (
-                  <option key={sub.id} style={{ width: '250px', textOverflow:'ellipsis'}} value={activity.type}>
+                  <option key={sub.id+'_'+card.id} style={{ width: '250px', textOverflow:'ellipsis'}} value={activity.type}>
                       {sub.name}</option>               
                 ))}
             </select>            
