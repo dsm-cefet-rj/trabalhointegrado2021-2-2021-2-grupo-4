@@ -4,7 +4,6 @@ import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteActivityServer, fetchActivities, selectAllActivities, selectActivitiesById } from '../slices/ActivitiesSlice';
-import { Link } from 'react-router-dom'
 
 
 const PainelValidacao = (props) => {
@@ -75,7 +74,6 @@ const PainelValidacao = (props) => {
 }
 
 const ActivityLine = (props) => {
-
   const activityFound = useSelector(state => selectActivitiesById(state, props.activity.id))
 
   const [selected, setSelected] = useState(null)
@@ -89,9 +87,9 @@ const ActivityLine = (props) => {
 //      console.log("entrou no if");
       return setSelected(null)
     }
-    setActivity(props.activity.validate = true);
-//    console.log("entrou no else");
+//    console.log("entrou no else")
     setSelected(i)
+    setActivity(activity.validate = true)
   }
 
   
