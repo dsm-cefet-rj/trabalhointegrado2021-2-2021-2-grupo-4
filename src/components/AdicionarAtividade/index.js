@@ -46,7 +46,7 @@ const AdicionarAtividade = (props) => {
         <form onSubmit={handleSubmit} >
           <div className='linha-form'>
             <label>Tipo Atividade</label>
-            <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange}>
+            <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange} required>
                 <option key=""></option>
                 {card.subcategories.map(sub => (
                   <option key={sub.id+'_'+card.id} style={{ width: '250px', textOverflow:'ellipsis'}} value={activity.type}>
@@ -59,14 +59,14 @@ const AdicionarAtividade = (props) => {
             <input  type="text" 
                     name='description' 
                     value={activity.description} 
-                    onChange={handleInputChange}/>
+                    onChange={handleInputChange} required/>
           </div>
           <div className='linha-form'>
             <label>Horas</label>
             <input  type="number" 
                     name="hours" 
                     value={activity.hours} 
-                    onChange={handleInputChange}/>
+                    onChange={handleInputChange} required/>
           </div>
           <div className='linha-form'>
             <label>Anexo</label>
