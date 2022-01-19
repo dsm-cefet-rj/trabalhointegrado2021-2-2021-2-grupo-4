@@ -4,12 +4,14 @@ import {
   Routes as Switch,
   Route
 } from "react-router-dom";
-import Header from './components/Header/index'
-import ListaAlunos from './components/ListaAlunos/index'
-import PainelAtividade from './components/PainelAtividade/index'
-import PainelOfertas from './components/PainelOfertas'
+import { Provider } from 'react-redux';
+import {store} from './store';
+import Header from './components/Header/index';
+import ListaAlunos from './components/ListaAlunos/index';
+import PainelAtividade from './components/PainelAtividade/index';
+import PainelValidacao from './components/PainelValidacao/index';
+import PainelOfertas from './components/PainelOfertas';
 import Footer from './components/Footer/index';
-//import Validacao from './components/TelaValidacao/index';
 import './App.css';
 import { store } from './store';
 import { Provider } from 'react-redux'
@@ -41,6 +43,8 @@ const App = (props) => {
     }
   }
 
+  const [offers, setOffers] = useState([]);
+  
   return (
     <Provider store={store}>
       <Router>
@@ -48,9 +52,11 @@ const App = (props) => {
           <Header />
           <Switch>
             <Route exact path="/" element={<ListaAlunos />}/>
-            <Route exact path="/painelatividades" element={<PainelAtividade activities={activities}  setActivities={setActivities} />} />
             <Route exact path="/painelofertas" element={<PainelOfertas ofertas={ofertas} dispatch={dispatch} />} />
            {/* <Route exact path="/validacao" element={<Validacao />}/> */}
+            <Route exact path="/painelatividades" element={<PainelAtividade />} />
+            <Route exact path="/adicionaratividade/:id" element={<AdicionarAtividade />}></Route>
+            <Route exact path="/painelvalidacao" element={<PainelValidacao />} />
           </Switch>
           <Footer />
         </div>
