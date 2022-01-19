@@ -16,7 +16,6 @@ const AdicionarOferta= (props) => {
     function handleSubmit(e) {
         e.preventDefault();
         /* props.setOffers(props.offers.concat(novaOferta)); */
-        debugger
         setOffer(novaOferta.category = props.card.id)
         dispatch({type:'add_offer', payload:novaOferta});     
         props.onClose();
