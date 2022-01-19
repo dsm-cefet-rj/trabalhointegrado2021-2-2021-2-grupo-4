@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react'
+import React, { useReducer } from 'react'
 import {
   BrowserRouter as Router,
   Routes as Switch,
@@ -11,14 +11,13 @@ import ListaAlunos from './components/ListaAlunos/index';
 import PainelAtividade from './components/PainelAtividade/index';
 import PainelValidacao from './components/PainelValidacao/index';
 import PainelOfertas from './components/PainelOfertas';
+import AdicionarAtividade from './components/AdicionarAtividade'
 import Footer from './components/Footer/index';
 import './App.css';
-import { store } from './store';
-import { Provider } from 'react-redux'
 
 
 const App = (props) => {
-  const [activities, setActivities] = useState([]);
+  // const [activities, setActivities] = useState([]);
   /* const [offers, setOffers] = useState([]); */
   
   const ofertasIniciais = []
@@ -43,7 +42,7 @@ const App = (props) => {
     }
   }
 
-  const [offers, setOffers] = useState([]);
+  // const [offers, setOffers] = useState([]);
   
   return (
     <Provider store={store}>
