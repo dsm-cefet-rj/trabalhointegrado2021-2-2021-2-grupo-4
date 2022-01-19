@@ -68,13 +68,13 @@ const AdicionarAtividade = (props) => {
                     value={activity.hours} 
                     onChange={handleInputChange} required/>
           </div>
-          <div className='linha-form'>
+          {/* <div className='linha-form'>
             <label>Anexo</label>
             <input type="file" 
                    name='attachment' 
                    value={activity.attachment} 
                    onChange={handleInputChange}/>
-          </div>
+          </div> */}
           <button id="comeco" type='submit' value="Salvar" >Salvar</button>   
         </form>
       </div>

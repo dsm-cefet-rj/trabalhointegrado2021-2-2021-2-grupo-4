@@ -1,12 +1,3 @@
 {
-  "activities": [
-    {
-      "type": "Disciplinas não previstas",
-      "description": "edwc",
-      "hours": "3",
-      "id": 1,
-      "category": 3,
-      "validate": false
-    }
-  ]
+  "activities": []
 }
