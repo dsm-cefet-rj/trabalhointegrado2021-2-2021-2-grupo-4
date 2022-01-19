@@ -11,7 +11,7 @@ import PainelOfertas from './components/PainelOfertas'
 import Footer from './components/Footer/index';
 import PainelCurso from './components/PainelCurso';
 import './App.css';
-
+ 
 const App = () => {
   const [activities, setActivities] = useState([]);
   const [offers, setOffers] = useState([]);
