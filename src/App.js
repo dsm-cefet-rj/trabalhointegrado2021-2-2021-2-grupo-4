@@ -9,9 +9,9 @@ import {store} from './store';
 import Header from './components/Header/index';
 import ListaAlunos from './components/ListaAlunos/index';
 import PainelAtividade from './components/PainelAtividade/index';
+import PainelValidacao from './components/PainelValidacao/index';
 import PainelOfertas from './components/PainelOfertas';
 import Footer from './components/Footer/index';
-//import Validacao from './components/TelaValidacao/index';
 import './App.css';
 import AdicionarAtividade from './components/AdicionarAtividade';
 
@@ -29,7 +29,7 @@ const App = (props) => {
             <Route exact path="/painelatividades" element={<PainelAtividade />} />
             <Route exact path="/adicionaratividade/:id" element={<AdicionarAtividade />}></Route>
             <Route exact path="/painelofertas" element={<PainelOfertas offers={offers} setOffers={setOffers} />} />
-          {/* <Route exact path="/validacao" element={<Validacao />}/> */}
+            <Route exact path="/painelvalidacao" element={<PainelValidacao />} />
           </Switch>
           <Footer />
         </div>

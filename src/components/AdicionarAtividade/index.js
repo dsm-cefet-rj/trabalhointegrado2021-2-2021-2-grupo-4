@@ -30,7 +30,7 @@ const AdicionarAtividade = (props) => {
   function handleSubmit(e) {
     e.preventDefault();
     if(actionType === '../slices/ActivitiesSlice/addActivityServer') {
-      setActivity(activity.id = props.activities.length+1, activity.category = props.card.id)
+      setActivity(activity.id = props.activities.length+1, activity.category = props.card.id, activity.validate=false)
       dispatch(addActivityServer(activity))
       props.onClose();
     }else{
