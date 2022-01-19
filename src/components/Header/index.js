@@ -10,7 +10,7 @@ const Header = () => {
       <nav className="nav-bar">
         <Link to='/'> Painel Aluno </Link>
         <Link to='/painelofertas'> Painel de Ofertas </Link>
-        {/* <Link to='/validacao'> Validação </Link> */}
+        <Link to='/painelvalidacao'> Painel Validação </Link>
       </nav>
     </div>
   ); 
