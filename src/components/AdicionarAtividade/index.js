@@ -4,6 +4,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addActivityServer, selectActivitiesById, updateActivityServer } from '../slices/ActivitiesSlice';
 import './styled.scss'
 
+/**
+ * @module components/AdicionarAtividade
+ */
+
+/**
+ * @typedef Atividade 
+ * @type {object}
+ * @property {number} id - identificador
+ * @property {string} type - tipo de atividade
+ * @property {string} description - descrição da atividade
+ * @property {number} hours - quantidade de horas concluídas
+ * @property {file} attachment - comprovante ou certificado de conclusão de atividade
+ * @param {*} props 
+ */
+
+/**
+ * Renderiza uma modal para adição de atividade no PainelAtividade 
+ * @params {Atividade} props.atividade - Atividade que será criada no painel
+ */
+
 const AdicionarAtividade = (props) => { 
   
   const history = useNavigate()

@@ -7,6 +7,16 @@ import { deleteActivityServer, fetchActivities, selectAllActivities } from '../s
 import { Link } from 'react-router-dom'
 
 
+/**
+ * @module components/PainelAtividade
+ */
+
+/**
+ * Um painel que renderiza a lista de atividades de um determinado aluno e acopla 
+ * funções de CRUD em seu escopo
+ * 
+ */
+
 const PainelAtividade = (props) => {
   const activities = useSelector(selectAllActivities)
   const status = useSelector(state => state.activities.status)
