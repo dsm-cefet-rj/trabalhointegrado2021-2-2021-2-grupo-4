@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteActivityServer, fetchActivities, selectAllActivities, selectActivitiesById } from '../slices/ActivitiesSlice';
 
 
-function PainelAtividade(props) {
+const PainelValidacao = (props) => {
+  const activities = useSelector(selectAllActivities)
+  const status = useSelector(state => state.activities.status)
+  const error = useSelector(state => state.activities.error)
+
+  const dispatch = useDispatch()
+
   const [selected, setSelected] = useState(null)
   const [isNewActivity, setIsNewActivity] = useState(null)
 
@@ -15,15 +23,25 @@ function PainelAtividade(props) {
     setSelected(i)
   }
 
-  const handleNewActivity = (i) => {
-    if (isNewActivity === i) {
-      return setIsNewActivity(null)
-    }
-    setIsNewActivity(i)
+  const handleClickDeleteActivity = (id) => {
+    dispatch(deleteActivityServer(id))
   }
 
-  const handleClickDeleteActivity = (id) => {
-    props.setActivities(props.activities.filter((value) => value.id !== id ))
+
+
+  useEffect(() => {
+    if(status ==='not_loaded' ) {
+      dispatch(fetchActivities())
+    }else if(status === 'failed'){
+      setTimeout(() => dispatch(fetchActivities()), 2000)
+    }
+  }, [status, dispatch])
+
+  let tableActivities = null
+  if(status === 'loading'){
+    tableActivities = <div>Carregando Atividades... </div>
+  } else if(status === 'failed') {
+    tableActivities = <div>Error: {error} </div>
   }
 
   return(
@@ -34,21 +52,19 @@ function PainelAtividade(props) {
             <CardHeader className={selected === i ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(i)}>{item.name}</CardHeader>
             <Collapse className={selected === i ? 'content show' : 'content'}>
               <CardBody>
-                Adicionar Atividade
-                <button type="button" 
-                        style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} 
-                        className="btn btn-success btn-block" 
-                        onClick={() => handleNewActivity(i)} >
-                  + 
-                </button>
               </CardBody>
-              <CardBody className={items != null ? 'pad' : ''}>
+              
                 {isNewActivity === i ? 
-                  <AdicionarAtividade onClose={() => setIsNewActivity(false)} activities={props.activities} setActivities={props.setActivities} card={item} /> 
-                : null}
-              </CardBody>
+                  <CardBody className={items != null ? 'pad' : ''}>
+                    <AdicionarAtividade onClose={() => setIsNewActivity(false)} activities={activities} dispatch={dispatch} card={item} /> 
+                  </CardBody>
+                  : null
+                }
               <hr />
-              <ActivityList activities={props.activities} onClickDeleteActivity={handleClickDeleteActivity} card={item} />
+              {status === 'loaded' || status === 'saved' || status === 'deleted' ?
+                <ActivityList activities={activities} onClickDeleteActivity={handleClickDeleteActivity} card={item} />
+                : tableActivities
+              }
             </Collapse>
           </Card>
         ))}
@@ -58,29 +74,39 @@ function PainelAtividade(props) {
 }
 
 const ActivityLine = (props) => {
+  const activityFound = useSelector(state => selectActivitiesById(state, props.activity.id))
+
   const [selected, setSelected] = useState(null)
+
+  const [activity, setActivity] = useState(
+    props.activity.id ? activityFound ?? {} : {}
+  )
 
   const handleClickValidateActivity = (i) => {
     if (selected === i) {
+//      console.log("entrou no if");
       return setSelected(null)
     }
+//    console.log("entrou no else")
     setSelected(i)
+    setActivity(activity.validate = true)
   }
+
+  
   return (    
     <div className='activity_list container row'>
       <div className='col-3'>{props.activity.type}</div>
-      <div className='col-4'>{props.activity.description}</div>
-      <div className='col-1'>{props.activity.hours}</div>
+      <div className='col-3'>{props.activity.description}</div>
+      <div className='col-2'>{props.activity.hours}</div>
       <div className='col-2'>{props.activity.attachment}</div>
-      <div className='col-1'><button className="btn btn-danger btn-block" name='delete_activity' onClick={() => props.onClickDeleteActivity(props.activity.id)}>X</button></div>
-      <div className='col-1'><button className={selected === props.keyActivity ? "btn btn-success disabled":"btn btn-success"} name='validate_activity' onClick={() => handleClickValidateActivity(props.keyActivity)}>V</button></div>
-    </div>    
+      <div className='col-1'><button className={selected === props.activity.id ? "btn btn-success disabled":"btn btn-success"} name='validate_activity' onClick={() => handleClickValidateActivity(props.keyActivity)}>V</button></div>
+    </div>
   );
 }
 
 function ActivityList(props){
   return(
-    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine keyActivity={i} activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} cardId={props.card.id}/>)            
+    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} card={props.card}/>)            
   );
 }
 
@@ -120,4 +146,4 @@ const cards = [
 
 const items = null
 
-export default PainelAtividade;
+export default PainelValidacao;

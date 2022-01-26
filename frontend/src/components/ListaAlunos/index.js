@@ -2,6 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import './styled.scss'
 
+/**
+ * @module components/ListaAlunos
+ */
+
+/**
+ * Renderiza a lista de alunos presentes no banco de dados que possuem
+ * atividades em seu painel 
+ */
+
 const ListaAlunos = () => {
 
   const students = [

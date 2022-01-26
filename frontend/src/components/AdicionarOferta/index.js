@@ -1,16 +1,23 @@
 import React, { useState } from 'react'
 import './styled.scss'
+import { useDispatch } from 'react-redux'
+
+
 
 const AdicionarOferta= (props) => {
-    const [offer, setOffer] = useState({});
+    const [novaOferta, setOffer] = useState({});
+
+    const dispatch = useDispatch();
     
     function handleInputChange(e) {
-        setOffer({...offer, [e.target.name]: e.target.value })
+        setOffer({...novaOferta, [e.target.name]: e.target.value })
     }
     
     function handleSubmit(e) {
         e.preventDefault();
-        props.setOffers(props.offers.concat(offer));   
+        /* props.setOffers(props.offers.concat(novaOferta)); */
+        setOffer(novaOferta.category = props.card.id)
+        dispatch({type:'add_offer', payload:novaOferta});     
         props.onClose();
     }
 
@@ -22,7 +29,7 @@ const AdicionarOferta= (props) => {
                         <input className='form-textbox' 
                                 type= "text"
                                 name='type'
-                                value={offer.type}
+                                value={novaOferta.type}
                                 onChange={handleInputChange} />    
                     </div>
                     <div>
@@ -30,7 +37,7 @@ const AdicionarOferta= (props) => {
                         <input  className='form-textbox' 
                                 type = "text"
                                 name='description'
-                                value={offer.description} 
+                                value={novaOferta.description} 
                                 onChange={handleInputChange} />
                     </div>
                    
