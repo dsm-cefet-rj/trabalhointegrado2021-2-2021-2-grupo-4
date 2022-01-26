@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
+const Activities = require('../models/activities')
 
 router.use(bodyParser.json());
 
@@ -25,9 +26,14 @@ let activities = [
 /* GET users listing. */
 router.route('/')
 .get((req, res, next) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(activities);
+
+  Activities.find({})
+    .then((activitiesBase) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(activitiesBase);
+    }, (err) => next(err))
+    .catch((err) => next(err))
 })
 .post((req, res, next) => {
   let proxId = 1 + activities.map(p => p.id).reduce((x,y) => Math.max(x,y));
