@@ -30,6 +30,16 @@ router.route('/')
 })
 
 router.route('/:id')
+.get((req, res, next) => {
+  Activities.findById(req.params.id)
+  .then((resp) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(resp);
+  }, (err) => next(err))
+  .catch((err) => next(err))
+
+})
 .delete((req, res, next) => {
   Activities.findByIdAndRemove(req.params.id)
   .then((resp) => {

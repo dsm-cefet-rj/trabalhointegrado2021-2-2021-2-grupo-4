@@ -10,7 +10,7 @@ const initialState = categoriesAdapter.getInitialState({
 });
 
 export const fetchCategories = createAsyncThunk('components/slices/fetchCategories', async () => {
-  return await httpGet(`${baseUrl}/activities`)
+  return await httpGet(`${baseUrl}/categories`)
 })
 
 export const categoriesSlice = createSlice({

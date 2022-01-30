@@ -4,7 +4,7 @@ import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteActivityServer, fetchActivities, selectAllActivities } from '../slices/ActivitiesSlice';
-import { selectAllCategories } from '../slices/CategoriesSlice';
+import { fetchCategories, selectAllCategories } from '../slices/CategoriesSlice';
 import { Link } from 'react-router-dom'
 
 
@@ -20,11 +20,11 @@ import { Link } from 'react-router-dom'
 
 const PainelAtividade = (props) => {
   const activities = useSelector(selectAllActivities)
-  const categories = useSelector(selectAllCategories)
   const status = useSelector(state => state.activities.status)
   const error = useSelector(state => state.activities.error)
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  //const categories = dispatch(fetchCategories());
 
   const [selected, setSelected] = useState(null)
   const [isNewActivity, setIsNewActivity] = useState(null)
@@ -65,7 +65,7 @@ const PainelAtividade = (props) => {
   return(
     <div className='wrapper'>
       <div className='accordion'>
-        {categories.map((item, i) => (          
+        {cards.map((item, i) => (          
           <Card style={{ marginBottom: '1rem' }} key={i}>
             <CardHeader className={selected === i ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(i)}>{item.name}</CardHeader>
             <Collapse className={selected === i ? 'content show' : 'content'}>
@@ -116,6 +116,40 @@ function ActivityList(props){
     props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} card={props.card} activityId={i}/>)            
   );
 }
+
+const cards = [
+  {
+    id: 1, 
+    name: 'Pesquisa',
+    subcategories: [{id: 1, name: 'Iniciação científica'},
+                    {id: 2, name: 'Publicações'},
+                    {id: 3, name: 'Participação em projetos de pesquisa'},
+                    {id: 4, name: 'Assistência a monografias, teses e dissertações'}]
+  },
+  {
+    id: 2, 
+    name: 'Extensão',
+    subcategories: [{id: 1, name: 'Organização e/ou colaboração em eventos e atividades institucionais'},
+                    {id: 2, name: 'Seminários, conferências, palestras, oficinas e visitas técnicas'},
+                    {id: 3, name: 'Participação em projetos de extensão'},
+                    {id: 4, name: 'Presença em bancas de projeto final de curso'},
+                    {id: 5, name: 'Cursos de atualização, qualificação e certificação tecnológica'},
+                    {id: 6, name: 'Cursos de língua estrangeira'},
+                    {id: 7, name: 'Assistência, assessoria e consultoria técnica'}]
+  },
+  {
+    id: 3, 
+    name: 'Ensino',
+    subcategories: [{id: 1, name: 'Disciplinas não previstas'},
+                    {id: 2, name: 'Monitoria'}]
+  },
+  {
+    id: 4, 
+    name: 'AC HC ou Ambiental',
+    subcategories: [{id: 1, name: 'Conscientização de questões histórico-culturais'},
+                    {id: 2, name: 'Ambientais'}]
+  }
+]
 
 const items = null
 

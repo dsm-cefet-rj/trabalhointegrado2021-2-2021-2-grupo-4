@@ -8,14 +8,10 @@ router.use(bodyParser.json());
 /* GET users listing. */
 router.route('/')
 .get( async (req, res, next) => {
-  try{
-    const categoriesBase = await Categories.find({});
+    const categoriesBase = await Categories.find({}).lean().exec();
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(categoriesBase);
-  }catch(err){
-    next(err);
-  }
 })
 
 module.exports = router;

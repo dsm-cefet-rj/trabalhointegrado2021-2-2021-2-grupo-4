@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivityServer, selectActivitiesById, updateActivityServer } from '../slices/ActivitiesSlice';
+import { fetchCategories, selectAllCategories } from '../slices/CategoriesSlice';
 import './styled.scss'
 
 /**
@@ -28,8 +29,9 @@ const AdicionarAtividade = (props) => {
   
   const history = useNavigate()
   const dispatch = useDispatch()
+  //const categories = dispatch(fetchCategories());
   let { id } = useParams()
-  id = id ? Number.parseInt(id) : null
+  id = id ? id : null
   const activityFound = useSelector(state => selectActivitiesById(state, id))
 
   const [activity, setActivity] = useState(
@@ -58,8 +60,8 @@ const AdicionarAtividade = (props) => {
       history('/painelatividades')
     }
   }
-
-  const card = props.card ? props.card : cards.filter((c) => c.id === activity.category)[0]
+  console.log(activity.category)
+  const card = props.card ? props.card : cards.filter((c) => c.categoryId === activity.category)[0]
   
   return ( 
       <div className='container' id="painel">    
@@ -103,7 +105,7 @@ const AdicionarAtividade = (props) => {
 
 const cards = [
   {
-    id: 1, 
+    categoryId: 1, 
     name: 'Pesquisa',
     subcategories: [{id: 1, name: 'Iniciação científica'},
                     {id: 2, name: 'Publicações'},
@@ -111,7 +113,7 @@ const cards = [
                     {id: 4, name: 'Assistência a monografias, teses e dissertações'}]
   },
   {
-    id: 2, 
+    categoryId: 2, 
     name: 'Extensão',
     subcategories: [{id: 1, name: 'Organização e/ou colaboração em eventos e atividades institucionais'},
                     {id: 2, name: 'Seminários, conferências, palestras, oficinas e visitas técnicas'},
@@ -122,13 +124,13 @@ const cards = [
                     {id: 7, name: 'Assistência, assessoria e consultoria técnica'}]
   },
   {
-    id: 3, 
+    categoryId: 3, 
     name: 'Ensino',
     subcategories: [{id: 1, name: 'Disciplinas não previstas'},
                     {id: 2, name: 'Monitoria'}]
   },
   {
-    id: 4, 
+    categoryId: 4, 
     name: 'AC HC ou Ambiental',
     subcategories: [{id: 1, name: 'Conscientização de questões histórico-culturais'},
                     {id: 2, name: 'Ambientais'}]
