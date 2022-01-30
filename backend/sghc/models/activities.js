@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const normalize =  require('normalize-mongoose');
 
 const activitySchema = new Schema({
     type: {
@@ -24,4 +25,8 @@ const activitySchema = new Schema({
     }
 })
 
-module.exports = activitySchema;
+activitySchema.plugin(normalize);
+
+var Activities = mongoose.model('Activities', activitySchema)
+
+module.exports = Activities;

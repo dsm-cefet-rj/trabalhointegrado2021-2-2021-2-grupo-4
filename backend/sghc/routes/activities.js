@@ -5,64 +5,51 @@ const Activities = require('../models/activities')
 
 router.use(bodyParser.json());
 
-let activities = [
-  {
-    "type": "Iniciação científica",
-    "description": "sfsaf",
-    "hours": "20",
-    "id": 1,
-    "category": 1,
-    "validate": false
-  },{
-    "type": "Cursos de língua estrangeira",
-    "description": "espanhol",
-    "hours": "60",
-    "id": 2,
-    "category": 2,
-    "validate": false
-  }
-];
-
 /* GET users listing. */
 router.route('/')
-.get((req, res, next) => {
-
-  Activities.find({})
-    .then((activitiesBase) => {
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      res.json(activitiesBase);
-    }, (err) => next(err))
-    .catch((err) => next(err))
+.get( async (req, res, next) => {
+  try{
+    const activitiesBase = await Activities.find({}).maxTime(5000);
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(activitiesBase);
+  }catch(err){
+    next(err);
+  }
 })
 .post((req, res, next) => {
-  let proxId = 1 + activities.map(p => p.id).reduce((x,y) => Math.max(x,y));
-  let activity = {...req.body, id: proxId }
-  activities.push(activity);
 
-  activities.push(req.body);
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(activity);
+  Activities.create(req.body)
+  .then((activity) => {
+    console.log('Activity criada', activity)
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(activity);
+  }, (err) => next(err))
+  .catch((err) => next(err))
 })
 
 router.route('/:id')
 .delete((req, res, next) => {
-  activities = activities.filter(function(value, index, arr){
-    return value.id != req.params.id;
-  });
+  Activities.findByIdAndRemove(req.params.id)
+  .then((resp) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(resp.id);
+  }, (err) => next(err))
+  .catch((err) => next(err))
 
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(req.params.id);
 })
 .put((req, res, next) => {
-  let index = activities.map(p => p.id).indexOf(req.params.id);
-  activities.splice(index, 1, req.body);
-
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(req.body);
+  Activities.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, { new: true })
+  .then((activity) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(activity);
+  }, (err) => next(err))
+  .catch((err) => next(err))
 })
 
 module.exports = router;
