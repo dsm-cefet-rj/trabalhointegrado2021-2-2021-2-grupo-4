@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import {useDispatch} from 'react-redux'
+import { useSelector, useDispatch} from 'react-redux'
+import { add } from './cursosSlice'
 import './styled.css'
 
 export default function FormularioCurso(props) {     
     const [obj, setObj] = useState(props.curso);
-
+    const dispatch = useDispatch();
+    const cursos = useSelector(state => state.cursos);
     function handleInputChange(e) {
         console.log(e.target);
         setObj({...obj, [e.target.name]: e.target.value });
@@ -12,7 +14,7 @@ export default function FormularioCurso(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        props.dispatch({type:'add_curso', payload: obj});
+        dispatch(add(obj));
     }
     
     return ( 
@@ -23,8 +25,8 @@ export default function FormularioCurso(props) {
                 <input  type="text" 
                         name='id'
                         value={obj.id} 
-                        disabled
-                        //onChange={handleInputChange}
+                        //disabled
+                        onChange={handleInputChange}
                         />
             </div>
             <div className='linha-form'>
@@ -32,8 +34,8 @@ export default function FormularioCurso(props) {
                 <input  type="text" 
                         name='name'
                         value={obj.name} 
-                        disabled
-                        //onChange={handleInputChange}
+                        //disabled
+                        onChange={handleInputChange}
                         />
             </div>
             <div className='linha-form'>

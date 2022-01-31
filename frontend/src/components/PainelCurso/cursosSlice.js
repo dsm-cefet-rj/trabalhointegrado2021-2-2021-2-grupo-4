@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit';
 
 const cursosIniciais = [{
   id: "BCC", 
@@ -9,15 +9,15 @@ const cursosIniciais = [{
               {id: 3, name: 'Pesquisa'},
               {id: 4, name: 'Conscientização HC ou Ambiental'}]
 },
-{
-  id: "ADM", 
-  name: 'Administração',
-  totalHours: 250,
-  categories: [{id: 1, name: 'Ensino'},
-              {id: 2, name: 'Extensão'},
-              {id: 3, name: 'Pesquisa'},
-              {id: 4, name: 'Conscientização HC ou Ambiental'}]
-},
+// {
+//   id: "ADM", 
+//   name: 'Administração',
+//   totalHours: 250,
+//   categories: [{id: 1, name: 'Ensino'},
+//               {id: 2, name: 'Extensão'},
+//               {id: 3, name: 'Pesquisa'},
+//               {id: 4, name: 'Conscientização HC ou Ambiental'}]
+// },
 {
 id: "ENG", 
 name: 'Engenharia',
@@ -30,18 +30,22 @@ categories: [{id: 1, name: 'Ensino'},
 
 function cursoJaExiste(id) {
   let obj = cursosSlice.getInitialState().filter(c => c.id === id);
-  return obj != null;
+  return obj.length > 0;
 }
 
 function addCursoReducer(cursos, payload) {
-  if (cursos.length > 0) //já existem registros dessa entidade cadastrados
-    if(cursoJaExiste(payload.id))
-      return 'Este curso já existe';
-    else
+  if (cursosSlice.reducer.length > 0) { //já existem registros dessa entidade cadastrados?
+    if(cursoJaExiste(payload.id)) {
+      console.log('Este curso já existe!');
+      return;
+    }else {            
+      console.log('Curso salvo!');
       return cursos.concat([{...payload}]);
-
+    }
+  }
   //não há registros cadastrados, primeira insercao:
-  return cursos.concat([{...payload}]); 
+  console.log('Curso salvo!');
+  return cursos.concat([{...payload}]);  
 }
 
 function editCursoReducer(cursos, payload) {}
