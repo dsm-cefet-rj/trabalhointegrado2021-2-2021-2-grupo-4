@@ -1,37 +1,40 @@
 import React, { useState } from 'react'
-//import './styled.scss'
+import {useDispatch} from 'react-redux'
+import './styled.css'
 
-export default function FormularioCurso(props) { 
-    const [obj, setObj] = useState(props.curso[0]);
+export default function FormularioCurso(props) {     
+    const [obj, setObj] = useState(props.curso);
 
     function handleInputChange(e) {
-        console.log(e.target.value);
+        console.log(e.target);
         setObj({...obj, [e.target.name]: e.target.value });
-        console.log(obj)
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        props.set(obj);
-        //props.onClose();
+        props.dispatch({type:'add_curso', payload: obj});
     }
-
+    
     return ( 
         <div className='container' id="painel">        
             <form onSubmit={handleSubmit} >
             <div className='linha-form'>
                 <label>Identificador:</label>
                 <input  type="text" 
-                        name='sigla'
+                        name='id'
                         value={obj.id} 
-                        disabled/>
+                        disabled
+                        //onChange={handleInputChange}
+                        />
             </div>
             <div className='linha-form'>
                 <label>Nome:</label>
                 <input  type="text" 
-                        name='description'
+                        name='name'
                         value={obj.name} 
-                        disabled/>
+                        disabled
+                        //onChange={handleInputChange}
+                        />
             </div>
             <div className='linha-form'>
                 <label>Horas Totais:</label>
@@ -42,15 +45,17 @@ export default function FormularioCurso(props) {
             </div>
             <div className='linha-form'>
                 <label>Categorias:</label>
-                <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange}>
-                    <option key=""></option>
-                    {obj.categories.map(sub => (
-                    <option key={sub.id} style={{ width: '250px', textOverflow:'ellipsis'}} value={obj.categories.name}>
-                        {sub.name}</option>               
-                    ))}
-                </select> 
+                {obj.categories.map(sub => (
+                    <ul key={sub.id}>                        
+                        <input type="text" 
+                               name='categories' 
+                               value={sub.name} 
+                               title={sub.name}
+                               onChange={handleInputChange} />   
+                    </ul>     
+                ))}
             </div>
-            <button id="updateCurso" type='submit' value="Salvar" >Salvar</button>   
+            <input type='submit' value="Salvar" /> 
             </form>
         </div>
     );

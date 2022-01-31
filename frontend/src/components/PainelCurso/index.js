@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Collapse, Card, CardHeader } from 'reactstrap';
+import {useDispatch, useSelector} from 'react-redux';
+import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import Template from './templateCurso';
 import FormCurso from './formularioCurso';
 
 function PainelCurso(props) {
-  const [selected, setSelected] = useState(null);
-  const [cursos, setCursos] = useState(mock);
+  const [selected, setSelected] = useState(null);  
+  const cursos = useSelector(state => state.cursos);
+  const dispatch = useDispatch();
+  const [editCurso, setEditCurso] = useState(null);
 
   const toggle = (i) => {
     if (selected === i) {
@@ -15,6 +18,13 @@ function PainelCurso(props) {
     setSelected(i)
   }
 
+  const handleCursoEdicao = (objEdicao) => {
+    if (objEdicao === editCurso) {
+      return setEditCurso(null);
+    }
+    setEditCurso(objEdicao);
+  }
+  
   return(
     <div className='wrapper'>
       <div className='accordion'>
@@ -22,18 +32,23 @@ function PainelCurso(props) {
           <Card key={item.id} style={{ marginBottom: '1rem' }}>
             <CardHeader className={selected === item.id ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(item.id)}>{item.name}</CardHeader>
             <Collapse className={selected === item.id ? 'content show':'content'}>  
-              {(selected===item.id)=== true ? 
-                <>
-                  <Template curso={cursos.filter(c => c.id === selected)} />
-                  <FormCurso curso={cursos.filter(c => c.id === selected)} set={setCursos}></FormCurso>
-                  {/* <button type="button" 
-                        style={{ marginLeft: '10px', paddingRight: '30px', paddingLeft: '30px'  }} 
-                        className="btn btn-success btn-block" 
-                        onClick={() => editarCurso} >
+              <CardBody>
+                <button type="button" className="btn btn-success btn-block"
+                        style={{ marginLeft: '10px', paddingRight: '20px', paddingLeft: '20px'  }} 
+                        onClick={() => handleCursoEdicao(item)}  >
                     Editar
-                  </button>  */}
-                </>
-              : null}              
+                </button>
+              </CardBody>
+              <CardBody>
+                {(selected===item.id)=== true ? 
+                  <>
+                    <Template curso={cursos.filter(c => c.id === selected)} />                   
+                    {editCurso != null && selected === editCurso.id ? 
+                        <FormCurso curso={editCurso} dispatch={dispatch}></FormCurso> 
+                      : null}
+                  </>
+                : null}     
+              </CardBody>         
             </Collapse>
           </Card>
         ))}
@@ -41,35 +56,5 @@ function PainelCurso(props) {
     </div>
   );
 }
-
-const mock = [
-  {
-    id: "BCC", 
-    name: 'Bacharelado em Ciência da Computação',
-    totalHours: 300,
-    categories: [{id: 1, name: 'Ensino'},
-                {id: 2, name: 'Extensão'},
-                {id: 3, name: 'Pesquisa'},
-                {id: 4, name: 'Conscientização HC ou Ambiental'}]
-  },
-  {
-    id: "ADM", 
-    name: 'Administração',
-    totalHours: 250,
-    categories: [{id: 1, name: 'Ensino'},
-                {id: 2, name: 'Extensão'},
-                {id: 3, name: 'Pesquisa'},
-                {id: 4, name: 'Conscientização HC ou Ambiental'}]
-  },
-  {
-    id: "ENG", 
-    name: 'Engenharia',
-    totalHours: 350,
-    categories: [{id: 1, name: 'Ensino'},
-                {id: 2, name: 'Extensão'},
-                {id: 3, name: 'Pesquisa'},
-                {id: 4, name: 'Conscientização HC ou Ambiental'}]
-  }
-]
 
 export default PainelCurso;

@@ -10,6 +10,7 @@ import Header from './components/Header/index';
 import ListaAlunos from './components/ListaAlunos/index';
 import PainelAtividade from './components/PainelAtividade/index';
 import PainelValidacao from './components/PainelValidacao/index';
+import PainelCurso from './components/PainelCurso/index';
 import PainelOfertas from './components/PainelOfertas';
 import AdicionarAtividade from './components/AdicionarAtividade'
 import Footer from './components/Footer/index';
@@ -17,9 +18,7 @@ import './App.css';
 
 
 const App = (props) => {
-  // const [activities, setActivities] = useState([]);
-  /* const [offers, setOffers] = useState([]); */
-  
+ 
   const ofertasIniciais = []
   const [ofertas, dispatch] = useReducer(ofertasReducer, ofertasIniciais)
 
@@ -41,24 +40,20 @@ const App = (props) => {
         return ofertas
     }
   }
-
-  // const [offers, setOffers] = useState([]);
   
   return (
     <Provider store={store}>
-      <Router>
-        <div>
+      <Router>        
           <Header />
           <Switch>
             <Route exact path="/" element={<ListaAlunos />}/>
             <Route exact path="/painelofertas" element={<PainelOfertas ofertas={ofertas} dispatch={dispatch} />} />
-           {/* <Route exact path="/validacao" element={<Validacao />}/> */}
             <Route exact path="/painelatividades" element={<PainelAtividade />} />
             <Route exact path="/adicionaratividade/:id" element={<AdicionarAtividade />}></Route>
+            <Route exact path="/painelcurso" element={<PainelCurso />} />
             <Route exact path="/painelvalidacao" element={<PainelValidacao />} />
           </Switch>
-          <Footer />
-        </div>
+          <Footer />        
       </Router>
     </Provider>
   );
