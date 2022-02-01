@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
 import { add, edit } from './cursosSlice'
-import './styled.css'
+import './styled.scss'
 
 export default function FormularioCurso(props) {     
     const [obj, setObj] = useState(props.curso);

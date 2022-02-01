@@ -28,6 +28,9 @@ function PainelCurso(props) {
   return(
     <div className='wrapper'>
       <div className='accordion'>
+        <div type="button" className="btn btn-success btn-block" >
+          Novo Curso
+        </div>
         {cursos.map((item) => (
           <Card key={item.id} style={{ marginBottom: '1rem' }}>
             <CardHeader className={selected === item.id ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(item.id)}>{item.name}</CardHeader>
