@@ -48,7 +48,17 @@ function addCursoReducer(cursos, payload) {
   return cursos.concat([{...payload}]);  
 }
 
-function editCursoReducer(cursos, payload) {}
+function editCursoReducer(cursos, payload) {
+  if(cursoJaExiste(payload.id)) {
+    let index = cursos.map(c => c.id).indexOf(payload.id);
+    cursos.splice(index, 1, payload);
+    console.log('Curso editado!');    
+    return cursos;
+  }else {            
+    console.log('Curso não existe!');
+    return;
+  } 
+}
 
 export const cursosSlice = createSlice({
   name:'cursos',
