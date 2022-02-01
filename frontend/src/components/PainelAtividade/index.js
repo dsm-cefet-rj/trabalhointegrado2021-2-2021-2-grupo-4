@@ -4,6 +4,7 @@ import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteActivityServer, fetchActivities, selectAllActivities } from '../slices/ActivitiesSlice';
+import { fetchCategories, selectAllCategories } from '../slices/CategoriesSlice';
 import { Link } from 'react-router-dom'
 
 
@@ -22,7 +23,8 @@ const PainelAtividade = (props) => {
   const status = useSelector(state => state.activities.status)
   const error = useSelector(state => state.activities.error)
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  //const categories = dispatch(fetchCategories());
 
   const [selected, setSelected] = useState(null)
   const [isNewActivity, setIsNewActivity] = useState(null)
@@ -107,7 +109,7 @@ const ActivityLine = (props) => {
   }
   return (    
     <div className='activity_list container row'>
-      <div className='col-1'> <Link to={{pathname: `/adicionaratividade/${props.activity.id}`, query: {props}}} > <button>{props.activity.id}</button> </Link></div>
+      <div className='col-1'> <Link to={{pathname: `/adicionaratividade/${props.activity.id}`, query: {props}}} > <button>{props.activityId}</button> </Link></div>
       <div className='col-3'>{props.activity.type}</div>
       <div className='col-3'>{props.activity.description}</div>
       <div className='col-2'>{props.activity.hours}</div>
@@ -119,7 +121,7 @@ const ActivityLine = (props) => {
 
 function ActivityList(props){
   return(
-    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} card={props.card}/>)            
+    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} card={props.card} activityId={i}/>)            
   );
 }
 
