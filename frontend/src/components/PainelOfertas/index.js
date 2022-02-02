@@ -4,6 +4,8 @@ import "./styled.scss";
 import AdicionarOferta from '../AdicionarOferta';
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+
 
 
 const check = null
@@ -13,6 +15,8 @@ const check = null
 function PainelOfertas(props) {
   const [selected, setSelected] = useState(null)
   const [isNewOffer, setIsNewOffer] = useState(null)
+  const dispatch = useDispatch();
+
 
   const ofertas = useSelector(state => state.ofertas)
 
@@ -23,6 +27,12 @@ function PainelOfertas(props) {
     }
     setSelected(i)
   }
+
+  function handleOfferDeletion(e) {
+    console.log("teste");
+    e.preventDefault();
+    dispatch({type:'remove_offer', payload: parseInt(e.target.value)});     
+}
 
   const handleNewOffer = (i) => {
     if (isNewOffer === i) {
@@ -55,8 +65,11 @@ function PainelOfertas(props) {
                       <tr> Tipo: {o.type} </tr> 
                       <tr> Descrição: {o.description} 
                       <td> 
-                        <Button type="button" style={{ marginLeft: '10px', paddingRight: '15px', paddingLeft: '15px', borderRadius:'20px'  }} variant="danger"  >
-                        X
+                        <Button type="button" value= {o.id} onClick={handleOfferDeletion} style={{ marginLeft: '10px', paddingRight: '15px', paddingLeft: '15px', borderRadius:'20px'  }} variant="danger"  >
+                          X
+                        </Button>
+                        <Button type="button" style={{ marginLeft: '10px', paddingRight: '15px', paddingLeft: '15px', borderRadius:'20px'  }} variant="warning"  >
+                          Editar
                         </Button>
                       </td>
                       
