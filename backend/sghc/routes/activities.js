@@ -20,6 +20,7 @@ router.route('/')
   }
 })
 .post((req, res, next) => {
+  console.log(req.body)
   Activities.create(req.body)
   .then((activity) => {
     console.log('Activity criada', activity)

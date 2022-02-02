@@ -3,7 +3,7 @@ import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteActivityServer, fetchActivities, selectAllActivities, selectActivitiesById } from '../slices/ActivitiesSlice';
+import { fetchActivities, selectAllActivities, updateActivityServer, selectActivitiesById } from '../slices/ActivitiesSlice';
 import { Link } from 'react-router-dom'
 
 
@@ -28,6 +28,13 @@ const PainelValidacao = (props) => {
 
   const [selected, setSelected] = useState(null)
   const [isNewActivity, setIsNewActivity] = useState(null)
+  
+//  const activityFound = useSelector(state => selectActivitiesById(state, props.activity.id))
+
+  const [activity, setActivity] = useState(
+//    props.activity.id ? activityFound ?? {} : {}
+
+  )
 
   const toggle = (i) => {
     if (selected === i) {
@@ -41,7 +48,9 @@ const PainelValidacao = (props) => {
       return setSelected(null)
     }
     setSelected(i)
-    setActivity(activity.validated = true)
+    const auxActivity = {...activity, validated:true}
+    setActivity(auxActivity)
+    dispatch(updateActivityServer(auxActivity))
   }
 
   useEffect(() => {
@@ -91,20 +100,22 @@ const PainelValidacao = (props) => {
 const ActivityLine = (props) => {
   const activityFound = useSelector(state => selectActivitiesById(state, props.activity.id))
   const [selected, setSelected] = useState(null)
+
+  const dispatch = useDispatch()
+
   const [activity, setActivity] = useState(
     props.activity.id ? activityFound ?? {} : {}
   )
-
-/*const handleClickValidateActivity = (i) => {
+  
+  const handleClickValidateActivity = (i) => {
     if (selected === i) {
-//      console.log("entrou no if");
       return setSelected(null)
     }
-//    console.log("entrou no else")
     setSelected(i)
-    setActivity(activity.validated = true)
+    const auxActivity = {...activity, validated:true}
+    setActivity(auxActivity)
+    dispatch(updateActivityServer(auxActivity))
   }
-*/
   
   return (    
     <div className='activity_list container row'>

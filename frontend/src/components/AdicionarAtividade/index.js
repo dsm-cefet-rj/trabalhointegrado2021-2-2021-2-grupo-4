@@ -50,12 +50,20 @@ const AdicionarAtividade = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const auxActivity = {
+      id: props.activities.length+1,
+      description: activity.description,
+      type: activity.type,
+      category: props.card.id,
+      hours: activity.hours,
+      validated: false
+    }
     if(actionType === '../slices/ActivitiesSlice/addActivityServer') {
-      setActivity(activity.id = props.activities.length+1, activity.category = props.card.id, activity.validate=false)
-      dispatch(addActivityServer(activity))
+      //setActivity(activity.id = props.activities.length+1, activity.category = props.card.id, activity.validated=false)
+      dispatch(addActivityServer(auxActivity))
       props.onClose();
     }else{
-      dispatch(updateActivityServer(activity))
+      dispatch(updateActivityServer(auxActivity))
       history('/painelatividades')
     }
   }
