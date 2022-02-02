@@ -4,6 +4,7 @@ import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteActivityServer, fetchActivities, selectAllActivities, selectActivitiesById } from '../slices/ActivitiesSlice';
+import { Link } from 'react-router-dom'
 
 
 
@@ -35,10 +36,13 @@ const PainelValidacao = (props) => {
     setSelected(i)
   }
 
-  const handleClickDeleteActivity = (id) => {
-    dispatch(deleteActivityServer(id))
+  const handleClickValidateActivity = (i) => {
+    if (selected === i) {
+      return setSelected(null)
+    }
+    setSelected(i)
+    setActivity(activity.validated = true)
   }
-
 
   useEffect(() => {
     if(status ==='not_loaded' ) {
@@ -73,7 +77,7 @@ const PainelValidacao = (props) => {
                 }
               <hr />
               {status === 'loaded' || status === 'saved' || status === 'deleted' ?
-                <ActivityList activities={activities} onClickDeleteActivity={handleClickDeleteActivity} card={item} />
+                <ActivityList activities={activities} onClickValidateActivity={handleClickValidateActivity} card={item} />
                 : tableActivities
               }
             </Collapse>
@@ -86,30 +90,28 @@ const PainelValidacao = (props) => {
 
 const ActivityLine = (props) => {
   const activityFound = useSelector(state => selectActivitiesById(state, props.activity.id))
-
   const [selected, setSelected] = useState(null)
-
   const [activity, setActivity] = useState(
     props.activity.id ? activityFound ?? {} : {}
   )
 
-  const handleClickValidateActivity = (i) => {
+/*const handleClickValidateActivity = (i) => {
     if (selected === i) {
 //      console.log("entrou no if");
       return setSelected(null)
     }
 //    console.log("entrou no else")
     setSelected(i)
-    setActivity(activity.validate = true)
+    setActivity(activity.validated = true)
   }
-
+*/
   
   return (    
     <div className='activity_list container row'>
+      <div className='col-1'> <Link to={{pathname: `/adicionaratividade/${props.activity.id}`, query: {props}}} > <button>{props.activityId}</button> </Link></div>
       <div className='col-3'>{props.activity.type}</div>
       <div className='col-3'>{props.activity.description}</div>
       <div className='col-2'>{props.activity.hours}</div>
-      <div className='col-2'>{props.activity.attachment}</div>
       <div className='col-1'><button className={selected === props.activity.id ? "btn btn-success disabled":"btn btn-success"} name='validate_activity' onClick={() => handleClickValidateActivity(props.keyActivity)}>V</button></div>
     </div>
   );
@@ -117,7 +119,7 @@ const ActivityLine = (props) => {
 
 function ActivityList(props){
   return(
-    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} card={props.card}/>)            
+    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine activity={activity} onClickValidateActivity={props.onClickValidateActivity} card={props.card}/>)            
   );
 }
 
