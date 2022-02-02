@@ -9,16 +9,17 @@ router.use(bodyParser.json());
 router.route('/')
 .get( async (req, res, next) => {
   try{
-    const activitiesBase = await Activities.find({}).maxTime(5000);
+    const activitiesBase = await Activities.find({});
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(activitiesBase);
   }catch(err){
-    next(err);
+    err = {};
+    res.statusCode = 404;
+    res.json(err);
   }
 })
 .post((req, res, next) => {
-
   Activities.create(req.body)
   .then((activity) => {
     console.log('Activity criada', activity)
@@ -30,15 +31,24 @@ router.route('/')
 })
 
 router.route('/:id')
-.get((req, res, next) => {
-  Activities.findById(req.params.id)
-  .then((resp) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(resp);
-  }, (err) => next(err))
-  .catch((err) => next(err))
-
+.get(async (req, res, next) => {
+  let err;
+  res.setHeader('Content-Type', 'application/json');
+  try{
+    const resp = await Activities.findById(req.params.id);
+    if(resp != null){
+      res.statusCode = 200;
+      res.json(resp);
+    }else{
+      err = {};
+      res.statusCode = 404;
+      res.json(err);
+    }
+  }catch(errParams){
+    console.log(errParams)
+    res.statusCode = 404;
+    res.json({});
+  }
 })
 .delete((req, res, next) => {
   Activities.findByIdAndRemove(req.params.id)

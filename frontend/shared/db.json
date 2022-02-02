@@ -1,3 +1,12 @@
 {
-  "activities": []
+  "activities": [
+    {
+      "type": "Publicações",
+      "description": "xdv",
+      "hours": "30",
+      "id": 1,
+      "category": 1,
+      "validate": false
+    }
+  ]
 }

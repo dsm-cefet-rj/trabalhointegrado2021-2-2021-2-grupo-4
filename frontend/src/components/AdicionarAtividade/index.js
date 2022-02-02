@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivityServer, selectActivitiesById, updateActivityServer } from '../slices/ActivitiesSlice';
-import { fetchCategories, selectAllCategories } from '../slices/CategoriesSlice';
 import './styled.scss'
 
 /**
@@ -60,7 +59,7 @@ const AdicionarAtividade = (props) => {
       history('/painelatividades')
     }
   }
-  console.log(activity.category)
+
   const card = props.card ? props.card : cards.filter((c) => c.categoryId === activity.category)[0]
   
   return ( 
@@ -71,7 +70,9 @@ const AdicionarAtividade = (props) => {
             <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange} required>
                 <option key=""></option>
                 {card.subcategories.map(sub => (
-                  <option key={sub.id+'_'+card.id} style={{ width: '250px', textOverflow:'ellipsis'}} value={activity.type}>
+                  <option key={sub.id+'_'+card.id} 
+                          style={{ width: '250px', textOverflow:'ellipsis'}} 
+                          value={sub.name}>
                       {sub.name}</option>               
                 ))}
             </select>            

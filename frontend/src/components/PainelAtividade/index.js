@@ -4,7 +4,6 @@ import "./styled.scss";
 import AdicionarAtividade from '../AdicionarAtividade';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteActivityServer, fetchActivities, selectAllActivities } from '../slices/ActivitiesSlice';
-import { fetchCategories, selectAllCategories } from '../slices/CategoriesSlice';
 import { Link } from 'react-router-dom'
 
 
@@ -99,14 +98,6 @@ const PainelAtividade = (props) => {
 }
 
 const ActivityLine = (props) => {
-  const [selected, setSelected] = useState(null)
-
-  const handleClickValidateActivity = (i) => {
-    if (selected === i) {
-      return setSelected(null)
-    }
-    setSelected(i)
-  }
   return (    
     <div className='activity_list container row'>
       <div className='col-1'> <Link to={{pathname: `/adicionaratividade/${props.activity.id}`, query: {props}}} > <button>{props.activityId}</button> </Link></div>
