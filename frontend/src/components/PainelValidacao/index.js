@@ -6,6 +6,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteActivityServer, fetchActivities, selectAllActivities, selectActivitiesById } from '../slices/ActivitiesSlice';
 
 
+
+/**
+ * @module components/PainelValidacao
+ */
+
+/**
+ * Painel voltado para o professor responsável pelas atividades complementares validar
+ * as ativdades de cada aluno
+ */
+
+
+
 const PainelValidacao = (props) => {
   const activities = useSelector(selectAllActivities)
   const status = useSelector(state => state.activities.status)
@@ -26,7 +38,6 @@ const PainelValidacao = (props) => {
   const handleClickDeleteActivity = (id) => {
     dispatch(deleteActivityServer(id))
   }
-
 
 
   useEffect(() => {
