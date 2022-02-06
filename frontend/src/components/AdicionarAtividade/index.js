@@ -57,7 +57,8 @@ const AdicionarAtividade = (props) => {
         type: activity.type,
         category: props.card.id,
         hours: activity.hours,
-        validated: false
+        validated: false,
+        attachment: activity.attachment
       }
       dispatch(addActivityServer(auxActivity))
       props.onClose();
@@ -98,13 +99,13 @@ const AdicionarAtividade = (props) => {
                     value={activity.hours} 
                     onChange={handleInputChange} required/>
           </div>
-          {/* <div className='linha-form'>
+          <div className='linha-form'>
             <label>Anexo</label>
             <input type="file" 
                    name='attachment' 
                    value={activity.attachment} 
                    onChange={handleInputChange}/>
-          </div> */}
+          </div>
           <button id="comeco" type='submit' value="Salvar" >Salvar</button>   
         </form>
       </div>

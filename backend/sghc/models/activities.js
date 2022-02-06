@@ -22,6 +22,10 @@ const activitySchema = new Schema({
     validated: {
         type: Boolean,
         required: true
+    },
+    attachment: {
+        type: String,
+        required: true
     }
 })
 
