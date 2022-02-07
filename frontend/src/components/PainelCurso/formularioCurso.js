@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch} from 'react-redux'
-import { add, edit } from '../slices/cursosSlice'
+import { useDispatch} from 'react-redux'
+import { edit } from '../slices/cursosSlice'
 import './styled.scss'
 
 export default function FormularioCurso(props) {     
     const [obj, setObj] = useState(props.curso);
     const dispatch = useDispatch();
-    const cursos = useSelector(state => state.cursos);
+    //const cursos = useSelector(state => state.cursos);
     function handleInputChange(e) {
         console.log(e.target);
         setObj({...obj, [e.target.name]: e.target.value });

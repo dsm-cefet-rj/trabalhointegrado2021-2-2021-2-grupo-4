@@ -68,7 +68,7 @@ const AdicionarAtividade = (props) => {
     }
   }
 
-  const card = props.card ? props.card : cards.filter((c) => c.categoryId === activity.category)[0]
+  const card = props.card ? props.card : cards.filter((c) => c.categoryCode === activity.category)[0]
   
   return ( 
       <div className='container' id="painel">    
@@ -114,7 +114,7 @@ const AdicionarAtividade = (props) => {
 
 const cards = [
   {
-    categoryId: 1, 
+    categoryCode: 1, 
     name: 'Pesquisa',
     subcategories: [{id: 1, name: 'Iniciação científica'},
                     {id: 2, name: 'Publicações'},
@@ -122,7 +122,7 @@ const cards = [
                     {id: 4, name: 'Assistência a monografias, teses e dissertações'}]
   },
   {
-    categoryId: 2, 
+    categoryCode: 2, 
     name: 'Extensão',
     subcategories: [{id: 1, name: 'Organização e/ou colaboração em eventos e atividades institucionais'},
                     {id: 2, name: 'Seminários, conferências, palestras, oficinas e visitas técnicas'},
@@ -133,13 +133,13 @@ const cards = [
                     {id: 7, name: 'Assistência, assessoria e consultoria técnica'}]
   },
   {
-    categoryId: 3, 
+    categoryCode: 3, 
     name: 'Ensino',
     subcategories: [{id: 1, name: 'Disciplinas não previstas'},
                     {id: 2, name: 'Monitoria'}]
   },
   {
-    categoryId: 4, 
+    categoryCode: 4, 
     name: 'AC HC ou Ambiental',
     subcategories: [{id: 1, name: 'Conscientização de questões histórico-culturais'},
                     {id: 2, name: 'Ambientais'}]
