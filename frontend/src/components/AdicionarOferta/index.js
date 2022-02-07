@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './styled.scss'
 import { useDispatch } from 'react-redux'
+import { add_offer } from '../PainelOfertas/ofertasSlice'
 
 
 
@@ -14,10 +15,11 @@ const AdicionarOferta= (props) => {
     }
     
     function handleSubmit(e) {
+        console.log('teste')
         e.preventDefault();
         /* props.setOffers(props.offers.concat(novaOferta)); */
         setOffer(novaOferta.category = props.card.id)
-        dispatch({type:'add_offer', payload:novaOferta});     
+        dispatch(add_offer(novaOferta));     
         props.onClose();
     }
 

@@ -5,6 +5,7 @@ import AdicionarOferta from '../AdicionarOferta';
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
+import { remove_offer } from './ofertasSlice';
 
 
 
@@ -31,7 +32,7 @@ function PainelOfertas(props) {
   function handleOfferDeletion(e) {
     console.log("teste");
     e.preventDefault();
-    dispatch({type:'remove_offer', payload: parseInt(e.target.value)});     
+    dispatch(remove_offer(parseInt(e.target.value)));     
 }
 
   const handleNewOffer = (i) => {
