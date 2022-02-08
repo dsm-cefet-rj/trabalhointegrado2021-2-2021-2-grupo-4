@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
 public/
+/sessions
 package-lock.json
 .env
