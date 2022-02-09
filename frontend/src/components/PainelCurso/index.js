@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import Template from './templateCurso';
 import FormCurso from './formularioCurso';
+import FormNovoCurso from './formularioNovoCurso';
 
-function PainelCurso(props) {
+function PainelCurso() {
   const [selected, setSelected] = useState(null);  
   const cursos = useSelector(state => state.cursos);
-  const dispatch = useDispatch();
+  
   const [editCurso, setEditCurso] = useState(null);
+  const [addCurso, setAddCurso] = useState(null);
 
   const toggle = (i) => {
     if (selected === i) {
@@ -16,6 +18,13 @@ function PainelCurso(props) {
     }
     setSelected(null)
     setSelected(i)
+  }
+
+  const handleNovoCurso = (objNovo) => {
+    if (objNovo === addCurso) {
+      return setAddCurso(null);
+    }
+    setAddCurso(objNovo);
   }
 
   const handleCursoEdicao = (objEdicao) => {
@@ -28,9 +37,11 @@ function PainelCurso(props) {
   return(
     <div className='wrapper'>
       <div className='accordion'>
-        <div type="button" className="btn btn-success btn-block" >
+        <div type="button" className="btn btn-success btn-block"
+             onClick={() => handleNovoCurso({})} >
           Novo Curso
         </div>
+        {addCurso != null ? <FormNovoCurso curso={addCurso} onClose={() => setAddCurso(null)} ></FormNovoCurso> : <></>}
         {cursos.map((item) => (
           <Card key={item.id} style={{ marginBottom: '1rem' }}>
             <CardHeader className={selected === item.id ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(item.id)}>{item.name}</CardHeader>
@@ -47,8 +58,8 @@ function PainelCurso(props) {
                   <>
                     <Template curso={cursos.filter(c => c.id === selected)} />                   
                     {editCurso != null && selected === editCurso.id ? 
-                        <FormCurso curso={editCurso} dispatch={dispatch}></FormCurso> 
-                      : null}
+                        <FormCurso curso={editCurso} ></FormCurso> 
+                      : <></>}
                   </>
                 : null}     
               </CardBody>         

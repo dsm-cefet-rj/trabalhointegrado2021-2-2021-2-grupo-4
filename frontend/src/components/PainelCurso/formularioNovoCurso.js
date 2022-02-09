@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
-import { edit } from '../slices/cursosSlice'
+import { add } from '../slices/cursosSlice'
 import './styled.scss'
 
 export default function FormularioCurso(props) {     
     const [obj, setObj] = useState(props.curso);
     const dispatch = useDispatch();
-    const cursos = useSelector(state => state.cursos);
+    //const cursos = useSelector(state => state.cursos);
     function handleInputChange(e) {
         console.log(e.target);
         setObj({...obj, [e.target.name]: e.target.value });
     }
 
     function handleSubmit(e) {
-        e.preventDefault();        
-        dispatch(edit(obj));
+        e.preventDefault();
+        console.log(props.curso);
+        dispatch(add(obj));
+        props.onClose();
     }
     
     return ( 
@@ -24,15 +26,17 @@ export default function FormularioCurso(props) {
                 <label>Identificador:</label>
                 <input  type="text" 
                         name='id'
-                        value={obj.id} 
-                        disabled />
+                        value={obj.id}                         
+                        onChange={handleInputChange}
+                        />
             </div>
             <div className='linha-form'>
                 <label>Nome:</label>
                 <input  type="text" 
                         name='name'
                         value={obj.name} 
-                        disabled />
+                        onChange={handleInputChange}
+                        />
             </div>
             <div className='linha-form'>
                 <label>Horas Totais:</label>
@@ -43,15 +47,12 @@ export default function FormularioCurso(props) {
             </div>
             <div className='linha-form'>
                 <label>Categorias:</label>
-                {obj.categories != null ? obj.categories.map(sub => (
-                    <ul key={sub.id}>                        
-                        <input type="text" 
-                               name='categories' 
-                               value={sub.name} 
-                               title={sub.name}
-                               onChange={handleInputChange} />   
-                    </ul>     
-                )) : <></>}
+                <ul >                        
+                    <input type="text" 
+                            name='categories' 
+                            value={obj.categories} 
+                            disabled />   
+                </ul>                     
             </div>
             <input type='submit' value="Salvar" /> 
             </form>
