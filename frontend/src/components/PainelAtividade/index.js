@@ -102,9 +102,9 @@ const ActivityLine = (props) => {
     <div className='activity_list container row'>
       <div className='col-1'> <Link to={{pathname: `/adicionaratividade/${props.activity.id}`, query: {props}}} > <button>{props.activityId}</button> </Link></div>
       <div className='col-3'>{props.activity.type}</div>
-      <div className='col-3'>{props.activity.description}</div>
+      <div className='col-5'>{props.activity.description}</div>
       <div className='col-2'>{props.activity.hours}</div>
-      <div className='col-2'>{props.activity.attachment}</div>
+      {/* <div className='col-2'>{props.activity.attachment}</div> */}
       <div className='col-1'><button className="btn btn-danger btn-block" name='delete_activity' onClick={() => props.onClickDeleteActivity(props.activity.id)}>X</button></div>
     </div>    
   );
