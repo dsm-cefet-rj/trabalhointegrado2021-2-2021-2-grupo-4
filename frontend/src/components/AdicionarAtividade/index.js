@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivityServer, selectActivitiesById, updateActivityServer } from '../slices/ActivitiesSlice';
-import { fetchCategories, selectAllCategories } from '../slices/CategoriesSlice';
 import './styled.scss'
 
 /**
@@ -52,15 +51,23 @@ const AdicionarAtividade = (props) => {
   function handleSubmit(e) {
     e.preventDefault();
     if(actionType === '../slices/ActivitiesSlice/addActivityServer') {
-      setActivity(activity.id = props.activities.length+1, activity.category = props.card.id, activity.validate=false)
-      dispatch(addActivityServer(activity))
+      const auxActivity = {
+        id: props.activities.length+1,
+        description: activity.description,
+        type: activity.type,
+        category: props.card.id,
+        hours: activity.hours,
+        validated: false,
+        attachment: activity.attachment
+      }
+      dispatch(addActivityServer(auxActivity))
       props.onClose();
     }else{
       dispatch(updateActivityServer(activity))
       history('/painelatividades')
     }
   }
-  console.log(activity.category)
+
   const card = props.card ? props.card : cards.filter((c) => c.categoryId === activity.category)[0]
   
   return ( 
@@ -71,7 +78,9 @@ const AdicionarAtividade = (props) => {
             <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange} required>
                 <option key=""></option>
                 {card.subcategories.map(sub => (
-                  <option key={sub.id+'_'+card.id} style={{ width: '250px', textOverflow:'ellipsis'}} value={activity.type}>
+                  <option key={sub.id+'_'+card.id} 
+                          style={{ width: '250px', textOverflow:'ellipsis'}} 
+                          value={sub.name}>
                       {sub.name}</option>               
                 ))}
             </select>            
@@ -90,13 +99,13 @@ const AdicionarAtividade = (props) => {
                     value={activity.hours} 
                     onChange={handleInputChange} required/>
           </div>
-          {/* <div className='linha-form'>
+          <div className='linha-form'>
             <label>Anexo</label>
             <input type="file" 
                    name='attachment' 
                    value={activity.attachment} 
                    onChange={handleInputChange}/>
-          </div> */}
+          </div>
           <button id="comeco" type='submit' value="Salvar" >Salvar</button>   
         </form>
       </div>
