@@ -60,13 +60,19 @@ function editCursoReducer(cursos, payload) {
   } 
 }
 
+function deleteCursoReducer(cursos, payload) {
+  console.log(payload.id);
+  return cursos.filter(c => c.id !== payload.id);
+}
+
 export const cursosSlice = createSlice({
   name:'cursos',
   initialState: cursosIniciais,
   reducers:{
     add:(state, action) => addCursoReducer(state, action.payload),
+    remove:(state, action) => deleteCursoReducer(state, action.payload),
     edit:(state, action) => editCursoReducer(state, action.payload)
   }
 })
-export const {add, edit} = cursosSlice.actions;
+export const {add, edit, remove} = cursosSlice.actions;
 export default cursosSlice.reducer;

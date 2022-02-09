@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import Template from './templateCurso';
 import FormCurso from './formularioCurso';
 import FormNovoCurso from './formularioNovoCurso';
+import {remove} from '../slices/cursosSlice';
 
 function PainelCurso() {
   const [selected, setSelected] = useState(null);  
   const cursos = useSelector(state => state.cursos);
-  
+  const dispatch = useDispatch();
   const [editCurso, setEditCurso] = useState(null);
   const [addCurso, setAddCurso] = useState(null);
 
@@ -33,7 +34,7 @@ function PainelCurso() {
     }
     setEditCurso(objEdicao);
   }
-  
+
   return(
     <div className='wrapper'>
       <div className='accordion'>
@@ -52,7 +53,12 @@ function PainelCurso() {
                         onClick={() => handleCursoEdicao(item)}  >
                     Editar
                 </button>
-              </CardBody>
+                <button type="button" className="btn btn-success btn-block"
+                        style={{ marginLeft: '10px', paddingRight: '20px', paddingLeft: '20px'  }} 
+                        onClick={()=> dispatch(remove(item))}>
+                    Remover
+                </button>
+              </CardBody>  
               <CardBody>
                 {(selected===item.id)=== true ? 
                   <>
