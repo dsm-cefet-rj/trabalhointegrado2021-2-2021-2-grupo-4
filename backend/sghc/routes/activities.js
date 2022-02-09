@@ -2,12 +2,14 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const Activities = require('../models/activities')
+var authenticate = require('../authenticate'); 
 
 router.use(bodyParser.json());
 
 /* GET users listing. */
 router.route('/')
-.get( async (req, res, next) => {
+.get(authenticate.verifyUser, async (req, res, next) => {
+  console.log(req.user);
   try{
     const activitiesBase = await Activities.find({});
     res.statusCode = 200;
@@ -19,7 +21,7 @@ router.route('/')
     res.json(err);
   }
 })
-.post((req, res, next) => {
+.post(authenticate.verifyUser,(req, res, next) => {
   Activities.create(req.body)
   .then((activity) => {
     console.log('Activity criada', activity)
@@ -31,7 +33,7 @@ router.route('/')
 })
 
 router.route('/:id')
-.get(async (req, res, next) => {
+.get(authenticate.verifyUser, async (req, res, next) => {
   let err;
   res.setHeader('Content-Type', 'application/json');
   try{
@@ -50,7 +52,7 @@ router.route('/:id')
     res.json({});
   }
 })
-.delete((req, res, next) => {
+.delete(authenticate.verifyUser, (req, res, next) => {
   Activities.findByIdAndRemove(req.params.id)
   .then((resp) => {
     res.statusCode = 200;
@@ -60,7 +62,7 @@ router.route('/:id')
   .catch((err) => next(err))
 
 })
-.put((req, res, next) => {
+.put(authenticate.verifyUser, (req, res, next) => {
   Activities.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, { new: true })

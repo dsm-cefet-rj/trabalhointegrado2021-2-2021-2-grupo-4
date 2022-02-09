@@ -4,6 +4,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
+var passport = require('passport');
+var authenticated = require('./authenticate');
 var cors = require('cors')
 
 require('dotenv').config();
@@ -30,35 +32,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //app.use(cookieParser('12354-09890-67876-45321'));
-app.use(session({
-    name: 'session-id',
-    secret: '12354-09890-67876-45321',
-    saveUninitialized: false,
-    resave: false,
-    store: new FileStore()
-}))
+
+app.use(passport.initialize());
 
 //app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-function auth(req, res, next){
-    console.log(req.headers);
-    if(!req.session.user) {
-        var err = new Error('You are not authenticated!');
-        err.status = 403;
-        return next(err);
-    } else { 
-        if(req.session.user === 'authenticated') {
-            next();
-        } else {
-            var err = new Error('You are not authenticated!');
-            err.status = 403;
-            return next(err);
-        }
-    }
-}
-
-app.use(auth);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
