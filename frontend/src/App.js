@@ -14,6 +14,7 @@ import PainelOfertas from './components/PainelOfertas';
 import AdicionarAtividade from './components/AdicionarAtividade'
 import Footer from './components/Footer/index';
 import './App.css';
+import AdicionarOferta from './components/AdicionarOferta';
 
 
 const App = (props) => {
@@ -52,6 +53,7 @@ const App = (props) => {
           <Switch>
             <Route exact path="/" element={<ListaAlunos />}/>
             <Route exact path="/painelofertas" element={<PainelOfertas ofertas={ofertas} dispatch={dispatch} />} />
+            <Route exact path="/adicionaroferta/:id" element={<AdicionarOferta/>} />
            {/* <Route exact path="/validacao" element={<Validacao />}/> */}
             <Route exact path="/painelatividades" element={<PainelAtividade />} />
             <Route exact path="/adicionaratividade/:id" element={<AdicionarAtividade />}></Route>
