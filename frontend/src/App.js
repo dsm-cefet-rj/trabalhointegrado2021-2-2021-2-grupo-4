@@ -14,6 +14,7 @@ import PainelCurso from './components/PainelCurso/index';
 import PainelOfertas from './components/PainelOfertas';
 import AdicionarAtividade from './components/AdicionarAtividade'
 import Footer from './components/Footer/index';
+import LoginForm from './components/LoginForm/index';
 import './App.css';
 
 
