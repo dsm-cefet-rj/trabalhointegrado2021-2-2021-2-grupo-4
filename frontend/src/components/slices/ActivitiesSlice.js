@@ -9,21 +9,21 @@ const initialState = activitiesAdapter.getInitialState({
   error: null
 });
 
-export const fetchActivities = createAsyncThunk('components/slices/fetchActivities', async () => {
-  return await httpGet(`${baseUrl}/activities`)
+export const fetchActivities = createAsyncThunk('components/slices/fetchActivities', async (_, {getState}) => {
+  return await httpGet(`${baseUrl}/activities`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken }})
 })
 
-export const addActivityServer = createAsyncThunk('components/slices/addActivityServer', async (activity) => {
-  return await httpPost(`${baseUrl}/activities`, activity);
+export const addActivityServer = createAsyncThunk('components/slices/addActivityServer', async (activity, {getState}) => {
+  return await httpPost(`${baseUrl}/activities`, activity, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const deleteActivityServer = createAsyncThunk('components/slices/deleteActivityServer', async (idActivity) => {
-  await httpDelete(`${baseUrl}/activities/${idActivity}`);
+export const deleteActivityServer = createAsyncThunk('components/slices/deleteActivityServer', async (idActivity, {getState}) => {
+  await httpDelete(`${baseUrl}/activities/${idActivity}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
   return idActivity;
 });
 
-export const updateActivityServer = createAsyncThunk('components/slices/updateActivityServer', async (activity) => {
-  return await httpPut(`${baseUrl}/activities/${activity.id}`, activity);
+export const updateActivityServer = createAsyncThunk('components/slices/updateActivityServer', async (activity, {getState}) => {
+  return await httpPut(`${baseUrl}/activities/${activity.id}`, activity, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
 export const activitiesSlice = createSlice({
