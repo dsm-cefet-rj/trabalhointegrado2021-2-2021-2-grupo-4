@@ -47,7 +47,8 @@ const App = (props) => {
       <Router>        
           <Header />
           <Switch>
-            <Route exact path="/" element={<ListaAlunos />}/>
+            <Route exact path="/" element={<LoginForm />}/>
+            <Route exact path="/listaalunos" element={<ListaAlunos />}/>
             <Route exact path="/painelofertas" element={<PainelOfertas ofertas={ofertas} dispatch={dispatch} />} />
             <Route exact path="/painelatividades" element={<PainelAtividade />} />
             <Route exact path="/adicionaratividade/:id" element={<AdicionarAtividade />}></Route>

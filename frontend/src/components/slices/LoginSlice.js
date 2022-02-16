@@ -14,14 +14,14 @@ export const loginServer = createAsyncThunk('components/slices/loginServer', asy
 });
 
 export const loginSlice = createSlice({
-  name: 'login',
+  name: 'logins',
   initialState: initialState,
   reducers: {
     setStatus: (state, action) => {state.status = action.payload}
   },
   extraReducers: {
-    [loginServer.pending]: (state, action) => {state.status = 'saving'},
-    [loginServer.fulfilled]: (state, action) => {state.status = 'saved'; loginAdapter.addOne(state, action.payload);},
+    [loginServer.pending]: (state, action) => {state.status = 'trying_login'},
+    [loginServer.fulfilled]: (state, action) => {state.status = 'logged_in'; loginAdapter.addOne(state, action.payload);},
   },
 })
 

@@ -1,34 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
+import React, { useEffect } from 'react'
 import "./styled.scss";
-import AdicionarAtividade from '../AdicionarAtividade';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { loginServer } from '../slices/LoginSlice';
 
 const LoginForm = (props) => {
-    //const history = useNavigate();
+    const history = useNavigate();
     const dispatch = useDispatch();
+    const status = useSelector(state => state.logins.status)
 
-    const { register, handleSubmit, errors } = useForm(
+    const { register, handleSubmit } = useForm(
         //
     );
 
     function onSubmit(login) {
         dispatch(loginServer(login));
+        //history('/painelatividades');
     }
 
+    useEffect(() => {
+        if(status === 'logged_in'){
+            history('/listaalunos');
+        }
+    }, [status, history])
     return(
         <div className='container' id='loginPanel'>
             <form onSubmit={handleSubmit(onSubmit)} >
                 <div className='linha-form'>
                     <label>Login</label>
-                    <input type="text" name='login' id='login' {...register("login", { required: true })} placeholder="Login"/>
+                    <input type="text" name='username' id='username' {...register("username", { required: true })} placeholder="Login"/>
                 </div>
                 <div className='linha-form'>
                     <label>Senha</label>
-                    <input type="password" name='senha' id='senha' {...register("senha", { required: true })} placeholder="Senha"/>
+                    <input type="password" name='password' id='password' {...register("password", { required: true })} placeholder="Senha"/>
                 </div>
                 <br />
                 <br />

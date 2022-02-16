@@ -31,7 +31,7 @@ router.post('/login', cors.corsWithOptions, passport.authenticate('local'), (req
     var token = authenticate.getToken({_id: req.user._id});
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    res.json({ user: req.user._id, token: token, success: true })
+    res.json({ id: req.user._id, token: token })
 });
 
 router.get('/logout', cors.corsWithOptions, (req, res) => {
