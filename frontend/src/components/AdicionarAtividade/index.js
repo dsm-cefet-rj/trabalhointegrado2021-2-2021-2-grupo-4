@@ -67,6 +67,7 @@ const AdicionarAtividade = (props) => {
     }
   }
 
+  console.log('props', props)
   const card = props.card ? props.card : cards.filter((c) => c.categoryId === activity.category)[0]
   
   return ( 

@@ -13,6 +13,7 @@ import PainelValidacao from './components/PainelValidacao/index';
 import PainelCurso from './components/PainelCurso/index';
 import PainelOfertas from './components/PainelOfertas';
 import AdicionarAtividade from './components/AdicionarAtividade'
+import PainelSeminario from './components/PainelSeminario'
 import Footer from './components/Footer/index';
 import './App.css';
 
@@ -52,6 +53,7 @@ const App = (props) => {
             <Route exact path="/adicionaratividade/:id" element={<AdicionarAtividade />}></Route>
             <Route exact path="/painelcurso" element={<PainelCurso />} />
             <Route exact path="/painelvalidacao" element={<PainelValidacao />} />
+            <Route exact path="/painelseminario" element={<PainelSeminario />} />
           </Switch>
           <Footer />        
       </Router>
