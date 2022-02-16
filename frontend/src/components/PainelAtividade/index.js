@@ -151,9 +151,11 @@ const cards = [
   {
     id: 5,
     name: 'Seminários',
-    subcategories: [{id: 1, name: 'Previsão e geração de Cenários Climáticos Extremos Usando Aprendizado de Máquina'},
-                    {id: 2, name: 'Classificação de Notícias sobre Fraude e Corrupção em Português'},
-                    {id: 3, name: 'Estudo comparativo entre métodos de representação de palavras'}]
+    subcategories: [{id: 1, name: 'SEMINÁRIO'},
+                    {id: 2, name: 'QUALIFICAÇÃO'},
+                    {id: 3, name: 'TCC'},
+                    {id: 4, name: 'PAINEL'},
+                    {id: 5, name: 'DISSERTAÇÃO'}]
   }
 ]
 
