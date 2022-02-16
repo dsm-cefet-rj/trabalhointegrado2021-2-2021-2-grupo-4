@@ -147,6 +147,13 @@ const cards = [
     name: 'AC HC ou Ambiental',
     subcategories: [{id: 1, name: 'Conscientização de questões histórico-culturais'},
                     {id: 2, name: 'Ambientais'}]
+  },
+  {
+    id: 5,
+    name: 'Seminários',
+    subcategories: [{id: 1, name: 'Previsão e geração de Cenários Climáticos Extremos Usando Aprendizado de Máquina'},
+                    {id: 2, name: 'Classificação de Notícias sobre Fraude e Corrupção em Português'},
+                    {id: 3, name: 'Estudo comparativo entre métodos de representação de palavras'}]
   }
 ]
 
