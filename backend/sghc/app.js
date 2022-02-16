@@ -14,6 +14,7 @@ var indexRouter = require('./routes/index');
 var activitiesRouter = require('./routes/activities');
 var categoriesRouter = require('./routes/categories');
 var usersRouter = require('./routes/users');
+const uploadRouter = require('./routes/uploadRouter');
 
 const mongoose = require('mongoose');
 
@@ -26,6 +27,16 @@ connect.then((db) => {
 }, (err) => {console.log(err); });
 
 var app = express();
+
+// Secure traffic only
+app.all('*', (req, res, next) => {
+    if (req.secure) {
+        return next();
+    }
+    else {
+        res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+    }
+});
 
 app.use(cors())
 app.use(logger('dev'));
@@ -42,5 +53,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/activities', activitiesRouter);
 app.use('/categories', categoriesRouter);
+app.use('/imageUpload', uploadRouter);
 
 module.exports = app;
