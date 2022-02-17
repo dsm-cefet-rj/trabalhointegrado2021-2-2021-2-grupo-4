@@ -22,7 +22,8 @@ const PainelAtividade = (props) => {
   const status = useSelector(state => state.activities.status)
   const error = useSelector(state => state.activities.error)
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  //const categories = dispatch(fetchCategories());
 
   const [selected, setSelected] = useState(null)
   const [isNewActivity, setIsNewActivity] = useState(null)
@@ -99,9 +100,9 @@ const PainelAtividade = (props) => {
 const ActivityLine = (props) => {
   return (    
     <div className='activity_list container row'>
-      <div className='col-1'> <Link to={{pathname: `/adicionaratividade/${props.activity.id}`, query: {props}}} > <button>{props.activity.id}</button> </Link></div>
+      <div className='col-1'> <Link to={{pathname: `/adicionaratividade/${props.activity.id}`, query: {props}}} > <button>{props.activityId}</button> </Link></div>
       <div className='col-3'>{props.activity.type}</div>
-      <div className='col-3'>{props.activity.description}</div>
+      <div className='col-5'>{props.activity.description}</div>
       <div className='col-2'>{props.activity.hours}</div>
       {/* <div className='col-2'>{props.activity.attachment}</div> */}
       <div className='col-1'><button className="btn btn-danger btn-block" name='delete_activity' onClick={() => props.onClickDeleteActivity(props.activity.id)}>X</button></div>
@@ -111,7 +112,7 @@ const ActivityLine = (props) => {
 
 function ActivityList(props){
   return(
-    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} card={props.card}/>)            
+    props.activities.filter((activity) => activity.category === props.card.id ).map((activity, i) => <ActivityLine activity={activity} onClickDeleteActivity={props.onClickDeleteActivity} card={props.card} activityId={i}/>)            
   );
 }
 

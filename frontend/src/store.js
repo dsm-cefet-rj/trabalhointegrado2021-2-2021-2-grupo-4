@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import ofertasReducer from "./components/PainelOfertas/ofertasSlice";
 import activitiesReducer from './components/slices/ActivitiesSlice';
+import categoriesReducer from './components/slices/CategoriesSlice';
+import cursosReducer from "./components/slices/cursosSlice";
 
 export const store = configureStore({
     reducer: {
         activities: activitiesReducer,
-        ofertas: ofertasReducer
+        ofertas: ofertasReducer,
+        cursos: cursosReducer,
+        categories: categoriesReducer
     }
 })
