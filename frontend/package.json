@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
     "bootstrap": "^5.1.3",
+    "json-server": "^0.17.0",
     "node-sass": "^4.14.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.3",
@@ -27,7 +28,6 @@
     "eject": "react-scripts eject",
     "json-server": "json-server --watch shared/db.json --port 3004 --delay 2000"
   },
-
   "browserslist": {
     "production": [
       ">0.2%",

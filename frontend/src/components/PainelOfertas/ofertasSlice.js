@@ -1,27 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const ofertasIniciais = []
 
-/* export default function ofertasReducer(ofertas = ofertasIniciais, action){
-    switch(action.type){
-      case 'add_offer':
-        let proxId = 0
-        if (ofertas.length > 0)
-          proxId = 1 + ofertas.map(o => o.id).reduce((x,y) => Math.max(x,y));
 
-        else
-          proxId = 1
-        return ofertas.concat([{...action.payload, id: proxId}]);
+  export const fetchOfertas = createAsyncThunk('ofertas/fetchOfertas',
+    async() => {
+      return await (await fetch('http://localhost:3004/ofertas')).json();
+    });
 
-      case 'remove_offer':
-        return ofertas.filter((o) => o.id !== action.payload);
-
-      case 'update_offer':
-        
-      default:
-        return ofertas
-    }
-  } */
+  function fullfillOfertasReducer(ofertasState, ofertasFetched){
+      return ofertasFetched;
+  }
 
   function addOfertasReducer(ofertas, oferta){
     let proxId = 0
@@ -49,7 +38,11 @@ const ofertasIniciais = []
       add_offer: (state, action) => addOfertasReducer(state, action.payload),
       remove_offer: (state, action) => removeOfertasReducer(state, action.payload),
       update_offer: (state, action) => updateOfertasReducer(state, action.payload)
-    }
+    },
+    extraReducers: {
+      [fetchOfertas.fulfilled]: (state, action) => fullfillOfertasReducer(state, action.payload),
+    },
   })
+
   export const {add_offer, update_offer, remove_offer} = ofertasSlice.actions
   export default ofertasSlice.reducer

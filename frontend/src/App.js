@@ -16,6 +16,9 @@ import AdicionarAtividade from './components/AdicionarAtividade'
 import Footer from './components/Footer/index';
 import './App.css';
 import AdicionarOferta from './components/AdicionarOferta';
+import { fetchOfertas } from './components/PainelOfertas/ofertasSlice';
+
+store.dispatch(fetchOfertas());
 
 
 const App = (props) => {

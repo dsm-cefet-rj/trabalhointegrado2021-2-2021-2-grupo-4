@@ -88,7 +88,7 @@ const AdicionarOferta= (props) => {
                                 onChange={handleInputChange} />
                     </div>
                    
-                    <button id="addOffer" type='submit' > Adicionar </button> 
+                    <button id="addOffer" type='submit' > Salvar </button> 
                 </form>
             </div>
     )

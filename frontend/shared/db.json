@@ -8,5 +8,10 @@
       "category": 1,
       "validate": false
     }
+  ],
+
+  "ofertas":[
+    {"id": 1,"category": 1, "type": "Iniciação Cientifica", "description": "Otimizacao de linhas telefonicas" },
+    {"id": 2,"category": 2, "type": "Projeto de Extansao", "description": "Implementacoes praticas de solucoes IoT" }
   ]
 }
