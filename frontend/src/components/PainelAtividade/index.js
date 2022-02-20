@@ -5,6 +5,7 @@ import AdicionarAtividade from '../AdicionarAtividade';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteActivityServer, fetchActivities, selectAllActivities } from '../slices/ActivitiesSlice';
 import { Link } from 'react-router-dom'
+import Header from '../Header/index';
 
 
 /**
@@ -62,38 +63,37 @@ const PainelAtividade = (props) => {
   }
 
   return(
+    <><Header />
     <div className='wrapper'>
       <div className='accordion'>
-        {cards.map((item, i) => (          
+        {cards.map((item, i) => (
           <Card style={{ marginBottom: '1rem' }} key={i}>
             <CardHeader className={selected === i ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(i)}>{item.name}</CardHeader>
             <Collapse className={selected === i ? 'content show' : 'content'}>
               <CardBody>
                 Adicionar Atividade
-                <button type="button" 
-                        style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} 
-                        className="btn btn-success btn-block" 
-                        onClick={() => handleNewActivity(i)} >
-                  + 
+                <button type="button"
+                  style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px' }}
+                  className="btn btn-success btn-block"
+                  onClick={() => handleNewActivity(i)}>
+                  +
                 </button>
               </CardBody>
-              
-                {isNewActivity === i ? 
-                  <CardBody className={items != null ? 'pad' : ''}>
-                    <AdicionarAtividade onClose={() => setIsNewActivity(false)} activities={activities} dispatch={dispatch} card={item} /> 
-                  </CardBody>
-                  : null
-                }
+
+              {isNewActivity === i ?
+                <CardBody className={items != null ? 'pad' : ''}>
+                  <AdicionarAtividade onClose={() => setIsNewActivity(false)} activities={activities} dispatch={dispatch} card={item} />
+                </CardBody>
+                : null}
               <hr />
               {status === 'loaded' || status === 'saved' || status === 'deleted' ?
                 <ActivityList activities={activities} onClickDeleteActivity={handleClickDeleteActivity} card={item} />
-                : tableActivities
-              }
+                : tableActivities}
             </Collapse>
           </Card>
         ))}
       </div>
-    </div>
+    </div></>
   );
 }
 

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivityServer, selectActivitiesById, updateActivityServer } from '../slices/ActivitiesSlice';
 import './styled.scss'
+import Header from '../Header/index';
 
 /**
  * @module components/AdicionarAtividade
@@ -70,44 +71,45 @@ const AdicionarAtividade = (props) => {
   const card = props.card ? props.card : cards.filter((c) => c.categoryCode === activity.category)[0]
   
   return ( 
-      <div className='container' id="painel">    
-        <form onSubmit={handleSubmit} >
-          <div className='linha-form'>
-            <label>Tipo Atividade</label>
-            <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange} required>
-                <option key=""></option>
-                {card.subcategories.map(sub => (
-                  <option key={sub.id+'_'+card.id} 
-                          style={{ width: '250px', textOverflow:'ellipsis'}} 
-                          value={sub.name}>
-                      {sub.name}</option>               
-                ))}
-            </select>            
-          </div>
-          <div className='linha-form'>
-            <label>Descrição</label>
-            <input  type="text" 
-                    name='description' 
-                    value={activity.description} 
-                    onChange={handleInputChange} required/>
-          </div>
-          <div className='linha-form'>
-            <label>Horas</label>
-            <input  type="number" 
-                    name="hours" 
-                    value={activity.hours} 
-                    onChange={handleInputChange} required/>
-          </div>
-          {/* <div className='linha-form'>
-            <label>Anexo</label>
-            <input type="file" 
-                   name='attachment' 
-                   value={activity.attachment} 
-                   onChange={handleInputChange}/>
-          </div> */}
-          <button id="comeco" type='submit' value="Salvar" >Salvar</button>   
-        </form>
-      </div>
+    <><Header />
+    <div className='container' id="painel">
+      <form onSubmit={handleSubmit}>
+        <div className='linha-form'>
+          <label>Tipo Atividade</label>
+          <select name="type" style={{ width: '250px', textOverflow: 'ellipsis' }} onChange={handleInputChange} required>
+            <option key=""></option>
+            {card.subcategories.map(sub => (
+              <option key={sub.id + '_' + card.id}
+                style={{ width: '250px', textOverflow: 'ellipsis' }}
+                value={sub.name}>
+                {sub.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className='linha-form'>
+          <label>Descrição</label>
+          <input type="text"
+            name='description'
+            value={activity.description}
+            onChange={handleInputChange} required />
+        </div>
+        <div className='linha-form'>
+          <label>Horas</label>
+          <input type="number"
+            name="hours"
+            value={activity.hours}
+            onChange={handleInputChange} required />
+        </div>
+        {/* <div className='linha-form'>
+      <label>Anexo</label>
+      <input type="file"
+             name='attachment'
+             value={activity.attachment}
+             onChange={handleInputChange}/>
+    </div> */}
+        <button id="comeco" type='submit' value="Salvar">Salvar</button>
+      </form>
+    </div></>
   );
 }
 

@@ -4,6 +4,7 @@ import "./styled.scss";
 import AdicionarOferta from '../AdicionarOferta';
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
+import Header from '../Header/index';
 
 
 const check = null
@@ -32,6 +33,7 @@ function PainelOfertas(props) {
   }
 
   return(
+    <><Header />
     <div className='wrapper'>
       {/* {console.log(props.ofertas.type)} */}
       <div className='accordion'>
@@ -39,36 +41,35 @@ function PainelOfertas(props) {
           <Card key={item.id} style={{ marginBottom: '1rem' }}>
             <CardHeader className={selected === i ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(i)}>{item.name}</CardHeader>
             <Collapse className={selected === i ? 'content show' : 'content'}>
-              <CardBody>  
-                <button type="button" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" onClick={() => handleNewOffer(i)}>
-                      + 
-                </button> 
+              <CardBody>
+                <button type="button" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px' }} className="btn btn-success btn-block" onClick={() => handleNewOffer(i)}>
+                  +
+                </button>
               </CardBody>
               <CardBody className={check != null ? '' : 'pad'}>
-                  {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)} card={item} /> : null}
+                {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)} card={item} /> : null}
               </CardBody>
               <CardBody className={check != null ? '' : 'pad'}>
-                  {}
+
               </CardBody>
-                {ofertas.filter((oferta) => oferta.category === item.id).map(o =>
-                    <CardBody key={i}>
-                      <tr> Tipo: {o.type} </tr> 
-                      <tr> Descrição: {o.description} 
-                      <td> 
-                        <Button type="button" style={{ marginLeft: '10px', paddingRight: '15px', paddingLeft: '15px', borderRadius:'20px'  }} variant="danger"  >
-                        X
-                        </Button>
-                      </td>
-                      
-                      </tr>
-                      
-                    </CardBody>
-                )}
+              {ofertas.filter((oferta) => oferta.category === item.id).map(o => <CardBody key={i}>
+                <tr> Tipo: {o.type} </tr>
+                <tr> Descrição: {o.description}
+                  <td>
+                    <Button type="button" style={{ marginLeft: '10px', paddingRight: '15px', paddingLeft: '15px', borderRadius: '20px' }} variant="danger">
+                      X
+                    </Button>
+                  </td>
+
+                </tr>
+
+              </CardBody>
+              )}
             </Collapse>
           </Card>
         ))}
       </div>
-    </div>
+    </div></>
   );
 }
 
