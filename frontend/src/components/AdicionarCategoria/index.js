@@ -46,7 +46,7 @@ export const AdicionarCategoria = () => {
     return (
         <>
             <Header />
-            <div className="container">
+            <div className="containerC">
                 <form>
                     <input type="text" placeholder="Nome" 
                         onChange={handleNameChange} value={categoria.name}></input>
