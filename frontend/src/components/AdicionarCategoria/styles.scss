@@ -1,0 +1,26 @@
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 80vh;
+
+    form {
+        position: absolute;
+        top: 33%;
+        left: 33%;
+        display: flex;
+        flex-flow: column;
+        gap: 20px;
+        width: 100%;
+    
+        .subcategoria div {
+            display: flex;
+            gap: 10px;
+        }
+
+        .salvar {
+            width: 200px;
+        }
+    }
+}
+

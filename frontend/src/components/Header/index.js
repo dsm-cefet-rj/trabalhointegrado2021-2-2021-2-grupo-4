@@ -12,6 +12,7 @@ const Header = () => {
         <Link to='/painelofertas'> Painel de Ofertas </Link>
         <Link to='/painelcurso'> Cursos </Link>
         <Link to='/painelvalidacao'> Painel Validação </Link>
+        <Link to='/categorias'> Categorias </Link>
       </nav>
     </div>
   ); 

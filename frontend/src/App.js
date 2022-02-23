@@ -17,6 +17,7 @@ import LoginForm from './components/LoginForm/index';
 import SignupForm from './components/SignupForm/index';
 import HomeScreen from './components/HomeScreen/index';
 import './App.css';
+import { AdicionarCategoria } from './components/AdicionarCategoria';
 
 
 const App = (props) => {
@@ -56,6 +57,7 @@ const App = (props) => {
           <Route exact path="/adicionaratividade/:id" element={<AdicionarAtividade />}></Route>
           <Route exact path="/painelcurso" element={<PainelCurso />} />
           <Route exact path="/painelvalidacao" element={<PainelValidacao />} />        
+          <Route exact path="/categorias" element={<AdicionarCategoria />} />        
         </Switch>
         <Footer />        
       </Router>
