@@ -71,7 +71,7 @@ const AdicionarAtividade = (props) => {
   const card = props.card ? props.card : cards.filter((c) => c.categoryCode === activity.category)[0]
   
   return ( 
-    <><Header />
+    <>
     <div className='container' id="painel">
       <form onSubmit={handleSubmit}>
         <div className='linha-form'>
