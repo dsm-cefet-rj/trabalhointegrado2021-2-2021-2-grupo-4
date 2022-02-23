@@ -1,6 +1,10 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 
-const ofertasIniciais = []
+const initialState = {
+  status: 'not_loaded',
+  ofertas: [],
+  error: 'null'
+}
 
 
   export const fetchOfertas = createAsyncThunk('ofertas/fetchOfertas',
@@ -8,39 +12,59 @@ const ofertasIniciais = []
       return await (await fetch('http://localhost:3004/ofertas')).json();
     });
 
+  export const updateOfertasServer = createAsyncThunk('ofertas/updateProjetoServer', async (oferta) => {
+    let response = await fetch('http://localhost:3004/ofertas/' + oferta.id , 
+                                {
+                                    method: 'PUT', 
+                                    headers: {
+                                        'Content-Type': 'application/json;charset=utf-8'
+                                    },
+                                    body: JSON.stringify(oferta)
+                                });
+    if(response.ok){
+        return oferta;
+    }else{
+        throw new Error("Erro ao atualizar a oferta");
+    }
+  });
+
   function fullfillOfertasReducer(ofertasState, ofertasFetched){
-      return ofertasFetched;
+      ofertasState.status = 'loaded';
+      ofertasState.ofertas = ofertasFetched
   }
 
-  function addOfertasReducer(ofertas, oferta){
+  function addOfertasReducer(state, oferta){
     let proxId = 0
-    if (ofertas.length > 0)
-          proxId = 1 + ofertas.map(o => o.id).reduce((x,y) => Math.max(x,y));
+    if (state.ofertas.length > 0)
+          proxId = 1 + state.ofertas.map(o => o.id).reduce((x,y) => Math.max(x,y));
 
         else
           proxId = 1
-    return ofertas.concat([{...oferta, id: proxId}]);
+    return state.ofertas.concat([{...oferta, id: proxId}]);
 }
-  function removeOfertasReducer(ofertas, idOferta){
-    return ofertas.filter((o) => o.id !== idOferta);
+  function removeOfertasReducer(state, idOferta){
+    return state.ofertas.filter((o) => o.id !== idOferta);
 }
 
-  function updateOfertasReducer(ofertas, oferta){
-    let index = ofertas.map(o => o.id).indexOf(oferta.id);
-    ofertas.splice(index, 1, oferta);
-    return ofertas;
+  function updateOfertasReducer(state, oferta){
+    let index = state.ofertas.map(o => o.id).indexOf(oferta.id);
+    state.ofertas.splice(index, 1, oferta);
+    return state.ofertas;
 }  
 
   export const ofertasSlice = createSlice({
     name: 'ofertas',
-    initialState: ofertasIniciais,
+    initialState: initialState,
     reducers: {
       add_offer: (state, action) => addOfertasReducer(state, action.payload),
       remove_offer: (state, action) => removeOfertasReducer(state, action.payload),
       update_offer: (state, action) => updateOfertasReducer(state, action.payload)
     },
     extraReducers: {
+      [fetchOfertas.pending]: (state, action) => {state.status = 'loading'},
       [fetchOfertas.fulfilled]: (state, action) => fullfillOfertasReducer(state, action.payload),
+      [fetchOfertas.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
+      [updateOfertasServer.fulfilled]: (state, action) => {updateOfertasReducer(state, action.payload)},
     },
   })
 

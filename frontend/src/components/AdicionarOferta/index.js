@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './styled.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { add_offer, update_offer } from '../PainelOfertas/ofertasSlice'
+import { add_offer, update_offer, updateOfertasServer } from '../PainelOfertas/ofertasSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 
 
@@ -60,7 +60,7 @@ const AdicionarOferta= (props) => {
 
         else if(props.update == true){
             setOffer(novaOferta.category = props.card.id)
-            dispatch(update_offer(novaOferta))
+            dispatch(updateOfertasServer(novaOferta))
             props.onClose();
         }
 

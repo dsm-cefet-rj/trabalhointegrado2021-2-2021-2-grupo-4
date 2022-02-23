@@ -22,7 +22,7 @@ function PainelOfertas(props) {
   const dispatch = useDispatch();
 
 
-  const ofertas = useSelector(state => state.ofertas)
+  const ofertas = useSelector(state => state.ofertas.ofertas)
 
 
   const toggle = (i) => {
@@ -33,7 +33,7 @@ function PainelOfertas(props) {
   }
 
   function handleOfferDeletion(e) {
-    console.log("teste");
+    console.log("teste handleOfferDeletion");
     e.preventDefault();
     dispatch(remove_offer(parseInt(e.target.value)));     
 }
