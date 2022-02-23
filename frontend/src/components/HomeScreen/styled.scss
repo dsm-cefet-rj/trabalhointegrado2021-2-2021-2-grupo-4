@@ -3,12 +3,12 @@
     padding: 0;
 }
 
-#signupPanel {
+#homePanel {
+    margin-top: 50px;
     background-color: #004478f0;
+    width: 350px;
+    height: 350px;
     border-radius: 10px;
-    padding: 12px;
-    width: 250px;
-    margin-top: 1%;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
     text-align: center;
 }
@@ -17,7 +17,7 @@
     margin: 10px auto;
     padding: 6px;
     width: 150px;
-    text-align: center;
+
     background-color: aliceblue;
     border-radius: 80%;
 }
@@ -54,4 +54,10 @@ button {
 
 h2 {
     color: white;
+}
+
+.containerLogin {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
