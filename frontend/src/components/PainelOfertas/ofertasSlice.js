@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import { httpGet, httpPost, httpPut, httpDelete } from '../../utils';
+import { baseUrl } from '../../baseUrl';
 
 const ofertasAdapter = createEntityAdapter();
 
@@ -12,20 +13,20 @@ const initialState = ofertasAdapter.getInitialState({
 
 
   export const fetchOfertas = createAsyncThunk('ofertas/fetchOfertas', async() => {
-      return await httpGet('http://localhost:3004/ofertas');
+      return await httpGet(`${baseUrl}/ofertas`);
     });
 
   export const updateOfertasServer = createAsyncThunk('ofertas/updateOfertasServer', async (oferta) => {
-    return await httpPut(`http://localhost:3004/ofertas/${oferta.id}`,oferta);
+    return await httpPut(`${baseUrl}/ofertas/${oferta.id}`,oferta);
     });
 
   export const removeOfertasServer = createAsyncThunk('ofertas/removeOfertasServer', async (idOferta) => {
-    await httpDelete(`http://localhost:3004/ofertas/${idOferta}`);
+    await httpDelete(`${baseUrl}/ofertas/${idOferta}`);
     return idOferta;
   });
 
   export const addOfertasServer = createAsyncThunk('ofertas/addOfertasServer', async (oferta) => {
-    return await httpPost('http://localhost:3004/ofertas', oferta);
+    return await httpPost(`${baseUrl}/ofertas`, oferta);
   });
 
   function fullfillOfertasReducer(ofertasState, ofertasFetched){
