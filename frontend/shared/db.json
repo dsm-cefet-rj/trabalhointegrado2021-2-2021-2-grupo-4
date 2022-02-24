@@ -11,12 +11,6 @@
   ],
   "ofertas": [
     {
-      "id": 1,
-      "category": 1,
-      "type": "Iniciação Cientifica",
-      "description": "Otimizacao de linhsasdasdsdas telefonicas"
-    },
-    {
       "id": 2,
       "category": 2,
       "type": "Projeto de Extansao",
@@ -27,6 +21,15 @@
       "category": 2,
       "type": "Qualquer coisa ai",
       "description": "Coisa pra fazer"
+    },
+    {
+      "id": 4
+    },
+    {
+      "type": "aoba",
+      "description": "zzzz",
+      "category": 1,
+      "id": 5
     }
   ]
 }

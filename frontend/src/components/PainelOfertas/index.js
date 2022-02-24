@@ -5,7 +5,8 @@ import AdicionarOferta from '../AdicionarOferta';
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { remove_offer } from './ofertasSlice';
+import { remove_offer, selectAllOfertas } from './ofertasSlice';
+import { removeOfertasServer } from './ofertasSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -22,7 +23,7 @@ function PainelOfertas(props) {
   const dispatch = useDispatch();
 
 
-  const ofertas = useSelector(state => state.ofertas.ofertas)
+  const ofertas = useSelector(selectAllOfertas)
 
 
   const toggle = (i) => {
@@ -35,7 +36,7 @@ function PainelOfertas(props) {
   function handleOfferDeletion(e) {
     console.log("teste handleOfferDeletion");
     e.preventDefault();
-    dispatch(remove_offer(parseInt(e.target.value)));     
+    dispatch(removeOfertasServer(parseInt(e.target.value)));     
 }
 
 const handleOfferUpdate = (updateTargetOffer) => {
