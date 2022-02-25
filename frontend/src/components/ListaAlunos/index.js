@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import Header from '../Header/index';
 import './styled.scss'
 
 /**
@@ -32,24 +33,25 @@ const ListaAlunos = () => {
     }
   ]
   return(
+    <><Header />
     <div className="card-5">
 
       <div className="search-div">
         <form className="search-form">
-          <input type="text" className="search-bar" placeholder="Procure por Nome ou CPF"/>
+          <input type="text" className="search-bar" placeholder="Procure por Nome ou CPF" />
         </form>
       </div>
 
       <div id="forms" className="card-body modal-body">
-        <div className="accordions"> 
+        <div className="accordions">
           {students.map((item, i) => (
             <div className="accordion-item" key={i}>
               <label htmlFor='accordion-1'> <Link to='/painelatividades'> {item.name} </Link> </label>
-            </div> 
+            </div>
           ))}
         </div>
       </div>
-    </div>
+    </div></>
   ); 
 }
 

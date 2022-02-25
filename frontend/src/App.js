@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import { Provider } from 'react-redux';
 import {store} from './store';
-import Header from './components/Header/index';
 import ListaAlunos from './components/ListaAlunos/index';
 import PainelAtividade from './components/PainelAtividade/index';
 import PainelValidacao from './components/PainelValidacao/index';
@@ -14,11 +13,11 @@ import PainelCurso from './components/PainelCurso/index';
 import PainelOfertas from './components/PainelOfertas';
 import AdicionarAtividade from './components/AdicionarAtividade'
 import Footer from './components/Footer/index';
+import LoginForm from './components/LoginForm/index';
+import SignupForm from './components/SignupForm/index';
+import HomeScreen from './components/HomeScreen/index';
 import './App.css';
-import AdicionarOferta from './components/AdicionarOferta';
-import { fetchOfertas } from './components/PainelOfertas/ofertasSlice';
-
-store.dispatch(fetchOfertas());
+import { AdicionarCategoria } from './components/AdicionarCategoria';
 
 
 const App = (props) => {
@@ -47,19 +46,20 @@ const App = (props) => {
   
   return (
     <Provider store={store}>
-      <Router>        
-          <Header />
-          <Switch>
-            <Route exact path="/" element={<ListaAlunos />}/>
-            <Route exact path="/painelofertas" element={<PainelOfertas ofertas={ofertas} dispatch={dispatch} />} />
-            <Route exact path="/adicionaroferta/:id" element={<AdicionarOferta/>} />
-           {/* <Route exact path="/validacao" element={<Validacao />}/> */}
-            <Route exact path="/painelatividades" element={<PainelAtividade />} />
-            <Route exact path="/adicionaratividade/:id" element={<AdicionarAtividade />}></Route>
-            <Route exact path="/painelcurso" element={<PainelCurso />} />
-            <Route exact path="/painelvalidacao" element={<PainelValidacao />} />
-          </Switch>
-          <Footer />        
+      <Router> 
+        <Switch>
+          <Route exact path="/" element={<HomeScreen />}/>
+          <Route exact path="/signup" element={<SignupForm />}/>
+          <Route exact path="/login" element={<LoginForm />}/>
+          <Route exact path="/listaalunos" element={<ListaAlunos />}/>
+          <Route exact path="/painelofertas" element={<PainelOfertas ofertas={ofertas} dispatch={dispatch} />} />
+          <Route exact path="/painelatividades" element={<PainelAtividade />} />
+          <Route exact path="/adicionaratividade/:id" element={<AdicionarAtividade />}></Route>
+          <Route exact path="/painelcurso" element={<PainelCurso />} />
+          <Route exact path="/painelvalidacao" element={<PainelValidacao />} />        
+          <Route exact path="/categorias" element={<AdicionarCategoria />} />        
+        </Switch>
+        <Footer />        
       </Router>
     </Provider>
   );

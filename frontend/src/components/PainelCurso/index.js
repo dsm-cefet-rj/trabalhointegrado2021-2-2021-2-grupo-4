@@ -5,6 +5,7 @@ import Template from './templateCurso';
 import FormCurso from './formularioCurso';
 import FormNovoCurso from './formularioNovoCurso';
 import {remove} from '../slices/cursosSlice';
+import Header from '../Header/index';
 
 function PainelCurso() {
   const [selected, setSelected] = useState(null);  
@@ -36,44 +37,45 @@ function PainelCurso() {
   }
 
   return(
+    <><Header />
     <div className='wrapper'>
       <div className='accordion'>
         <div type="button" className="btn btn-success btn-block"
-             onClick={() => handleNovoCurso({})} >
+          onClick={() => handleNovoCurso({})}>
           Novo Curso
         </div>
-        {addCurso != null ? <FormNovoCurso curso={addCurso} onClose={() => setAddCurso(null)} ></FormNovoCurso> : <></>}
+        {addCurso != null ? <FormNovoCurso curso={addCurso} onClose={() => setAddCurso(null)}></FormNovoCurso> : <></>}
         {cursos.map((item) => (
           <Card key={item.id} style={{ marginBottom: '1rem' }}>
             <CardHeader className={selected === item.id ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(item.id)}>{item.name}</CardHeader>
-            <Collapse className={selected === item.id ? 'content show':'content'}>  
+            <Collapse className={selected === item.id ? 'content show' : 'content'}>
               <CardBody>
                 <button type="button" className="btn btn-success btn-block"
-                        style={{ marginLeft: '10px', paddingRight: '20px', paddingLeft: '20px'  }} 
-                        onClick={() => handleCursoEdicao(item)}  >
-                    Editar
+                  style={{ marginLeft: '10px', paddingRight: '20px', paddingLeft: '20px' }}
+                  onClick={() => handleCursoEdicao(item)}>
+                  Editar
                 </button>
                 <button type="button" className="btn btn-success btn-block"
-                        style={{ marginLeft: '10px', paddingRight: '20px', paddingLeft: '20px'  }} 
-                        onClick={()=> dispatch(remove(item))}>
-                    Remover
+                  style={{ marginLeft: '10px', paddingRight: '20px', paddingLeft: '20px' }}
+                  onClick={() => dispatch(remove(item))}>
+                  Remover
                 </button>
-              </CardBody>  
+              </CardBody>
               <CardBody>
-                {(selected===item.id)=== true ? 
+                {(selected === item.id) === true ?
                   <>
-                    <Template curso={cursos.filter(c => c.id === selected)} />                   
-                    {editCurso != null && selected === editCurso.id ? 
-                        <FormCurso curso={editCurso} ></FormCurso> 
+                    <Template curso={cursos.filter(c => c.id === selected)} />
+                    {editCurso != null && selected === editCurso.id ?
+                      <FormCurso curso={editCurso}></FormCurso>
                       : <></>}
                   </>
-                : null}     
-              </CardBody>         
+                  : null}
+              </CardBody>
             </Collapse>
           </Card>
         ))}
       </div>
-    </div>
+    </div></>
   );
 }
 

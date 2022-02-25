@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivityServer, selectActivitiesById, updateActivityServer } from '../slices/ActivitiesSlice';
 import './styled.scss'
+import Header from '../Header/index';
 
 /**
  * @module components/AdicionarAtividade
@@ -67,53 +68,54 @@ const AdicionarAtividade = (props) => {
     }
   }
 
-  const card = props.card ? props.card : cards.filter((c) => c.categoryId === activity.category)[0]
+  const card = props.card ? props.card : cards.filter((c) => c.categoryCode === activity.category)[0]
   
   return ( 
-      <div className='container' id="painel">    
-        <form onSubmit={handleSubmit} >
-          <div className='linha-form'>
-            <label>Tipo Atividade</label>
-            <select name="type" style={{ width: '250px', textOverflow:'ellipsis'}} onChange={handleInputChange} required>
-                <option key=""></option>
-                {card.subcategories.map(sub => (
-                  <option key={sub.id+'_'+card.id} 
-                          style={{ width: '250px', textOverflow:'ellipsis'}} 
-                          value={sub.name}>
-                      {sub.name}</option>               
-                ))}
-            </select>            
-          </div>
-          <div className='linha-form'>
-            <label>Descrição</label>
-            <input  type="text" 
-                    name='description' 
-                    value={activity.description} 
-                    onChange={handleInputChange} required/>
-          </div>
-          <div className='linha-form'>
-            <label>Horas</label>
-            <input  type="number" 
-                    name="hours" 
-                    value={activity.hours} 
-                    onChange={handleInputChange} required/>
-          </div>
-          {/* <div className='linha-form'>
-            <label>Anexo</label>
-            <input type="file" 
-                   name='attachment' 
-                   value={activity.attachment} 
-                   onChange={handleInputChange}/>
-          </div> */}
-          <button id="comeco" type='submit' value="Salvar" >Salvar</button>   
-        </form>
-      </div>
+    <>
+    <div className='container' id="painel">
+      <form onSubmit={handleSubmit}>
+        <div className='linha-form'>
+          <label>Tipo Atividade</label>
+          <select name="type" style={{ width: '250px', textOverflow: 'ellipsis' }} onChange={handleInputChange} required>
+            <option key=""></option>
+            {card.subcategories.map(sub => (
+              <option key={sub.id + '_' + card.id}
+                style={{ width: '250px', textOverflow: 'ellipsis' }}
+                value={sub.name}>
+                {sub.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className='linha-form'>
+          <label>Descrição</label>
+          <input type="text"
+            name='description'
+            value={activity.description}
+            onChange={handleInputChange} required />
+        </div>
+        <div className='linha-form'>
+          <label>Horas</label>
+          <input type="number"
+            name="hours"
+            value={activity.hours}
+            onChange={handleInputChange} required />
+        </div>
+        {/* <div className='linha-form'>
+      <label>Anexo</label>
+      <input type="file"
+             name='attachment'
+             value={activity.attachment}
+             onChange={handleInputChange}/>
+    </div> */}
+        <button id="comeco" type='submit' value="Salvar">Salvar</button>
+      </form>
+    </div></>
   );
 }
 
 const cards = [
   {
-    categoryId: 1, 
+    categoryCode: 1, 
     name: 'Pesquisa',
     subcategories: [{id: 1, name: 'Iniciação científica'},
                     {id: 2, name: 'Publicações'},
@@ -121,7 +123,7 @@ const cards = [
                     {id: 4, name: 'Assistência a monografias, teses e dissertações'}]
   },
   {
-    categoryId: 2, 
+    categoryCode: 2, 
     name: 'Extensão',
     subcategories: [{id: 1, name: 'Organização e/ou colaboração em eventos e atividades institucionais'},
                     {id: 2, name: 'Seminários, conferências, palestras, oficinas e visitas técnicas'},
@@ -132,13 +134,13 @@ const cards = [
                     {id: 7, name: 'Assistência, assessoria e consultoria técnica'}]
   },
   {
-    categoryId: 3, 
+    categoryCode: 3, 
     name: 'Ensino',
     subcategories: [{id: 1, name: 'Disciplinas não previstas'},
                     {id: 2, name: 'Monitoria'}]
   },
   {
-    categoryId: 4, 
+    categoryCode: 4, 
     name: 'AC HC ou Ambiental',
     subcategories: [{id: 1, name: 'Conscientização de questões histórico-culturais'},
                     {id: 2, name: 'Ambientais'}]

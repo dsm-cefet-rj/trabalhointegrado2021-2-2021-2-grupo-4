@@ -9,7 +9,7 @@ const categorySchema = new Schema({
     subcategories: {
         type: Array
     },
-    categoryId: {
+    categoryCode: {
         type: Number
     }
 })

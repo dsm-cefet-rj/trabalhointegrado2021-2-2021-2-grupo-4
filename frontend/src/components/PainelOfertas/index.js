@@ -9,6 +9,7 @@ import { remove_offer, selectAllOfertas } from './ofertasSlice';
 import { removeOfertasServer } from './ofertasSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
+import Header from '../Header/index';
 
 
 const check = null
@@ -54,6 +55,7 @@ const handleOfferUpdate = (updateTargetOffer) => {
   }
 
   return(
+    <><Header />
     <div className='wrapper'>
       {/* {console.log(props.ofertas.type)} */}
       <div className='accordion'>
@@ -61,16 +63,16 @@ const handleOfferUpdate = (updateTargetOffer) => {
           <Card key={item.id} style={{ marginBottom: '1rem' }}>
             <CardHeader className={selected === i ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(i)}>{item.name}</CardHeader>
             <Collapse className={selected === i ? 'content show' : 'content'}>
-              <CardBody>  
-                <button type="button" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px'  }} className="btn btn-success btn-block" onClick={() => handleNewOffer(i)}>
-                      + 
-                </button> 
+              <CardBody>
+                <button type="button" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px' }} className="btn btn-success btn-block" onClick={() => handleNewOffer(i)}>
+                  +
+                </button>
               </CardBody>
               <CardBody className={check != null ? '' : 'pad'}>
                   {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)} card={item} update={false} updateTarget={null} /> : null}
               </CardBody>
               <CardBody className={check != null ? '' : 'pad'}>
-                  {}
+
               </CardBody>
                 {ofertas.filter((oferta) => oferta.category === item.id).map(o =>
 
@@ -96,7 +98,7 @@ const handleOfferUpdate = (updateTargetOffer) => {
           </Card>
         ))}
       </div>
-    </div>
+    </div></>
   );
 }
 
