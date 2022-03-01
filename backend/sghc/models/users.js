@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const normalize =  require('normalize-mongoose');
 
 var passportLocalMongoose = require('passport-local-mongoose');
 
@@ -13,8 +12,5 @@ const User = new Schema({
 })
 
 User.plugin(passportLocalMongoose);
-activitySchema.plugin(normalize);
 
-var Users = mongoose.model('User', User);
-
-module.exports = Users;
+module.exports = mongoose.model('User', User);
