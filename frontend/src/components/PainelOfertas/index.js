@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import "./styled.scss";
 import AdicionarOferta from '../AdicionarOferta';
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { remove_offer, selectAllOfertas } from './ofertasSlice';
+import { remove_offer, selectAllOfertas, fetchOfertas } from './ofertasSlice';
 import { removeOfertasServer } from './ofertasSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -25,6 +25,8 @@ function PainelOfertas(props) {
 
 
   const ofertas = useSelector(selectAllOfertas)
+  const status = useSelector(state => state.ofertas.status)
+  const error = useSelector(state => state.ofertas.error)
 
 
   const toggle = (i) => {
@@ -37,7 +39,7 @@ function PainelOfertas(props) {
   function handleOfferDeletion(e) {
     console.log("teste handleOfferDeletion");
     e.preventDefault();
-    dispatch(removeOfertasServer(parseInt(e.target.value)));     
+    dispatch(removeOfertasServer(e.target.value));     
 }
 
 const handleOfferUpdate = (updateTargetOffer) => {
@@ -53,6 +55,14 @@ const handleOfferUpdate = (updateTargetOffer) => {
     }
     setIsNewOffer(i)
   }
+
+  useEffect(() => {
+    if(status ==='not_loaded' ) {
+      dispatch(fetchOfertas())
+    }else if(status === 'failed'){
+      setTimeout(() => dispatch(fetchOfertas()), 2000)
+    }
+  }, [status, dispatch])
 
   return(
     <><Header />

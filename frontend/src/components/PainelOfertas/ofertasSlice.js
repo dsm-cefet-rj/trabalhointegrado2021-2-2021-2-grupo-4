@@ -12,21 +12,21 @@ const initialState = ofertasAdapter.getInitialState({
 
 
 
-  export const fetchOfertas = createAsyncThunk('ofertas/fetchOfertas', async() => {
-      return await httpGet(`${baseUrl}/ofertas`);
+  export const fetchOfertas = createAsyncThunk('ofertas/fetchOfertas', async(_, {getState}) => {
+      return await httpGet(`${baseUrl}/ofertas`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken }});
     });
 
-  export const updateOfertasServer = createAsyncThunk('ofertas/updateOfertasServer', async (oferta) => {
-    return await httpPut(`${baseUrl}/ofertas/${oferta.id}`,oferta);
+  export const updateOfertasServer = createAsyncThunk('ofertas/updateOfertasServer', async (oferta, {getState}) => {
+    return await httpPut(`${baseUrl}/ofertas/${oferta.id}`,oferta, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     });
 
-  export const removeOfertasServer = createAsyncThunk('ofertas/removeOfertasServer', async (idOferta) => {
-    await httpDelete(`${baseUrl}/ofertas/${idOferta}`);
+  export const removeOfertasServer = createAsyncThunk('ofertas/removeOfertasServer', async (idOferta, {getState}) => {
+    await httpDelete(`${baseUrl}/ofertas/${idOferta}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}} );
     return idOferta;
   });
 
-  export const addOfertasServer = createAsyncThunk('ofertas/addOfertasServer', async (oferta) => {
-    return await httpPost(`${baseUrl}/ofertas`, oferta);
+  export const addOfertasServer = createAsyncThunk('ofertas/addOfertasServer', async (oferta, {getState}) => {
+    return await httpPost(`${baseUrl}/ofertas`, oferta, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
   });
 
   function fullfillOfertasReducer(ofertasState, ofertasFetched){
