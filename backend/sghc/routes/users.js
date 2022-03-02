@@ -9,6 +9,22 @@ const cors = require('./cors');
 
 router.use(bodyParser.json());
 
+router.route('/')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200) })
+.get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
+  console.log(req.user);
+  try{
+    const userBase = await User.find({});
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(userBase);
+  }catch(err){
+    err = {};
+    res.statusCode = 404;
+    res.json(err);
+  }
+})
+
 router.post('/signup', cors.corsWithOptions, (req, res, next) => {
     User.register(new User({username: req.body.username}), req.body.password, 
     (err, user )=> {

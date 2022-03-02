@@ -5,6 +5,7 @@ import categoriesReducer from './components/slices/CategoriesSlice';
 import cursosReducer from "./components/slices/cursosSlice";
 import loginReducer from "./components/slices/LoginSlice";
 import signupReducer from "./components/slices/SignupSlice";
+import usersReducer from "./components/slices/UsersSlice";
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
         cursos: cursosReducer,
         categories: categoriesReducer,
         logins: loginReducer,
-        signups: signupReducer
+        signups: signupReducer,
+        users: usersReducer
     }
 })
