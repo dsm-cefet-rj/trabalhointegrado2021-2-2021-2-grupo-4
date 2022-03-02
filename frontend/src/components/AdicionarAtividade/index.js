@@ -3,7 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivityServer, selectActivitiesById, updateActivityServer } from '../slices/ActivitiesSlice';
 import './styled.scss'
-import Header from '../Header/index';
+import { activitySchema } from '../../schemas/ActivitySchema';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 
 /**
  * @module components/AdicionarAtividade
@@ -34,9 +36,14 @@ const AdicionarAtividade = (props) => {
   id = id ? id : null
   const activityFound = useSelector(state => selectActivitiesById(state, id))
 
-  const [activity, setActivity] = useState(
-    id ? activityFound ?? {} : {}
-  )
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(activitySchema)
+  });
+  debugger;
+
+  const [activityOnLoad] = useState(
+    id ? activityFound ?? activitySchema.cast({}): activitySchema.cast({}));
+  
 
   const [actionType, ] = useState(
     id ? activityFound 
@@ -45,12 +52,11 @@ const AdicionarAtividade = (props) => {
       : '../slices/ActivitiesSlice/addActivityServer'
   )
 
-  function handleInputChange(e) {
-    setActivity({...activity, [e.target.name]: e.target.value })
-  }
+  // function handleInputChange(e) {
+  //   setActivity({...activity, [e.target.name]: e.target.value })
+  // }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function onSubmit(activity) {
     if(actionType === '../slices/ActivitiesSlice/addActivityServer') {
       const auxActivity = {
         id: props.activities.length+1,
@@ -63,7 +69,7 @@ const AdicionarAtividade = (props) => {
       dispatch(addActivityServer(auxActivity))
       props.onClose();
     }else{
-      dispatch(updateActivityServer(activity))
+      dispatch(updateActivityServer({ ...activity, id: activityFound.id }))
       history('/painelatividades')
     }
   }
@@ -73,10 +79,10 @@ const AdicionarAtividade = (props) => {
   return ( 
     <>
     <div className='container' id="painel">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className='linha-form'>
           <label>Tipo Atividade</label>
-          <select name="type" style={{ width: '250px', textOverflow: 'ellipsis' }} onChange={handleInputChange} required>
+          <select name="type" style={{ width: '250px', textOverflow: 'ellipsis' }} {...register("type", { required: true })} >
             <option key=""></option>
             {card.subcategories.map(sub => (
               <option key={sub.id + '_' + card.id}
@@ -85,20 +91,23 @@ const AdicionarAtividade = (props) => {
                 {sub.name}</option>
             ))}
           </select>
+          &nbsp;<br /><span>{errors.type?.message}</span>
         </div>
         <div className='linha-form'>
           <label>Descrição</label>
           <input type="text"
-            name='description'
-            value={activity.description}
-            onChange={handleInputChange} required />
+            name="description"
+            defaultValue={activityOnLoad.description}
+            {...register("description", { required: true })} />
+            &nbsp;<br /><span>{errors.description?.message}</span>
         </div>
         <div className='linha-form'>
           <label>Horas</label>
           <input type="number"
             name="hours"
-            value={activity.hours}
-            onChange={handleInputChange} required />
+            defaultValue={activityOnLoad.hours}
+            {...register("hours", { required: true })} />
+            &nbsp;<br /><span>{errors.hours?.message}</span>
         </div>
         {/* <div className='linha-form'>
       <label>Anexo</label>
