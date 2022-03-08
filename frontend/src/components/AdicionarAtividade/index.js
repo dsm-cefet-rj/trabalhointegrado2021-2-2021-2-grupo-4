@@ -39,7 +39,6 @@ const AdicionarAtividade = (props) => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(activitySchema)
   });
-  debugger;
 
   const [activityOnLoad] = useState(
     id ? activityFound ?? activitySchema.cast({}): activitySchema.cast({}));
@@ -73,7 +72,6 @@ const AdicionarAtividade = (props) => {
       history('/painelatividades')
     }
   }
-
   const card = props.card ? props.card : cards.filter((c) => c.categoryCode === activity.category)[0]
   
   return ( 

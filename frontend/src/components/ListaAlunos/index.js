@@ -65,7 +65,7 @@ const ActivityLine = (props) => {
   return (  
     console.log(props.user),
     <div className="accordion-item" key={props.userId}>
-      <label htmlFor='accordion-1'> <Link to={{pathname: `/painelatividades/${props.user.id}`, query: {props}}}> {props.user.username} </Link> </label>
+      <label htmlFor='accordion-1'> <Link to={{pathname: `/painelatividades`, query: {props}}}> {props.user.username} </Link> </label>
     </div>
   );
 }

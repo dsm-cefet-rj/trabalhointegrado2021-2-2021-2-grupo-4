@@ -53,7 +53,7 @@ const App = (props) => {
           <Route exact path="/login" element={<LoginForm />}/>
           <Route exact path="/listaalunos" element={<ListaAlunos />}/>
           <Route exact path="/painelofertas" element={<PainelOfertas ofertas={ofertas} dispatch={dispatch} />} />
-          <Route exact path="/painelatividades/:id" element={<PainelAtividade />} />
+          <Route exact path="/painelatividades" element={<PainelAtividade />} />
           <Route exact path="/adicionaratividade/:id" element={<AdicionarAtividade />}></Route>
           <Route exact path="/painelcurso" element={<PainelCurso />} />
           <Route exact path="/painelvalidacao" element={<PainelValidacao />} />        
