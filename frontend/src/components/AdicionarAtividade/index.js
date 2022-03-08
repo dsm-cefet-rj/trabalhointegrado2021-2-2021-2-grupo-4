@@ -72,7 +72,8 @@ const AdicionarAtividade = (props) => {
       history('/painelatividades')
     }
   }
-  const card = props.card ? props.card : cards.filter((c) => c.categoryCode === activity.category)[0]
+  debugger;
+  const card = props.card ? props.card : cards.filter((c) => c.categoryCode === activityFound.category)[0]
   
   return ( 
     <>
