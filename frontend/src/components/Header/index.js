@@ -10,15 +10,18 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
-  const users = useSelector(state => state.users.entities)['undefined'];
+  const users = useSelector(state => state.users.entities.undefined);
   const status = useSelector(state => state.users.status);
   const loggedUserId = useSelector(state => state.logins.ids)[0];
   const [userIsProfessor, setUserIsProfessor] = useState(false);
+  const [userIsAdmin, setUserIsAdmin] = useState(false);
 
   useEffect(() => {
     const loggedUser = users && users.find(u => u._id === loggedUserId);
-    if(loggedUser)
+    if(loggedUser){
       setUserIsProfessor(loggedUser.professor);
+      setUserIsAdmin(loggedUser.admin);
+    }
   })
 
   return(
@@ -27,9 +30,9 @@ const Header = () => {
       <nav className="nav-bar">
         <Link to='/listaalunos'> Painel Aluno </Link>
         <Link to='/painelofertas'> Painel de Ofertas </Link>
-        <Link to='/painelcurso'> Cursos </Link>
-        <Link to='/painelvalidacao'> Painel Validação </Link>
-        { userIsProfessor ? <Link to='/categorias'> Categorias </Link> : null }
+        {/* <Link to='/painelcurso'> Cursos </Link> */}
+        {/* <Link to='/painelvalidacao'> Painel Validação </Link> */}
+        { (userIsProfessor || userIsAdmin) ? <Link to='/categorias'> Categorias </Link> : null }
       </nav>
     </div>
   ); 

@@ -28,6 +28,19 @@ function PainelOfertas(props) {
   const status = useSelector(state => state.ofertas.status)
   const error = useSelector(state => state.ofertas.error)
 
+  const users = useSelector(state => state.users.entities.undefined);
+  const loggedUserId = useSelector(state => state.logins.ids)[0];
+  const [userIsProfessor, setUserIsProfessor] = useState(false);
+  const [userIsAdmin, setUserIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const loggedUser = users && users.find(u => u._id === loggedUserId);
+    if(loggedUser){
+      setUserIsProfessor(loggedUser.professor);
+      setUserIsAdmin(loggedUser.admin);
+    }
+  })
+
 
   const toggle = (i) => {
     if (selected === i) {
@@ -73,11 +86,12 @@ const handleOfferUpdate = (updateTargetOffer) => {
           <Card key={item.id} style={{ marginBottom: '1rem' }}>
             <CardHeader className={selected === i ? 'accordion-button' : 'accordion-button collapsed'} onClick={() => toggle(i)}>{item.name}</CardHeader>
             <Collapse className={selected === i ? 'content show' : 'content'}>
+            {userIsAdmin || userIsProfessor ? 
               <CardBody>
                 <button type="button" style={{ marginLeft: '10px', paddingRight: '40px', paddingLeft: '40px' }} className="btn btn-success btn-block" onClick={() => handleNewOffer(i)}>
                   +
                 </button>
-              </CardBody>
+              </CardBody>:null}
               <CardBody className={check != null ? '' : 'pad'}>
                   {isNewOffer === i ? <AdicionarOferta onClose={() => setIsNewOffer(false)} card={item} update={false} updateTarget={null} /> : null}
               </CardBody>
@@ -89,15 +103,19 @@ const handleOfferUpdate = (updateTargetOffer) => {
                     <CardBody key={i}>
                       {updateTarget != null && o.id == updateTarget.id ? <AdicionarOferta onClose={() => handleOfferUpdate(o)} card={item} updateTarget={o}  update={true} /> :
                     <text>
-                      <tr> Tipo: {o.type} </tr> 
-                      <tr> Descrição: {o.description} 
+                      <tr> <b>Tipo: </b> {o.type} </tr> 
+                      <tr> <b>Descrição: </b> {o.description} 
                       <td> 
+                        {userIsAdmin || userIsProfessor ? 
                         <Button type="button" value= {o.id} onClick={handleOfferDeletion} style={{ marginLeft: '10px', paddingRight: '15px', paddingLeft: '15px', borderRadius:'20px'  }} variant="danger"  >
                           X
-                        </Button>
-                          <Button onClick={() => handleOfferUpdate(o)} type="button" style={{ marginLeft: '10px', paddingRight: '15px', paddingLeft: '15px', borderRadius:'20px'  }} variant="warning"  >
-                              Editar
-                          </Button>
+                        </Button>:null}
+                        
+                        {userIsAdmin || userIsProfessor ? 
+                        <Button onClick={() => handleOfferUpdate(o)} type="button" style={{ marginLeft: '10px', paddingRight: '15px', paddingLeft: '15px', borderRadius:'20px'  }} variant="warning"  >
+                            Editar
+                        </Button>:null}
+
                       </td>  
                       </tr>
                     </text>
