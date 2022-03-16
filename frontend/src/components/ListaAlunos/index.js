@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Card } from 'reactstrap';
 import { fetchUsers, selectAllUsers } from '../slices/UsersSlice'; 
@@ -19,6 +19,19 @@ const ListaAlunos = () => {
   const users = useSelector(selectAllUsers)
   const status = useSelector(state => state.users.status)
   const error = useSelector(state => state.users.error)
+
+  const userList = useSelector(state => state.users.entities.undefined);
+  const loggedUserId = useSelector(state => state.logins.ids)[0];
+  const [userIsProfessor, setUserIsProfessor] = useState(false);
+  const [userIsAdmin, setUserIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const loggedUser = userList && userList.find(u => u._id === loggedUserId);
+    if(loggedUser){
+      setUserIsProfessor(loggedUser.professor);
+      setUserIsAdmin(loggedUser.admin);
+    }
+  })
 
   const dispatch = useDispatch();
 
@@ -51,7 +64,7 @@ const ListaAlunos = () => {
       <div id="forms" className="card-body modal-body">
         <div className="accordions">
           {status === 'loaded' || status === 'saved' || status === 'deleted' ?
-            <ActivityList users={users[0]} />
+            <ActivityList users={users[0] } isProfessor={userIsProfessor} isAdmin={userIsAdmin} loggedUserId={loggedUserId} />
             : tableActivities}
         </div>
       </div>
@@ -71,9 +84,10 @@ const ActivityLine = (props) => {
 }
 
 function ActivityList(props){
-  return(
-    props.users.map((user, i) => <ActivityLine user={user} userId={i}/>)            
-  );
+  if(props.isProfessor||props.isAdmin)
+    return(props.users.map((user, i) => <ActivityLine user={user} userId={i}/>));
+  else
+    return(props.users.filter(user => user._id === props.loggedUserId).map((u,i) => <ActivityLine user={u} userId={i}/>) )
 }
 
 export default ListaAlunos;
