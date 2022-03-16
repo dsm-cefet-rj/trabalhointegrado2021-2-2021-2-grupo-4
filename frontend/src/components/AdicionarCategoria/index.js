@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { React } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
 import Header from '../Header';
 import { addCategoryServer } from '../slices/CategoriesSlice';
 import './styles.scss';
@@ -10,7 +11,19 @@ export const AdicionarCategoria = () => {
     const [categoria, setCategoria] = useState({name: '', categoryCode: '', subcategories: []});
     const [subcategoria, setSubcategoria] = useState('');
 
+    const users = useSelector(state => state.users.entities)['undefined'];
+    const loggedUserId = useSelector(state => state.logins.ids)[0];
+
+    const history = useNavigate();
+
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        const loggedUser = users && users.find(u => u._id === loggedUserId);
+        if(!users || !loggedUser.professor){
+            history('/login');
+        }
+    }, [])
 
     function handleNameChange(ev) {
         setCategoria({...categoria, name: ev.target.value});
@@ -79,4 +92,3 @@ export const AdicionarCategoria = () => {
     )
 
 }
-
